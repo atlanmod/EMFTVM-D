@@ -1043,14 +1043,16 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			if (!currentMatch.isOverridden()) {
 				createAllUniqueMappings(currentMatch);
 			}
-			boolean defaultMappingSet = completeTraceFor(frame, currentMatch);
+			boolean defaultMappingSet = completeTraceWithNoTarget(frame, currentMatch);
 			// Mark default/unique source elements if applicable
 			if (!defaultMappingSet) {
 				EList<SourceElement> ses = currentMatch.getSourceElements();
 				defaultState.createDefaultMapping(currentMatch.getRule().getLinkSet(), ses);
-			}
-			
+			}	
 		}
+
+		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -2245,6 +2247,50 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		abstractState.createSingleTrace(frame);
 		
 	}
+	/**
+	 * Create a {@link TraceLink} for the current match, no target object is created
+	 * @param frame
+	 * @param currentMatch
+	 * @return true if the traceLink has been created successfully
+	 */
+	private boolean completeTraceWithNoTarget(StackFrame frame,
+			TraceLink trace) {
+		//TraceLink [[s:Member -> []] -> []]
+				boolean defaultMappingSet = false;
+				final ExecEnv env = frame.getEnv();
+				final int seSize = trace.getSourceElements().size();
+				//sesize=1
+				for (OutputRuleElement ore : getOutputElements()) {
+					String oreName = ore.getName();
+					//ore=t: Persons!Male (models: [OUT])
+					// If there is *any* target element with the same name, it overrides us
+					
+					if (trace.getTargetElement(oreName) != null) {
+						continue;
+					}
+					TargetElement te = TraceFactory.eINSTANCE.createTargetElement();
+					te.setName(oreName);
+					te.setTargetOf(trace);
+					//TraceLink [[s:Member -> []] -> [t:null]]
+					EList<SourceElement> teMapsTo = te.getMapsTo();
+					
+					for (InputRuleElement source : ore.getMapsTo()) {
+						SourceElement mapsTo = trace.getSourceElement(source.getName(), false);
+						assert mapsTo != null;
+						teMapsTo.add(mapsTo);
+					}
+					if (!teMapsTo.isEmpty()) {
+						defaultMappingSet |= defaultState.createDefaultMapping(env.getTraces(), teMapsTo, seSize);
+						uniqueState.checkAndCreateUniqueMapping(trace.getRule(), teMapsTo);
+					}
+				}
+				
+				for (Rule superRule : getESuperRules()) {
+					defaultMappingSet |= superRule.completeTraceFor(frame, trace);
+				}
+				return defaultMappingSet;
+	}
+	
 	/**
 	 * <!-- begin-user-doc. -->
 	 * {@inheritDoc}

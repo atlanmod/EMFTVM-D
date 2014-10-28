@@ -809,6 +809,8 @@ public interface ExecEnv extends EObject {
 	 */
 	public Map<String, Rule> getRulesMap();
 
-	void applyAll(Set<Rule> matchedRules); 
+	void applyAll(); 
+	
+	//public Set<Rule> getMatchedRules();
 	
 } // ExecEnv

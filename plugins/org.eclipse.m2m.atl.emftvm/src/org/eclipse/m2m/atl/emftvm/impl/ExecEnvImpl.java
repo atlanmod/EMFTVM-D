@@ -69,6 +69,7 @@ import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
 import org.eclipse.m2m.atl.emftvm.util.DuplicateEntryException;
 import org.eclipse.m2m.atl.emftvm.util.EMFTVMUtil;
 import org.eclipse.m2m.atl.emftvm.util.FieldContainer;
@@ -2183,6 +2184,11 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 					}
 		return result;	
 	}
+//Set<Rule> matchedRules = new HashSet<Rule>();
+	
+//	public Set<Rule> getMatchedRules() {
+//		return matchedRules;
+//	}
 	public boolean matchSingleObject(EObject object, String className) {
 
 		StackFrame rootFrame = new StackFrame(this, mainChain.get(
@@ -2199,6 +2205,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		while (rules.hasNext() && !isApplied) {
 			nextRule = rules.next();
 			isApplied = nextRule.matchSingleObject(rootFrame, object);
+			//matchedRules.add(nextRule);
 		}
 		nextRule.createSingleTrace(rootFrame);
 		return true;
@@ -2217,7 +2224,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * {@inheritDoc}
 	 * 
 	 * This implementation supports only {@link RuleMode#AUTOMATIC_SINGLE_VALUE}
-	 * No inhertance is supported yet
+	 * No inheritance is supported yet
 	 */
 	public void preMatchAllSingle() {
 
@@ -2237,8 +2244,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				throw new UnsupportedOperationException(String.format(
 						"Operation %s not found", EMFTVMUtil.MAIN_OP_NAME));
 			}
-			final StackFrame rootFrame = new StackFrame(this, mainChain.get(
-					mainChain.size() - 1).getBody());
+			//final StackFrame rootFrame = new StackFrame(this, mainChain.get(mainChain.size() - 1).getBody());
 
 			// run all automatic rules before main
 			currentPhase = RuleMode.AUTOMATIC_SINGLE;
@@ -2265,10 +2271,6 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 
 	}
 
-	public void postMatch() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Finds the {@link EClassifier} for the given (meta-)
@@ -2379,7 +2381,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * @param frame the stack frame context
 	 * @param timingData the timing data object to update
 	 */
-	private Set<Rule> matchAllSingle(final StackFrame frame, final TimingData timingData) {
+	private void matchAllSingle(final StackFrame frame, final TimingData timingData) {
 		final List<Rule> rules = getRules();
 		// Match automatic single rules
 		final Set<Rule> matchedRules = new LinkedHashSet<Rule>();
@@ -2431,14 +2433,14 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		deleteQueue();
 		if (timingData != null)
 			timingData.finishPostApply();
-		
-		return matchedRules;
+
 	}
 
 	/**
 	 * 
 	 */
-	public void applyAll(Set<Rule> matchedRules) {
+	public void applyAll() {
+		Set<Rule> matchedRules = resolveMatchedRules();
 		final StackFrame frame = new StackFrame(this, mainChain.get(
 				mainChain.size() - 1).getBody());
 			// Apply rules
@@ -2459,6 +2461,14 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				
 	}
 	
+	private Set<Rule> resolveMatchedRules() {
+		Set<Rule> result = new HashSet<Rule>();
+		for (TracedRule rule : traces.getRules()) {
+			result.add(getRulesMap().get(rule.getRule()));
+		}
+		return result;
+	}
+
 	/**
 	 * Matches all {@link RuleMode#AUTOMATIC_RECURSIVE} rules.
 	 * @param frame the stack frame context
@@ -2827,8 +2837,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	}
 
 	public TraceLink getCurrentMatch() {
-		// TODO Auto-generated method stub
-		return null;
+		return currentMatch;
 	}
 
 	public void setCurrentMatch(TraceLink match) {
