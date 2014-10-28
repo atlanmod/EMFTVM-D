@@ -516,11 +516,11 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 					iterables.add(re.createIterable(env));
 				}
 			}
-			
 			iterableList = iterables;
 			iterableMap = null;
 		}
 
+		
 	}
 	
 	/**
@@ -732,7 +732,6 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		
 		@Override
 		public boolean matchSingleObject(StackFrame frame, EObject object) {
-			// TODO Auto-generated method stub
 			assert getMode() == RuleMode.AUTOMATIC_SINGLE;
 			return leafState.matchSingleObject(frame, object); 
 		}
@@ -756,7 +755,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			return matcherCbState.matchFor(frame, valuesMap, values);
 		}
 
-	
+		
 	}
 
 	/**
@@ -795,7 +794,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 
 		@Override
 		public boolean matchSingleObject(StackFrame frame, EObject object) {
-			// TODO match single object in RECURSIVE_MODE
+			// TODO match singleObject in AUTOMATIC_RECURSIVE_MODE
 			throw new UnsupportedOperationException("To be implemented soon");
 		}
 		
@@ -819,7 +818,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		public boolean matchSingleObject(StackFrame frame, EObject object) {
 			return superRulesState.matchSingleObject(frame, object); 
 			
-		};
+		}
 
 		/**
 		 * Matches {@link #getRule()} for the automatic recursive stage, if applicable.
@@ -1089,8 +1088,6 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				applierCbState.postApplyFor(frame, trace);
 			}
 		}
-
-
 	}
 
 	/**
@@ -1119,7 +1116,6 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				ses.add(se);
 			}
 			frame.getEnv().getMatches().getLinksByRule(getName(), true).getLinks().add(match);
-			frame.getEnv().setCurrentMatch(match);
 			return true;
 		}
 
@@ -2239,6 +2235,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	public void createTraces(final StackFrame frame) {
 		abstractState.createTraces(frame);
 	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -2254,7 +2251,6 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated NOT
 	 */
 	public boolean completeTraceFor(final StackFrame frame, final TraceLink trace) {
-		//TraceLink [[s:Member -> []] -> []]
 		boolean defaultMappingSet = false;
 		final ExecEnv env = frame.getEnv();
 		final int seSize = trace.getSourceElements().size();
@@ -2267,7 +2263,6 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			if (trace.getTargetElement(oreName) != null) {
 				continue;
 			}
-			
 			TargetElement te = TraceFactory.eINSTANCE.createTargetElement();
 			te.setName(oreName);
 			te.setTargetOf(trace);
@@ -2291,7 +2286,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			}
 			EList<Model> models = ore.getEModels();
 			assert models.size() == 1;
-			//te.setObject(models.get(0).newElement(type));
+			te.setObject(models.get(0).newElement(type));
 			assert te.getObject() != null;
 			assert te.getObject().eResource() != null;
 			assert te.getObject().eResource() == models.get(0).getResource();
@@ -3639,7 +3634,6 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		}
 		uniqueState.createUniqueMapping(trace);
 	}
-
 
 
 } //RuleImpl
