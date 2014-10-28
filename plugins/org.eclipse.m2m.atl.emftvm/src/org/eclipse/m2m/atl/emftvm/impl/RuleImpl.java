@@ -1116,6 +1116,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				ses.add(se);
 			}
 			frame.getEnv().getMatches().getLinksByRule(getName(), true).getLinks().add(match);
+			frame.getEnv().setCurrentMatch(match);
 			return true;
 		}
 
@@ -2251,6 +2252,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated NOT
 	 */
 	public boolean completeTraceFor(final StackFrame frame, final TraceLink trace) {
+		//TraceLink [[s:Member -> []] -> []]
 		boolean defaultMappingSet = false;
 		final ExecEnv env = frame.getEnv();
 		final int seSize = trace.getSourceElements().size();
@@ -3634,6 +3636,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		}
 		uniqueState.createUniqueMapping(trace);
 	}
+
 
 
 } //RuleImpl

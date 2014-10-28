@@ -2436,6 +2436,30 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	}
 
 	/**
+	 * 
+	 */
+	public void applyAll(Set<Rule> matchedRules) {
+		final StackFrame frame = new StackFrame(this, mainChain.get(
+				mainChain.size() - 1).getBody());
+			// Apply rules
+				for (Rule rule : matchedRules) {
+					rule.apply(frame);
+				}
+
+				setQueue();
+				remapQueue();
+				
+				// Run post-apply
+				for (Rule rule : matchedRules) {
+					rule.postApply(frame);
+				}
+				setQueue();
+				remapQueue();
+				deleteQueue();
+				
+	}
+	
+	/**
 	 * Matches all {@link RuleMode#AUTOMATIC_RECURSIVE} rules.
 	 * @param frame the stack frame context
 	 * @param timingData the timing data object to update
@@ -2802,37 +2826,13 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		this.ruleStateCompiled = ruleStateCompiled;
 	}
 
+	public TraceLink getCurrentMatch() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public void setCurrentMatch(TraceLink match) {
-		this.currentMatch = match;		
-	}
-	
-	public TraceLink getCurrentMatch () {
-		return this.currentMatch;
-		
-	}
-	
-	/**
-	 * 
-	 */
-	public void applyAll(Set<Rule> matchedRules) {
-		final StackFrame frame = new StackFrame(this, mainChain.get(
-				mainChain.size() - 1).getBody());
-			// Apply rules
-				for (Rule rule : matchedRules) {
-					rule.apply(frame);
-				}
-
-				setQueue();
-				remapQueue();
-				
-				// Run post-apply
-				for (Rule rule : matchedRules) {
-					rule.postApply(frame);
-				}
-				setQueue();
-				remapQueue();
-				deleteQueue();
-				
+		this.currentMatch = match;	
 	}
 
-} //ExecEnvImpl
+} // ExecEnvImpl
