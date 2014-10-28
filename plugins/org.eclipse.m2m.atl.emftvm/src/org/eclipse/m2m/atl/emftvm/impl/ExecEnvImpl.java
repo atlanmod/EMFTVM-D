@@ -938,7 +938,13 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	/**
 	 * <!-- begin-user-doc. -->
 	 * {@inheritDoc}
-	 * <!-- end-user-doc -->
+	 */
+	public Map<String , Rule > getRulesMap() {
+		return rules;
+	}
+	/**
+	 * <!-- begin-user-doc. --> {@inheritDoc} <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void queueForAdd(final EStructuralFeature feature, final EObject object, final Object value, final int index,
@@ -2077,22 +2083,29 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 			if (!isRuleStateCompiled()) {
 				for (Rule r : getRules()) {
 					r.compileState(this); // compile internal state for all registered rules
+					// create iterables also -- allInstancesMap--
+					// TODO disable the getAllInstances for
 				}
 			}
 			for (Rule r : getRules()) {
 				resolveRuleModels(r);
 			}
+			// be carreful about the state of this iterator
 			final Iterator<Operation> mains = mainChain.iterator();
 			if (!mains.hasNext()) {
 				throw new UnsupportedOperationException(String.format("Operation %s not found", EMFTVMUtil.MAIN_OP_NAME));
 			}
-			final StackFrame rootFrame = new StackFrame(this, mainChain.get(mainChain.size() - 1).getBody());
+			final StackFrame rootFrame = new StackFrame(this, mainChain.get(
+					mainChain.size() - 1).getBody());
+
 			// run all automatic rules before main
 			currentPhase = RuleMode.AUTOMATIC_SINGLE;
 			matchAllSingle(rootFrame, timingData);
 			currentPhase = RuleMode.AUTOMATIC_RECURSIVE;
 			matchAllRecursive(rootFrame, timingData);
 			currentPhase = RuleMode.MANUAL;
+			
+			// run imperative code 
 			while (mains.hasNext()) {
 				CodeBlock cb = mains.next().getBody();
 				if (cb.getStackLevel() > 0) {

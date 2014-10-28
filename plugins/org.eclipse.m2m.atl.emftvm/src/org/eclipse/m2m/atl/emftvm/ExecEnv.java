@@ -785,4 +785,6 @@ public interface ExecEnv extends EObject {
 	 */
 	void setCurrentMatch(String match);
 
+	Map<String, Rule> getRulesMap();
+
 } // ExecEnv
