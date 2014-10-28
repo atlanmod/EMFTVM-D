@@ -14,6 +14,7 @@ package org.eclipse.m2m.atl.emftvm;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.util.LazySet;
 import org.eclipse.m2m.atl.emftvm.util.StackFrame;
@@ -560,6 +561,15 @@ public interface Rule extends NamedElement {
 	void createTraces(StackFrame frame);
 
 	/**
+	 * Create trace for one single match
+	 * @param StackFrame 
+	 * @return void
+	 * 
+	 *  
+	 */
+	public void createSingleTrace(StackFrame frame); 
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * Completes <code>trace</code> for this rule by creating the output elements.
 	 * Will create default/unique trace iff mapsTo information exists.
@@ -718,5 +728,8 @@ public interface Rule extends NamedElement {
 	 * @generated
 	 */
 	InputRuleElement findInputElement(String name);
+	
+	
+	public boolean matchSingleObject(StackFrame frame, EObject object);
 
 } // Rule

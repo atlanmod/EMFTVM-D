@@ -14,6 +14,7 @@ package org.eclipse.m2m.atl.emftvm.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -89,6 +90,18 @@ import org.eclipse.m2m.atl.emftvm.util.VMException;
  */
 public class RuleImpl extends NamedElementImpl implements Rule {
 
+	
+	private String currentElement = "";
+	
+	public String getCurrentElement () {
+		return this.currentElement;
+	}
+	
+	public void setCurrentelement(String currentElement) {
+		this.currentElement = currentElement;
+	}
+	
+	
 	/**
 	 * Base class for code that depends on the state of {@link Rule#isUnique()}.
 	 * @author <a href="mailto:dennis.wagelaar@vub.ac.be">Dennis Wagelaar</a>
@@ -450,6 +463,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		 * @param env the execution environment with models
 		 */
 		public abstract void compileIterables(ExecEnv env);
+
+		public abstract boolean matchSingleObject(StackFrame frame, EObject object);
 	}
 
 	/**
@@ -466,7 +481,15 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			assert getESuperRules().isEmpty();
 			return matchFor(frame, new EObject[iterableList.size()], 0, iterableList);
 		}
-
+		
+		/**
+		 * {@inheritDoc}}
+		 */
+		@Override
+		public boolean matchSingleObject(StackFrame frame, EObject object) {
+			assert getESuperRules().isEmpty();	
+			return matchFor(frame, Collections.singletonList(object).toArray(), 0);
+		}
 		/**
 		 * {@inheritDoc}
 		 */
@@ -493,9 +516,11 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 					iterables.add(re.createIterable(env));
 				}
 			}
+			
 			iterableList = iterables;
 			iterableMap = null;
 		}
+
 	}
 	
 	/**
@@ -575,6 +600,12 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			iterableMap = iterables;
 			iterableList = null;
 		}
+
+		@Override
+		public boolean matchSingleObject(StackFrame frame, EObject object) {
+			// TODO Auto-generated method stub
+			throw new UnsupportedOperationException("To be implmented soon");
+		}
 	}
 
 	/**
@@ -637,6 +668,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		 */
 		public abstract boolean matchFor(StackFrame frame, Map<String, Object> valuesMap, 
 				Object[] values);
+
+		public abstract boolean matchSingleObject(StackFrame frame, EObject object);
 	}
 
 	/**
@@ -674,6 +707,12 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			throw new VMException(frame, 
 					"matchFor(StackFrame, Map<String, EObject>, EObject[]) should not be used for manual rules");
 		}
+
+		@Override
+		public boolean matchSingleObject(StackFrame frame, EObject object) {
+			// TODO match singleObject in MANUAL_MODE
+			throw new UnsupportedOperationException("To be implemented soon");
+		}
 	}
 
 	/**
@@ -689,6 +728,13 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		public boolean matchSingle(final StackFrame frame) {
 			assert getMode() == RuleMode.AUTOMATIC_SINGLE;
 			return leafState.matchSingle(frame);
+		}
+		
+		@Override
+		public boolean matchSingleObject(StackFrame frame, EObject object) {
+			// TODO Auto-generated method stub
+			assert getMode() == RuleMode.AUTOMATIC_SINGLE;
+			return leafState.matchSingleObject(frame, object); 
 		}
 
 		/**
@@ -709,6 +755,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			assert getMode() == RuleMode.AUTOMATIC_SINGLE;
 			return matcherCbState.matchFor(frame, valuesMap, values);
 		}
+
+	
 	}
 
 	/**
@@ -744,6 +792,12 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			assert getMode() == RuleMode.AUTOMATIC_RECURSIVE;
 			return uniqueState.matchFor(frame, valuesMap, values);
 		}
+
+		@Override
+		public boolean matchSingleObject(StackFrame frame, EObject object) {
+			// TODO match single object in RECURSIVE_MODE
+			throw new UnsupportedOperationException("To be implemented soon");
+		}
 		
 	}
 
@@ -761,6 +815,11 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		public boolean matchSingle(final StackFrame frame) {
 			return superRulesState.match(frame);
 		}
+
+		public boolean matchSingleObject(StackFrame frame, EObject object) {
+			return superRulesState.matchSingleObject(frame, object); 
+			
+		};
 
 		/**
 		 * Matches {@link #getRule()} for the automatic recursive stage, if applicable.
@@ -891,6 +950,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		 * @param frame the stack frame in which to execute the post-applier
 		 */
 		public abstract void postApply(StackFrame frame);
+
+		public abstract void createSingleTrace(StackFrame frame);
 	}
 
 	/**
@@ -925,6 +986,11 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			assert isAbstract();
 			// do nothing - abstract rules cannot be applied
 		}
+
+		@Override
+		public void createSingleTrace(StackFrame frame) {
+			assert isAbstract();			
+		}
 	}
 
 	/**
@@ -954,8 +1020,11 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				if (trace.isOverridden()) {
 					links.remove(); // This match is overridden by a sub-rule
 				} else {
+					//TraceLink [[s:Member -> []] -> []]
 					createAllUniqueMappings(trace);
+					//TraceLink [[s:Member -> []] -> []]
 					boolean defaultMappingSet = completeTraceFor(frame, trace);
+					//
 					// Mark default/unique source elements if applicable
 					if (!defaultMappingSet) {
 						EList<SourceElement> ses = trace.getSourceElements();
@@ -964,7 +1033,25 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				}
 			}
 		}
-
+		
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void createSingleTrace(StackFrame frame) {
+			assert !isAbstract();
+			TraceLink currentMatch = frame.getEnv().getCurrentMatch();
+			if (!currentMatch.isOverridden()) {
+				createAllUniqueMappings(currentMatch);
+			}
+			boolean defaultMappingSet = completeTraceFor(frame, currentMatch);
+			// Mark default/unique source elements if applicable
+			if (!defaultMappingSet) {
+				EList<SourceElement> ses = currentMatch.getSourceElements();
+				defaultState.createDefaultMapping(currentMatch.getRule().getLinkSet(), ses);
+			}
+			
+		}
 		/**
 		 * {@inheritDoc}
 		 */
@@ -1002,6 +1089,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				applierCbState.postApplyFor(frame, trace);
 			}
 		}
+
+
 	}
 
 	/**
@@ -1030,6 +1119,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				ses.add(se);
 			}
 			frame.getEnv().getMatches().getLinksByRule(getName(), true).getLinks().add(match);
+			frame.getEnv().setCurrentMatch(match);
 			return true;
 		}
 
@@ -1139,6 +1229,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	protected class WithApplierWithPostApplyCbState extends ApplierCbState {
 
 		/**
+		 * 
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -2057,6 +2148,9 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		return ruleModeState.matchSingle(frame);
 	}
 
+	public boolean matchSingleObject(StackFrame frame, EObject object) {
+		return ruleModeState.matchSingleObject(frame, object);
+	}
 	/**
 	 * <!-- begin-user-doc. -->
 	 * {@inheritDoc}
@@ -2145,7 +2239,14 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	public void createTraces(final StackFrame frame) {
 		abstractState.createTraces(frame);
 	}
-
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	public void createSingleTrace(StackFrame frame) {
+		abstractState.createSingleTrace(frame);
+		
+	}
 	/**
 	 * <!-- begin-user-doc. -->
 	 * {@inheritDoc}
@@ -2153,19 +2254,26 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated NOT
 	 */
 	public boolean completeTraceFor(final StackFrame frame, final TraceLink trace) {
+		//TraceLink [[s:Member -> []] -> []]
 		boolean defaultMappingSet = false;
 		final ExecEnv env = frame.getEnv();
 		final int seSize = trace.getSourceElements().size();
+		//sesize=1
 		for (OutputRuleElement ore : getOutputElements()) {
 			String oreName = ore.getName();
+			//ore=t: Persons!Male (models: [OUT])
 			// If there is *any* target element with the same name, it overrides us
+			
 			if (trace.getTargetElement(oreName) != null) {
 				continue;
 			}
+			
 			TargetElement te = TraceFactory.eINSTANCE.createTargetElement();
 			te.setName(oreName);
 			te.setTargetOf(trace);
+			//TraceLink [[s:Member -> []] -> [t:null]]
 			EList<SourceElement> teMapsTo = te.getMapsTo();
+			
 			for (InputRuleElement source : ore.getMapsTo()) {
 				SourceElement mapsTo = trace.getSourceElement(source.getName(), false);
 				assert mapsTo != null;
@@ -2183,7 +2291,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			}
 			EList<Model> models = ore.getEModels();
 			assert models.size() == 1;
-			te.setObject(models.get(0).newElement(type));
+			//te.setObject(models.get(0).newElement(type));
 			assert te.getObject() != null;
 			assert te.getObject().eResource() != null;
 			assert te.getObject().eResource() == models.get(0).getResource();
@@ -2937,6 +3045,9 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 */
 	private boolean matchFor(final StackFrame frame, final Object[] values, final int index,
 			final List<Iterable<EObject>> iterables) {
+		if (iterables == null) {
+			return matchFor (frame, values, 0);
+		}
 		assert values.length == iterables.size();
 		int newIndex = index;
 		while (newIndex < values.length && iterables.get(newIndex) == null) { // bound rule elements
@@ -3528,5 +3639,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		}
 		uniqueState.createUniqueMapping(trace);
 	}
+
+
 
 } //RuleImpl
