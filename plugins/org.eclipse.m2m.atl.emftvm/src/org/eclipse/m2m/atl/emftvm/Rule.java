@@ -729,4 +729,6 @@ public interface Rule extends NamedElement {
 	 */
 	public boolean matchSingleObject(StackFrame frame, EObject object);
 
+	void createSingleTrace(StackFrame rootFrame);
+
 } // Rule

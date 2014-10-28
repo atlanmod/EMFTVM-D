@@ -12,6 +12,7 @@
 package org.eclipse.m2m.atl.emftvm;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -773,18 +774,41 @@ public interface ExecEnv extends EObject {
 	 */
 	CodeBlockJIT getJITCompiler();
 	
-	/**
-	 * 
-	 * @return the current match 
-	 */
-	TraceLink getCurrentMatch();
 	
 	/**
-	 * Sets the currents match
-	 * @param match
+	 * Sets up the execution environment before running the match phase
 	 */
-	void setCurrentMatch(String match);
+	
+	public void preMatchAllSingle();
+	
+	/**
+	 * matches an object 
+	 * @param object
+	 * @param className
+	 * @return void 
+	 */
+	public boolean matchSingleObject(EObject object, String className);
+	
+	/**
+	 * Sets the value of the current match to be passed 
+	 * MapReduce stuff
+	 * @param TraceLinkmatch
+	 * @return void
+	 */
+	public void setCurrentMatch(TraceLink match);
+	
+	/**
+	 * Gets the Current Match 
+	 * @return
+	 */
+	public TraceLink getCurrentMatch();
+	
+	/**
+	 * 
+	 * @return returns the {@link Map<String, Rule>} of rules 
+	 */
+	public Map<String, Rule> getRulesMap();
 
-	Map<String, Rule> getRulesMap();
-
+	void applyAll(Set<Rule> matchedRules); 
+	
 } // ExecEnv

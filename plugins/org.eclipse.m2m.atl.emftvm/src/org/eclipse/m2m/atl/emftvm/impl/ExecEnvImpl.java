@@ -1601,8 +1601,30 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		if (r.getMode() != RuleMode.MANUAL) {
 			r.compileIterables(this);
 		}
+		if (!getRules().isEmpty()) {
+			resolveRulesPerType();
+		}
 	}
 
+	private Map<String, List<Rule>> rulesPerType;
+
+	private TraceLink currentMatch;
+	/**
+	 * creates a map<String, LazyList<Rule>> of rules per type
+	 */
+	private void resolveRulesPerType() {
+		rulesPerType = new HashMap<String, List<Rule>>();
+		Iterator<Rule> iterator = getRules().iterator();
+		Rule nextRule = null;
+		String currentClassName = "";
+		while (iterator.hasNext()) {
+			nextRule = iterator.next();
+			currentClassName = nextRule.getInputElements().get(0).getEType().getName();
+			if (! rulesPerType.containsKey(currentClassName)) {
+				rulesPerType.put(currentClassName, new BasicEList<Rule>()); }
+				rulesPerType.get(currentClassName).add(nextRule);
+		}
+	}
 	/**
 	 * Resolves model references in <pre>re</pre>.
 	 * @param re the rule element to resolve references for
@@ -2142,11 +2164,138 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		}
 		return result;
 	}
+	
+	/**
+	 * runs imperative code
+	 * @return
+	 */
+	public Object runImperative() {
+		Object result = null;
+		final Iterator<Operation> mains = mainChain.iterator();
+		// run imperative code 
+					while (mains.hasNext()) {
+						CodeBlock cb = mains.next().getBody();
+						if (cb.getStackLevel() > 0) {
+							result = cb.execute(new StackFrame(this, cb));
+						} else {
+							cb.execute(new StackFrame(this, cb));
+						}
+					}
+		return result;	
+	}
+	public boolean matchSingleObject(EObject object, String className) {
+
+		StackFrame rootFrame = new StackFrame(this, mainChain.get(
+				mainChain.size() - 1).getBody());
+		
+		Iterator<Rule> rules = resolveAppliedRules(object, className);
+		if (rules == null) {
+			return false ; // no rule matches this object;
+		}
+			
+		boolean isApplied = false;
+		Rule nextRule = null;
+		
+		while (rules.hasNext() && !isApplied) {
+			nextRule = rules.next();
+			isApplied = nextRule.matchSingleObject(rootFrame, object);
+		}
+		nextRule.createSingleTrace(rootFrame);
+		return true;
+	}
+
+	private Iterator<Rule> resolveAppliedRules(EObject object, String className) {
+		
+		if (! rulesPerType.containsKey(className)) {
+			return null;
+		}
+		return rulesPerType.get(className).iterator();
+		
+	}
 
 	/**
-	 * Finds the {@link EClassifier} for the given (meta-)<pre>modelName</pre> and <pre>typeName</pre>.
-	 * @param modelName the name under which the metamodel that contains the type is registered
-	 * @param typeName the type/metaclass name (may be fully qualified using '<pre>::</pre>')
+	 * {@inheritDoc}
+	 * 
+	 * This implementation supports only {@link RuleMode#AUTOMATIC_SINGLE_VALUE}
+	 * No inhertance is supported yet
+	 */
+	public void preMatchAllSingle() {
+
+		try {
+			assert deletionQueue.isEmpty();
+			if (!isRuleStateCompiled()) {
+				for (Rule r : getRules()) {
+					r.compileState(this); // compile internal state for all
+											// registered rules
+				}
+			}
+			for (Rule r : getRules()) {
+				resolveRuleModels(r);
+			}
+			final Iterator<Operation> mains = mainChain.iterator();
+			if (!mains.hasNext()) {
+				throw new UnsupportedOperationException(String.format(
+						"Operation %s not found", EMFTVMUtil.MAIN_OP_NAME));
+			}
+			final StackFrame rootFrame = new StackFrame(this, mainChain.get(
+					mainChain.size() - 1).getBody());
+
+			// run all automatic rules before main
+			currentPhase = RuleMode.AUTOMATIC_SINGLE;
+		} catch (VMException e) {
+			if (monitor != null) {
+				monitor.error(e.getFrame(), e.getLocalizedMessage(), e);
+				monitor.terminated();
+			}
+			throw e;
+		} 
+			//finally {
+//			currentPhase = null;
+//			this.matches = null;
+//			this.traces = null;
+//			this.uniqueResults = null;
+//			fieldContainer.clear();
+//			for (Rule r : getRules()) {
+//				r.clearFields();
+//				clearRuleModels(r);
+//			}
+//			assert findStaticField(eClass(), "matches").getStaticValue() == null;
+//			assert findStaticField(eClass(), "traces").getStaticValue() == null;
+//		}
+
+	}
+
+	public void postMatch() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * Finds the {@link EClassifier} for the given (meta-)
+	 * 
+	 * <pre>
+	 * modelName
+	 * </pre>
+	 * 
+	 * and
+	 * 
+	 * <pre>
+	 * typeName
+	 * </pre>
+	 * 
+	 * .
+	 * 
+	 * @param modelName
+	 *            the name under which the metamodel that contains the type is
+	 *            registered
+	 * @param typeName
+	 *            the type/metaclass name (may be fully qualified using '
+	 * 
+	 *            <pre>
+	 * ::
+	 * </pre>
+	 * 
+	 *            ')
 	 * @return the type/metaclass, or <code>null</code> if not found
 	 */
 	private EClassifier findEClassifier(String modelName, String typeName) {
@@ -2230,11 +2379,16 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * @param frame the stack frame context
 	 * @param timingData the timing data object to update
 	 */
-	private void matchAllSingle(final StackFrame frame, final TimingData timingData) {
+	private Set<Rule> matchAllSingle(final StackFrame frame, final TimingData timingData) {
 		final List<Rule> rules = getRules();
 		// Match automatic single rules
 		final Set<Rule> matchedRules = new LinkedHashSet<Rule>();
 		boolean match;
+		// Filter matched rules
+		// this implementation is per rule ...
+		// what would make more sense for ATLMR is per object what we can do is
+		// to stop here anfd run the transformation
+		// per element
 		do {
 			match = false;
 			for (Rule rule : rules) {
@@ -2247,18 +2401,27 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				}
 			}
 		} while (match);
+		// end filter matched rules
+
 		// Create traces for automatic single rules
 		for (Rule rule : matchedRules) {
 			rule.createTraces(frame);
+			// here we can adapt the method to return the traces for available
+			// elements
+			// TODO dig into that
 		}
-		if (timingData != null) timingData.finishMatch();
+		//
+		if (timingData != null)
+			timingData.finishMatch();
+
 		// Apply rules
 		for (Rule rule : matchedRules) {
 			rule.apply(frame);
 		}
 		setQueue();
 		remapQueue();
-		if (timingData != null) timingData.finishApply();
+		if (timingData != null)
+			timingData.finishApply();
 		// Run post-apply
 		for (Rule rule : matchedRules) {
 			rule.postApply(frame);
@@ -2266,7 +2429,10 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		setQueue();
 		remapQueue();
 		deleteQueue();
-		if (timingData != null) timingData.finishPostApply();
+		if (timingData != null)
+			timingData.finishPostApply();
+		
+		return matchedRules;
 	}
 
 	/**
@@ -2636,14 +2802,37 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		this.ruleStateCompiled = ruleStateCompiled;
 	}
 
-	public TraceLink getCurrentMatch() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setCurrentMatch(TraceLink match) {
+		this.currentMatch = match;		
 	}
-
-	public void setCurrentMatch(String match) {
-		// TODO Auto-generated method stub
+	
+	public TraceLink getCurrentMatch () {
+		return this.currentMatch;
 		
+	}
+	
+	/**
+	 * 
+	 */
+	public void applyAll(Set<Rule> matchedRules) {
+		final StackFrame frame = new StackFrame(this, mainChain.get(
+				mainChain.size() - 1).getBody());
+			// Apply rules
+				for (Rule rule : matchedRules) {
+					rule.apply(frame);
+				}
+
+				setQueue();
+				remapQueue();
+				
+				// Run post-apply
+				for (Rule rule : matchedRules) {
+					rule.postApply(frame);
+				}
+				setQueue();
+				remapQueue();
+				deleteQueue();
+				
 	}
 
 } //ExecEnvImpl
