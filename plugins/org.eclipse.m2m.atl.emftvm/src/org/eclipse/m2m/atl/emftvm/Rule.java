@@ -728,7 +728,16 @@ public interface Rule extends NamedElement {
 	 * @return a {@link Boolean} if the a match has been found
 	 */
 	public boolean matchSingleObject(StackFrame frame, EObject object);
-
+	/**
+	 * Creates a single trace for the current element
+	 * @param rootFrame
+	 */
 	void createSingleTrace(StackFrame rootFrame);
+
+	/**
+	 * Add the current {@link TraceLink} to the defaultMapping
+	 * @param traceLink
+	 */
+	void createDefaultMappingForTrace(TraceLink traceLink);
 
 } // Rule

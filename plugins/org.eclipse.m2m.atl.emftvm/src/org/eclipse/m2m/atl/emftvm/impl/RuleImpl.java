@@ -381,6 +381,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		 * @return <code>true</code> iff default mappings are set for complete list of all source elements
 		 */
 		public abstract boolean createDefaultMapping(TraceLinkSet traces, EList<SourceElement> teMapsTo, int seSize);
+
+		//public abstract void createDefaultMappingForTrace(TraceLink traceLink);
 	}
 
 	/**
@@ -404,6 +406,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		public boolean createDefaultMapping(final TraceLinkSet traces, final EList<SourceElement> teMapsTo, final int seSize) {
 			return false;
 		}
+
 	}
 	
 	/**
@@ -437,6 +440,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			// Default mappings set for complete list of all source elements
 			return (ses.size() == seSize);
 		}
+
 	}
 
 	/**
@@ -3682,6 +3686,13 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		}
 		uniqueState.createUniqueMapping(trace);
 	}
+
+	public void createDefaultMappingForTrace(TraceLink traceLink) {
+		
+		defaultState.createDefaultMapping(traceLink.getRule().getLinkSet(), traceLink.getSourceElements());
+		
+	}
+
 
 
 
