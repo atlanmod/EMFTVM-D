@@ -62,6 +62,8 @@
         eOpposite="#//TracedRule/links"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         transient="true" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//TraceProperty" containment="true" eOpposite="#//TraceProperty/appliedAt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TraceElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -97,6 +99,23 @@
         eOpposite="#//TracedRule/uniqueSourceElementLists"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="JavaList" instanceClassName="java.util.List">
+    <eAnnotations/>
     <eTypeParameters name="E"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceProperty">
+    <eOperations name="resolveBinding">
+      <eGenericType eClassifier="#//JavaList">
+        <eTypeArguments/>
+      </eGenericType>
+      <eParameters name="traces" eType="#//TraceLinkSet"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedFor" lowerBound="1"
+        eType="#//TargetElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvings" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appliedAt" eType="#//TraceLink"
+        eOpposite="#//TraceLink/properties"/>
   </eClassifiers>
 </ecore:EPackage>
