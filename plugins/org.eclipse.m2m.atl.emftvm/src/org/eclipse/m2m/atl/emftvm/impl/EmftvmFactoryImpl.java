@@ -12,6 +12,7 @@
 package org.eclipse.m2m.atl.emftvm.impl;
 
 
+import java.lang.Iterable;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.ecore.EClass;
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.m2m.atl.emftvm.*;
 import org.eclipse.m2m.atl.emftvm.Add;
 import org.eclipse.m2m.atl.emftvm.Allinst;
 import org.eclipse.m2m.atl.emftvm.AllinstIn;
@@ -237,6 +239,10 @@ public class EmftvmFactoryImpl extends EFactoryImpl implements EmftvmFactory {
 				return createRuleModeFromString(eDataType, initialValue);
 			case EmftvmPackage.CONSTANT_TAG:
 				return createConstantTagFromString(eDataType, initialValue);
+			case EmftvmPackage.EXEC_MODE:
+				return createExecModeFromString(eDataType, initialValue);
+			case EmftvmPackage.EXEC_PHASE:
+				return createExecPhaseFromString(eDataType, initialValue);
 			case EmftvmPackage.MODULE_RESOLVER:
 				return createModuleResolverFromString(eDataType, initialValue);
 			case EmftvmPackage.ENUM_LITERAL:
@@ -293,6 +299,10 @@ public class EmftvmFactoryImpl extends EFactoryImpl implements EmftvmFactory {
 				return convertRuleModeToString(eDataType, instanceValue);
 			case EmftvmPackage.CONSTANT_TAG:
 				return convertConstantTagToString(eDataType, instanceValue);
+			case EmftvmPackage.EXEC_MODE:
+				return convertExecModeToString(eDataType, instanceValue);
+			case EmftvmPackage.EXEC_PHASE:
+				return convertExecPhaseToString(eDataType, instanceValue);
 			case EmftvmPackage.MODULE_RESOLVER:
 				return convertModuleResolverToString(eDataType, instanceValue);
 			case EmftvmPackage.ENUM_LITERAL:
@@ -1139,6 +1149,46 @@ public class EmftvmFactoryImpl extends EFactoryImpl implements EmftvmFactory {
 	 * @generated
 	 */
 	public String convertConstantTagToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecMode createExecModeFromString(EDataType eDataType, String initialValue) {
+		ExecMode result = ExecMode.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertExecModeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecPhase createExecPhaseFromString(EDataType eDataType, String initialValue) {
+		ExecPhase result = ExecPhase.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertExecPhaseToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

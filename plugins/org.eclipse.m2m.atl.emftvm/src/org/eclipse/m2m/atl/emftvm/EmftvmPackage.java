@@ -658,13 +658,22 @@ public interface EmftvmPackage extends EPackage {
 	int EXEC_ENV__CURRENT_PHASE = 9;
 
 	/**
+	 * The feature id for the '<em><b>Execution Mode</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXEC_ENV__EXECUTION_MODE = 10;
+
+	/**
 	 * The number of structural features of the '<em>Exec Env</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXEC_ENV_FEATURE_COUNT = 10;
+	int EXEC_ENV_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.impl.ModelImpl <em>Model</em>}' class.
@@ -6621,6 +6630,26 @@ public interface EmftvmPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.ExecMode <em>Exec Mode</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.m2m.atl.emftvm.ExecMode
+	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getExecMode()
+	 * @generated
+	 */
+	int EXEC_MODE = 80;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.ExecPhase <em>Exec Phase</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.m2m.atl.emftvm.ExecPhase
+	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getExecPhase()
+	 * @generated
+	 */
+	int EXEC_PHASE = 81;
+
+	/**
 	 * The meta object id for the '<em>Stack Frame</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6628,7 +6657,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getStackFrame()
 	 * @generated
 	 */
-	int STACK_FRAME = 82;
+	int STACK_FRAME = 84;
 
 
 	/**
@@ -6639,7 +6668,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getMethod()
 	 * @generated
 	 */
-	int METHOD = 83;
+	int METHOD = 85;
 
 	/**
 	 * The meta object id for the '<em>Timing Data</em>' data type.
@@ -6649,7 +6678,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getTimingData()
 	 * @generated
 	 */
-	int TIMING_DATA = 84;
+	int TIMING_DATA = 86;
 
 	/**
 	 * The meta object id for the '<em>VM Monitor</em>' data type.
@@ -6659,7 +6688,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getVMMonitor()
 	 * @generated
 	 */
-	int VM_MONITOR = 85;
+	int VM_MONITOR = 87;
 
 	/**
 	 * The meta object id for the '<em>Lazy Collection</em>' data type.
@@ -6669,7 +6698,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getLazyCollection()
 	 * @generated
 	 */
-	int LAZY_COLLECTION = 86;
+	int LAZY_COLLECTION = 88;
 
 	/**
 	 * The meta object id for the '<em>Lazy Bag</em>' data type.
@@ -6679,7 +6708,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getLazyBag()
 	 * @generated
 	 */
-	int LAZY_BAG = 87;
+	int LAZY_BAG = 89;
 
 	/**
 	 * The meta object id for the '<em>Lazy List</em>' data type.
@@ -6689,7 +6718,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getLazyList()
 	 * @generated
 	 */
-	int LAZY_LIST = 88;
+	int LAZY_LIST = 90;
 
 	/**
 	 * The meta object id for the '<em>Lazy Ordered Set</em>' data type.
@@ -6699,7 +6728,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getLazyOrderedSet()
 	 * @generated
 	 */
-	int LAZY_ORDERED_SET = 89;
+	int LAZY_ORDERED_SET = 91;
 
 	/**
 	 * The meta object id for the '<em>Lazy Set</em>' data type.
@@ -6709,7 +6738,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getLazySet()
 	 * @generated
 	 */
-	int LAZY_SET = 90;
+	int LAZY_SET = 92;
 
 	/**
 	 * The meta object id for the '<em>EJava Object Array</em>' data type.
@@ -6718,7 +6747,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getEJavaObjectArray()
 	 * @generated
 	 */
-	int EJAVA_OBJECT_ARRAY = 91;
+	int EJAVA_OBJECT_ARRAY = 93;
 
 	/**
 	 * The meta object id for the '<em>EObject Array</em>' data type.
@@ -6727,7 +6756,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getEObjectArray()
 	 * @generated
 	 */
-	int EOBJECT_ARRAY = 92;
+	int EOBJECT_ARRAY = 94;
 
 	/**
 	 * The meta object id for the '<em>EBoolean Array</em>' data type.
@@ -6736,7 +6765,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getEBooleanArray()
 	 * @generated
 	 */
-	int EBOOLEAN_ARRAY = 93;
+	int EBOOLEAN_ARRAY = 95;
 
 	/**
 	 * The meta object id for the '<em>EJava Set</em>' data type.
@@ -6746,7 +6775,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getEJavaSet()
 	 * @generated
 	 */
-	int EJAVA_SET = 94;
+	int EJAVA_SET = 96;
 
 	/**
 	 * The meta object id for the '<em>EJava Iterable</em>' data type.
@@ -6756,7 +6785,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getEJavaIterable()
 	 * @generated
 	 */
-	int EJAVA_ITERABLE = 95;
+	int EJAVA_ITERABLE = 97;
 
 	/**
 	 * The meta object id for the '<em>Class Not Found Exception</em>' data type.
@@ -6766,7 +6795,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getClassNotFoundException()
 	 * @generated
 	 */
-	int CLASS_NOT_FOUND_EXCEPTION = 96;
+	int CLASS_NOT_FOUND_EXCEPTION = 98;
 
 	/**
 	 * The meta object id for the '<em>Module Resolver</em>' data type.
@@ -6776,7 +6805,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getModuleResolver()
 	 * @generated
 	 */
-	int MODULE_RESOLVER = 80;
+	int MODULE_RESOLVER = 82;
 
 
 	/**
@@ -6787,7 +6816,7 @@ public interface EmftvmPackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getEnumLiteral()
 	 * @generated
 	 */
-	int ENUM_LITERAL = 81;
+	int ENUM_LITERAL = 83;
 
 
 	/**
@@ -8786,6 +8815,17 @@ public interface EmftvmPackage extends EPackage {
 	EAttribute getExecEnv_CurrentPhase();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionMode <em>Execution Mode</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Execution Mode</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionMode()
+	 * @see #getExecEnv()
+	 * @generated
+	 */
+	EAttribute getExecEnv_ExecutionMode();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getMetaModels <em>Meta Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8997,6 +9037,26 @@ public interface EmftvmPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getConstantTag();
+
+	/**
+	 * Returns the meta object for enum '{@link org.eclipse.m2m.atl.emftvm.ExecMode <em>Exec Mode</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Exec Mode</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecMode
+	 * @generated
+	 */
+	EEnum getExecMode();
+
+	/**
+	 * Returns the meta object for enum '{@link org.eclipse.m2m.atl.emftvm.ExecPhase <em>Exec Phase</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Exec Phase</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecPhase
+	 * @generated
+	 */
+	EEnum getExecPhase();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.m2m.atl.emftvm.util.StackFrame <em>Stack Frame</em>}'.
@@ -10855,6 +10915,14 @@ public interface EmftvmPackage extends EPackage {
 		EAttribute EXEC_ENV__CURRENT_PHASE = eINSTANCE.getExecEnv_CurrentPhase();
 
 		/**
+		 * The meta object literal for the '<em><b>Execution Mode</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXEC_ENV__EXECUTION_MODE = eINSTANCE.getExecEnv_ExecutionMode();
+
+		/**
 		 * The meta object literal for the '<em><b>Meta Models</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11027,6 +11095,26 @@ public interface EmftvmPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum CONSTANT_TAG = eINSTANCE.getConstantTag();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.m2m.atl.emftvm.ExecMode <em>Exec Mode</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.m2m.atl.emftvm.ExecMode
+		 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getExecMode()
+		 * @generated
+		 */
+		EEnum EXEC_MODE = eINSTANCE.getExecMode();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.m2m.atl.emftvm.ExecPhase <em>Exec Phase</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.m2m.atl.emftvm.ExecPhase
+		 * @see org.eclipse.m2m.atl.emftvm.impl.EmftvmPackageImpl#getExecPhase()
+		 * @generated
+		 */
+		EEnum EXEC_PHASE = eINSTANCE.getExecPhase();
 
 		/**
 		 * The meta object literal for the '<em>Stack Frame</em>' data type.

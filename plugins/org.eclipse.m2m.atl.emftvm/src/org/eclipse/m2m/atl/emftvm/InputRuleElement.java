@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.atl.emftvm;
 
+import java.lang.Iterable;
 import org.eclipse.emf.ecore.EObject;
 
 

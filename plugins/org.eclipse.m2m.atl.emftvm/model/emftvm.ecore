@@ -352,6 +352,7 @@
         transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentPhase" eType="#//RuleMode"
         changeable="false" transient="true" defaultValueLiteral="manual"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="executionMode" eType="#//ExecMode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eOperations name="allInstancesOf">
@@ -845,4 +846,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Insert" eSuperTypes="#//FieldInstruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="GetSuper" eSuperTypes="#//FieldInstruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Getenv" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExecMode">
+    <eLiterals name="Normal"/>
+    <eLiterals name="MR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExecPhase">
+    <eLiterals name="Pre"/>
+    <eLiterals name="Post" value="1"/>
+  </eClassifiers>
 </ecore:EPackage>

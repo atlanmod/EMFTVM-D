@@ -50,6 +50,7 @@ import org.eclipse.m2m.atl.emftvm.CodeBlock;
 import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
 import org.eclipse.m2m.atl.emftvm.EmftvmPackage;
 import org.eclipse.m2m.atl.emftvm.ExecEnv;
+import org.eclipse.m2m.atl.emftvm.ExecMode;
 import org.eclipse.m2m.atl.emftvm.Feature;
 import org.eclipse.m2m.atl.emftvm.Field;
 import org.eclipse.m2m.atl.emftvm.Instruction;
@@ -108,6 +109,7 @@ import org.eclipse.m2m.atl.emftvm.util.VMMonitor;
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getUniqueResults <em>Unique Results</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#isJitDisabled <em>Jit Disabled</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getCurrentPhase <em>Current Phase</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getExecutionMode <em>Execution Mode</em>}</li>
  * </ul>
  * </p>
  *
@@ -446,6 +448,26 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * @ordered
 	 */
 	protected RuleMode currentPhase = CURRENT_PHASE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getExecutionMode() <em>Execution Mode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutionMode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ExecMode EXECUTION_MODE_EDEFAULT = ExecMode.NORMAL;
+
+	/**
+	 * The cached value of the '{@link #getExecutionMode() <em>Execution Mode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutionMode()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExecMode executionMode = EXECUTION_MODE_EDEFAULT;
 
 	/**
 	 * The internal value of the '{@link #getMetaModels() <em>Meta Models</em>}' attribute.
@@ -789,6 +811,27 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 */
 	public RuleMode getCurrentPhase() {
 		return currentPhase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecMode getExecutionMode() {
+		return executionMode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExecutionMode(ExecMode newExecutionMode) {
+		ExecMode oldExecutionMode = executionMode;
+		executionMode = newExecutionMode == null ? EXECUTION_MODE_EDEFAULT : newExecutionMode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmftvmPackage.EXEC_ENV__EXECUTION_MODE, oldExecutionMode, executionMode));
 	}
 
 	/**
@@ -2736,6 +2779,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				return isJitDisabled();
 			case EmftvmPackage.EXEC_ENV__CURRENT_PHASE:
 				return getCurrentPhase();
+			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
+				return getExecutionMode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2751,6 +2796,9 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 			case EmftvmPackage.EXEC_ENV__JIT_DISABLED:
 				setJitDisabled((Boolean)newValue);
 				return;
+			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
+				setExecutionMode((ExecMode)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2765,6 +2813,9 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		switch (featureID) {
 			case EmftvmPackage.EXEC_ENV__JIT_DISABLED:
 				setJitDisabled(JIT_DISABLED_EDEFAULT);
+				return;
+			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
+				setExecutionMode(EXECUTION_MODE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -2799,6 +2850,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				return jitDisabled != JIT_DISABLED_EDEFAULT;
 			case EmftvmPackage.EXEC_ENV__CURRENT_PHASE:
 				return currentPhase != CURRENT_PHASE_EDEFAULT;
+			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
+				return executionMode != EXECUTION_MODE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2830,6 +2883,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		result.append(jitDisabled);
 		result.append(", currentPhase: ");
 		result.append(currentPhase);
+		result.append(", executionMode: ");
+		result.append(executionMode);
 		result.append(')');
 		return result.toString();
 	}

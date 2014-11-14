@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.atl.emftvm.impl;
 
+import java.lang.Iterable;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -39,6 +40,8 @@ import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
 import org.eclipse.m2m.atl.emftvm.EmftvmPackage;
 import org.eclipse.m2m.atl.emftvm.Enditerate;
 import org.eclipse.m2m.atl.emftvm.ExecEnv;
+import org.eclipse.m2m.atl.emftvm.ExecMode;
+import org.eclipse.m2m.atl.emftvm.ExecPhase;
 import org.eclipse.m2m.atl.emftvm.Feature;
 import org.eclipse.m2m.atl.emftvm.FeatureTag;
 import org.eclipse.m2m.atl.emftvm.Field;
@@ -686,6 +689,20 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 	 * @generated
 	 */
 	private EEnum constantTagEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum execModeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum execPhaseEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2568,6 +2585,15 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExecEnv_ExecutionMode() {
+		return (EAttribute)execEnvEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getExecEnv_MetaModels() {
 		return (EAttribute)execEnvEClass.getEStructuralFeatures().get(0);
 	}
@@ -2741,6 +2767,24 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 	 */
 	public EEnum getConstantTag() {
 		return constantTagEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getExecMode() {
+		return execModeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getExecPhase() {
+		return execPhaseEEnum;
 	}
 
 	/**
@@ -2935,6 +2979,7 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 		createEAttribute(execEnvEClass, EXEC_ENV__UNIQUE_RESULTS);
 		createEAttribute(execEnvEClass, EXEC_ENV__JIT_DISABLED);
 		createEAttribute(execEnvEClass, EXEC_ENV__CURRENT_PHASE);
+		createEAttribute(execEnvEClass, EXEC_ENV__EXECUTION_MODE);
 
 		modelEClass = createEClass(MODEL);
 		createEAttribute(modelEClass, MODEL__RESOURCE);
@@ -3208,6 +3253,8 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 		opcodeEEnum = createEEnum(OPCODE);
 		ruleModeEEnum = createEEnum(RULE_MODE);
 		constantTagEEnum = createEEnum(CONSTANT_TAG);
+		execModeEEnum = createEEnum(EXEC_MODE);
+		execPhaseEEnum = createEEnum(EXEC_PHASE);
 
 		// Create data types
 		moduleResolverEDataType = createEDataType(MODULE_RESOLVER);
@@ -3380,6 +3427,7 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 		initEAttribute(getExecEnv_UniqueResults(), g1, "uniqueResults", null, 1, 1, ExecEnv.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecEnv_JitDisabled(), theEcorePackage.getEBoolean(), "jitDisabled", null, 1, 1, ExecEnv.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecEnv_CurrentPhase(), this.getRuleMode(), "currentPhase", "manual", 0, 1, ExecEnv.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecEnv_ExecutionMode(), this.getExecMode(), "executionMode", null, 0, 1, ExecEnv.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(execEnvEClass, this.getModule(), "loadModule", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getModuleResolver(), "resolver", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -4070,6 +4118,14 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 		addEEnumLiteral(constantTagEEnum, ConstantTag.LONG);
 		addEEnumLiteral(constantTagEEnum, ConstantTag.ENUM_LITERAL);
 		addEEnumLiteral(constantTagEEnum, ConstantTag.NULL);
+
+		initEEnum(execModeEEnum, ExecMode.class, "ExecMode");
+		addEEnumLiteral(execModeEEnum, ExecMode.NORMAL);
+		addEEnumLiteral(execModeEEnum, ExecMode.MR);
+
+		initEEnum(execPhaseEEnum, ExecPhase.class, "ExecPhase");
+		addEEnumLiteral(execPhaseEEnum, ExecPhase.PRE);
+		addEEnumLiteral(execPhaseEEnum, ExecPhase.POST);
 
 		// Initialize data types
 		initEDataType(moduleResolverEDataType, ModuleResolver.class, "ModuleResolver", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

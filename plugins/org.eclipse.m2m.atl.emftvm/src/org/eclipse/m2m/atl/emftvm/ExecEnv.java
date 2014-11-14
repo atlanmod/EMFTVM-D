@@ -46,6 +46,7 @@ import org.eclipse.m2m.atl.emftvm.util.VMMonitor;
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getUniqueResults <em>Unique Results</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#isJitDisabled <em>Jit Disabled</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getCurrentPhase <em>Current Phase</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionMode <em>Execution Mode</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,6 +159,35 @@ public interface ExecEnv extends EObject {
 	 * @generated
 	 */
 	RuleMode getCurrentPhase();
+
+	/**
+	 * Returns the value of the '<em><b>Execution Mode</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.m2m.atl.emftvm.ExecMode}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Execution Mode</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Execution Mode</em>' attribute.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecMode
+	 * @see #setExecutionMode(ExecMode)
+	 * @see org.eclipse.m2m.atl.emftvm.EmftvmPackage#getExecEnv_ExecutionMode()
+	 * @model
+	 * @generated
+	 */
+	ExecMode getExecutionMode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionMode <em>Execution Mode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Execution Mode</em>' attribute.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecMode
+	 * @see #getExecutionMode()
+	 * @generated
+	 */
+	void setExecutionMode(ExecMode value);
 
 	/**
 	 * <!-- begin-user-doc -->
