@@ -15,6 +15,7 @@ package org.eclipse.m2m.atl.emftvm.trace;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -128,5 +129,20 @@ public interface TraceLinkSet extends EObject{
 	 * @generated
 	 */
 	void clear();
-
+	
+	/**
+	 * Records the resolved object in a list for lightweight future resolution
+	 * @param uri
+	 * @param resolvedObject
+	 * @return 
+	 */
+	public EObject recordObject(URI uri, EObject resolvedObject);
+	/**
+	 * checks is the element has a mapping 
+	 * @param uri
+	 * @return
+	 */
+	EObject resolveObject(URI uri, EObject object);
+	
+	EObject resolveObject(EObject next);
 } // TraceLinkSet

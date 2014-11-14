@@ -353,6 +353,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentPhase" eType="#//RuleMode"
         changeable="false" transient="true" defaultValueLiteral="manual"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="executionMode" eType="#//ExecMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="executionPhase" eType="#//ExecPhase"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eOperations name="allInstancesOf">

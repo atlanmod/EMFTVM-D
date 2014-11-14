@@ -85,7 +85,7 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 		new TraceSwitch<Adapter>() {
 			@Override
 			public Adapter caseTraceLinkSet(TraceLinkSet object) {
-				return createTraceLinkSetAdapter();
+				return createTraceLinkSetAdapter(object);
 			}
 			@Override
 			public Adapter caseTracedRule(TracedRule object) {
@@ -141,11 +141,12 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * @param object 
 	 * @return the new adapter.
 	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet
 	 * @generated
 	 */
-	public Adapter createTraceLinkSetAdapter() {
+	public Adapter createTraceLinkSetAdapter(TraceLinkSet object) {
 		return null;
 	}
 
@@ -256,6 +257,11 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEObjectAdapter() {
+		return null;
+	}
+
+	public Adapter createTraceLinkSetAdapter() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

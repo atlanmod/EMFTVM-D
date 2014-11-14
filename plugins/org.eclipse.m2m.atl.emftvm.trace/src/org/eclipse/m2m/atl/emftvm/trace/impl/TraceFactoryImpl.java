@@ -21,14 +21,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.m2m.atl.emftvm.trace.*;
-import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
-import org.eclipse.m2m.atl.emftvm.trace.SourceElementList;
-import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
-import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
-import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
-import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
-import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
-import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
 
 /**
  * <!-- begin-user-doc -->

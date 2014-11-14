@@ -38,13 +38,7 @@ import org.eclipse.m2m.atl.emftvm.Operation;
  * @generated
  */
 public class OperationItemProvider
-	extends FeatureItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends FeatureItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

@@ -667,13 +667,22 @@ public interface EmftvmPackage extends EPackage {
 	int EXEC_ENV__EXECUTION_MODE = 10;
 
 	/**
+	 * The feature id for the '<em><b>Execution Phase</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXEC_ENV__EXECUTION_PHASE = 11;
+
+	/**
 	 * The number of structural features of the '<em>Exec Env</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXEC_ENV_FEATURE_COUNT = 11;
+	int EXEC_ENV_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.impl.ModelImpl <em>Model</em>}' class.
@@ -8826,6 +8835,17 @@ public interface EmftvmPackage extends EPackage {
 	EAttribute getExecEnv_ExecutionMode();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionPhase <em>Execution Phase</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Execution Phase</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionPhase()
+	 * @see #getExecEnv()
+	 * @generated
+	 */
+	EAttribute getExecEnv_ExecutionPhase();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getMetaModels <em>Meta Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10921,6 +10941,14 @@ public interface EmftvmPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXEC_ENV__EXECUTION_MODE = eINSTANCE.getExecEnv_ExecutionMode();
+
+		/**
+		 * The meta object literal for the '<em><b>Execution Phase</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXEC_ENV__EXECUTION_PHASE = eINSTANCE.getExecEnv_ExecutionPhase();
 
 		/**
 		 * The meta object literal for the '<em><b>Meta Models</b></em>' attribute feature.

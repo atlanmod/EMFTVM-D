@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.m2m.atl.emftvm.EmftvmPackage;
 import org.eclipse.m2m.atl.emftvm.LocalVariableInstruction;
+import org.eclipse.m2m.atl.emftvm.Opcode;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.m2m.atl.emftvm.LocalVariableInstruction} object.
@@ -36,13 +37,7 @@ import org.eclipse.m2m.atl.emftvm.LocalVariableInstruction;
  * @generated
  */
 public class LocalVariableInstructionItemProvider
-	extends InstructionItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends InstructionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

@@ -12,13 +12,18 @@
 package org.eclipse.m2m.atl.emftvm.trace.impl;
 
 
+import java.text.RuleBasedCollator;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
 import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
+import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
 
 /**
@@ -136,15 +141,20 @@ public abstract class TraceElementImpl extends EObjectImpl implements TraceEleme
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EObject getObject() {
 		if (object != null && object.eIsProxy()) {
 			InternalEObject oldObject = (InternalEObject)object;
+			URI proxy = oldObject.eProxyURI();
 			object = eResolveProxy(oldObject);
+			if (this instanceof TargetElement) {
+				TraceLinkSet traces = ((TargetElement)this).getTargetOf().getRule().getLinkSet();
+				object = traces.recordObject(proxy, object);				
+			}
 			if (object != oldObject) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TracePackage.TRACE_ELEMENT__OBJECT, oldObject, object));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TracePackage.TRACE_ELEMENT__OBJECT, proxy, object));
 			}
 		}
 		return object;

@@ -36,13 +36,7 @@ import org.eclipse.m2m.atl.emftvm.Findtype;
  * @generated
  */
 public class FindtypeItemProvider
-	extends InstructionItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends InstructionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

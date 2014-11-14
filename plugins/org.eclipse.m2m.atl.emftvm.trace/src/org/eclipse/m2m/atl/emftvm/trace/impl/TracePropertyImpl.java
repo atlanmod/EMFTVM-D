@@ -266,9 +266,13 @@ public class TracePropertyImpl extends EObjectImpl implements TraceProperty {
 		assert resolvedFor != null;
 		EList<EObject> result = new BasicEList<EObject>();
 		for (EObject next : resolvings) {
-			if (next.eIsProxy()) {
-					InternalEObject oldObject = (InternalEObject)next;
-					next = EcoreUtil.resolve(oldObject, rs);	    
+			{// Already a target Object
+				EObject newNext = traces.resolveObject(next);
+				if (! newNext.equals(next)) {
+					result.add(newNext);
+					continue;
+				}
+//			}
 			}
 		final SourceElement se = traces.getDefaultSourceElement(next);
 		if (se != null && !se.isMapsToSelf()) {
@@ -289,7 +293,6 @@ public class TracePropertyImpl extends EObjectImpl implements TraceProperty {
 				}
 			}
 		}
-		result.add(next);
 		}
 		return result;
 	}

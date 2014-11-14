@@ -19,12 +19,14 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElementList;
@@ -52,6 +54,8 @@ import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
  */
 public class TraceLinkSetImpl extends EObjectImpl implements TraceLinkSet {
 
+	Map<URI, EObject> targetElementsCache = new HashMap<URI, EObject>();
+	Map<EObject, EObject> old2newTargetElements = new HashMap<EObject, EObject>();
 	/**
 	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -494,6 +498,24 @@ public class TraceLinkSetImpl extends EObjectImpl implements TraceLinkSet {
 	 */
 	private void defaultSourceElementListRemoved(final SourceElementList sel) {
 		defaultSourceObjectLists.remove(sel.getSourceObjects());
+	}
+
+	public EObject recordObject(URI uri, EObject object) {
+		if (! targetElementsCache.containsKey(uri)) {
+			EObject result = EcoreUtil.copy(object);
+			targetElementsCache.put(uri, result);
+			old2newTargetElements.put(object, result);
+			return result;
+		}		
+		return targetElementsCache.get(uri);
+	}
+
+	public EObject resolveObject(URI uri, EObject object) {
+		return targetElementsCache.containsKey(uri) ? targetElementsCache.get(uri) : object;
+	}
+
+	public EObject resolveObject(EObject object) {
+		return old2newTargetElements.containsKey(object) ? old2newTargetElements.get(object) : object;
 	}
 
 } //TraceLinkSetImpl

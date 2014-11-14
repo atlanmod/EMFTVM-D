@@ -2594,6 +2594,15 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExecEnv_ExecutionPhase() {
+		return (EAttribute)execEnvEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getExecEnv_MetaModels() {
 		return (EAttribute)execEnvEClass.getEStructuralFeatures().get(0);
 	}
@@ -2980,6 +2989,7 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 		createEAttribute(execEnvEClass, EXEC_ENV__JIT_DISABLED);
 		createEAttribute(execEnvEClass, EXEC_ENV__CURRENT_PHASE);
 		createEAttribute(execEnvEClass, EXEC_ENV__EXECUTION_MODE);
+		createEAttribute(execEnvEClass, EXEC_ENV__EXECUTION_PHASE);
 
 		modelEClass = createEClass(MODEL);
 		createEAttribute(modelEClass, MODEL__RESOURCE);
@@ -3428,6 +3438,7 @@ public class EmftvmPackageImpl extends EPackageImpl implements EmftvmPackage {
 		initEAttribute(getExecEnv_JitDisabled(), theEcorePackage.getEBoolean(), "jitDisabled", null, 1, 1, ExecEnv.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecEnv_CurrentPhase(), this.getRuleMode(), "currentPhase", "manual", 0, 1, ExecEnv.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecEnv_ExecutionMode(), this.getExecMode(), "executionMode", null, 0, 1, ExecEnv.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecEnv_ExecutionPhase(), this.getExecPhase(), "executionPhase", null, 0, 1, ExecEnv.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(execEnvEClass, this.getModule(), "loadModule", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getModuleResolver(), "resolver", 0, 1, IS_UNIQUE, IS_ORDERED);

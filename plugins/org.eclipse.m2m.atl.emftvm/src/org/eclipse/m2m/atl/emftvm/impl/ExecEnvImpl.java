@@ -30,6 +30,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -51,6 +52,7 @@ import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
 import org.eclipse.m2m.atl.emftvm.EmftvmPackage;
 import org.eclipse.m2m.atl.emftvm.ExecEnv;
 import org.eclipse.m2m.atl.emftvm.ExecMode;
+import org.eclipse.m2m.atl.emftvm.ExecPhase;
 import org.eclipse.m2m.atl.emftvm.Feature;
 import org.eclipse.m2m.atl.emftvm.Field;
 import org.eclipse.m2m.atl.emftvm.Instruction;
@@ -110,6 +112,7 @@ import org.eclipse.m2m.atl.emftvm.util.VMMonitor;
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#isJitDisabled <em>Jit Disabled</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getCurrentPhase <em>Current Phase</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getExecutionMode <em>Execution Mode</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getExecutionPhase <em>Execution Phase</em>}</li>
  * </ul>
  * </p>
  *
@@ -468,6 +471,26 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * @ordered
 	 */
 	protected ExecMode executionMode = EXECUTION_MODE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getExecutionPhase() <em>Execution Phase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutionPhase()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ExecPhase EXECUTION_PHASE_EDEFAULT = ExecPhase.PRE;
+
+	/**
+	 * The cached value of the '{@link #getExecutionPhase() <em>Execution Phase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutionPhase()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExecPhase executionPhase = EXECUTION_PHASE_EDEFAULT;
 
 	/**
 	 * The internal value of the '{@link #getMetaModels() <em>Meta Models</em>}' attribute.
@@ -832,6 +855,27 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		executionMode = newExecutionMode == null ? EXECUTION_MODE_EDEFAULT : newExecutionMode;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EmftvmPackage.EXEC_ENV__EXECUTION_MODE, oldExecutionMode, executionMode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecPhase getExecutionPhase() {
+		return executionPhase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExecutionPhase(ExecPhase newExecutionPhase) {
+		ExecPhase oldExecutionPhase = executionPhase;
+		executionPhase = newExecutionPhase == null ? EXECUTION_PHASE_EDEFAULT : newExecutionPhase;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EmftvmPackage.EXEC_ENV__EXECUTION_PHASE, oldExecutionPhase, executionPhase));
 	}
 
 	/**
@@ -2781,6 +2825,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				return getCurrentPhase();
 			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
 				return getExecutionMode();
+			case EmftvmPackage.EXEC_ENV__EXECUTION_PHASE:
+				return getExecutionPhase();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2799,6 +2845,9 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
 				setExecutionMode((ExecMode)newValue);
 				return;
+			case EmftvmPackage.EXEC_ENV__EXECUTION_PHASE:
+				setExecutionPhase((ExecPhase)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2816,6 +2865,9 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				return;
 			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
 				setExecutionMode(EXECUTION_MODE_EDEFAULT);
+				return;
+			case EmftvmPackage.EXEC_ENV__EXECUTION_PHASE:
+				setExecutionPhase(EXECUTION_PHASE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -2852,6 +2904,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				return currentPhase != CURRENT_PHASE_EDEFAULT;
 			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
 				return executionMode != EXECUTION_MODE_EDEFAULT;
+			case EmftvmPackage.EXEC_ENV__EXECUTION_PHASE:
+				return executionPhase != EXECUTION_PHASE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2885,6 +2939,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		result.append(currentPhase);
 		result.append(", executionMode: ");
 		result.append(executionMode);
+		result.append(", executionPhase: ");
+		result.append(executionPhase);
 		result.append(')');
 		return result.toString();
 	}
@@ -2943,7 +2999,12 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * {@inheritDoc}
 	 */
 	public void postApplyAll(ResourceSet rs) {
-		assert traces != null;
+		{// cleaning the resource and making sure that
+		 // traces are still there	
+		 //	cleanResources(rs);
+			assert traces != null; 
+			
+		}
 		for (TracedRule rule : traces.getRules()) {
 			assert rule != null;
 			for (TraceLink link : rule.getLinks()) {
@@ -2952,12 +3013,98 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 					if (!prop.isResolved()) {
 						EObject to = prop.getResolvedFor().getObject();
 						EClass type = to.eClass();
-						EStructuralFeature sf = type.getEStructuralFeature(prop.getPropertyName());						
-						EMFTVMUtil.postSet(this, to, sf, prop.resolveBinding(traces, rs));				
+						EStructuralFeature sf = type.getEStructuralFeature(prop.getPropertyName());	
+						List<?> value = prop.resolveBinding(traces, rs);
+						EMFTVMUtil.set(this, to, sf, value);				
 					}
 				}
 			}
 		}
+	}
+	/**
+	 * cleans up the resources before performing the postApply
+	 * @param rs
+	 */
+	private void cleanResources(ResourceSet rs) {
+		assert rs != null;
+		assert rs.getResources() != null; 
+		Set<Resource> rtk = resourcesToKeep(rs);
+		for (Resource rsc : rs.getResources()) {
+			if (!rtk.contains(rsc)) {
+				rsc.unload();
+			}
+		}	
+	}
+	/**
+	 * Returns the list of resources to keep loaded
+	 * @return
+	 */
+	private Set<Resource> resourcesToKeep(ResourceSet rs) {
+	    Set<Resource> result = new HashSet<Resource>();
+	    {// In models 
+	    	for (Model model :inputModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+	    	}
+	    
+	    {// inout models
+	    	for (Model model :inoutModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+	    }
+	    
+	    {//outModels
+	    	for (Model model :outputModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+
+	    }
+	    
+	    {//internalInOutModels
+	    	for (Model model : internalInoutModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+
+	    }
+	    
+	    {//internalInOutModels
+	    	for (Model model : internalInoutModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+
+	    }
+	    
+	    {//internalInOutModels
+	    	for (Model model : internalInputModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+
+	    }
+	    
+	    {//internalInOutModels
+	    	for (Model model : internalOutputModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+	    }
+	    
+	    {//internalMetamodels
+	    	for (Model model : internalMetaModels.values()) {
+	    		result.add(model.getResource());
+	    		}
+	    }
+	    {//internalInOutMetamodel
+	    	for (Model model : metaModels.values()) {
+	    		result.add(model.getResource());
+	    		}    	
+	    }	    
+	    {//traceModel
+	    	Resource traces = rs.getResource(URI.createURI(TRACES_NSURI), true);	
+	    	if (traces != null) {
+	    		result.add(traces);
+	    	}
+	    }
+	    
+		return result;
 	}
 	
 	

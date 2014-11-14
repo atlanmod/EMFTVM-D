@@ -78,6 +78,8 @@ public class ExecEnvItemProvider
 			addUniqueResultsPropertyDescriptor(object);
 			addJitDisabledPropertyDescriptor(object);
 			addCurrentPhasePropertyDescriptor(object);
+			addExecutionModePropertyDescriptor(object);
+			addExecutionPhasePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -207,6 +209,50 @@ public class ExecEnvItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_ExecEnv_currentPhase_feature", "_UI_ExecEnv_type"),
 				 EmftvmPackage.Literals.EXEC_ENV__CURRENT_PHASE,
 				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Execution Mode feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExecutionModePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ExecEnv_executionMode_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ExecEnv_executionMode_feature", "_UI_ExecEnv_type"),
+				 EmftvmPackage.Literals.EXEC_ENV__EXECUTION_MODE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Execution Phase feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExecutionPhasePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ExecEnv_executionPhase_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ExecEnv_executionPhase_feature", "_UI_ExecEnv_type"),
+				 EmftvmPackage.Literals.EXEC_ENV__EXECUTION_PHASE,
+				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -347,6 +393,8 @@ public class ExecEnvItemProvider
 			case EmftvmPackage.EXEC_ENV__UNIQUE_RESULTS:
 			case EmftvmPackage.EXEC_ENV__JIT_DISABLED:
 			case EmftvmPackage.EXEC_ENV__CURRENT_PHASE:
+			case EmftvmPackage.EXEC_ENV__EXECUTION_MODE:
+			case EmftvmPackage.EXEC_ENV__EXECUTION_PHASE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

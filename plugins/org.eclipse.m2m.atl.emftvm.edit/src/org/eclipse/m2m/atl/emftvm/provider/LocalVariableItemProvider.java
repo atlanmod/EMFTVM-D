@@ -36,13 +36,7 @@ import org.eclipse.m2m.atl.emftvm.LocalVariable;
  * @generated
  */
 public class LocalVariableItemProvider
-	extends TypedElementItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends TypedElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

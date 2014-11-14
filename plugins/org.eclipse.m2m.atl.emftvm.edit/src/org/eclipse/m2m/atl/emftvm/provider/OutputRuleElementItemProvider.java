@@ -34,13 +34,7 @@ import org.eclipse.m2m.atl.emftvm.OutputRuleElement;
  * @generated
  */
 public class OutputRuleElementItemProvider
-	extends RuleElementItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends RuleElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

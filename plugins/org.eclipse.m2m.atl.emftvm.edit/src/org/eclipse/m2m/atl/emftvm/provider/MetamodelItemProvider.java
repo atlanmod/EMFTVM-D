@@ -33,13 +33,7 @@ import org.eclipse.m2m.atl.emftvm.Metamodel;
  * @generated
  */
 public class MetamodelItemProvider
-	extends ModelItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends ModelItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

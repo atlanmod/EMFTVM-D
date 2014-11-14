@@ -36,13 +36,7 @@ import org.eclipse.m2m.atl.emftvm.Feature;
  * @generated
  */
 public class FeatureItemProvider
-	extends TypedElementItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends TypedElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

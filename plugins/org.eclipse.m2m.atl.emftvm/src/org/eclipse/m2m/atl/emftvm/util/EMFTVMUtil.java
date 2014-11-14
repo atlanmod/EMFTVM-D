@@ -36,7 +36,6 @@ import java.util.StringTokenizer;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
@@ -56,16 +55,16 @@ import org.eclipse.m2m.atl.emftvm.CodeBlock;
 import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
 import org.eclipse.m2m.atl.emftvm.EmftvmPackage;
 import org.eclipse.m2m.atl.emftvm.ExecEnv;
+import org.eclipse.m2m.atl.emftvm.ExecMode;
+import org.eclipse.m2m.atl.emftvm.ExecPhase;
 import org.eclipse.m2m.atl.emftvm.Field;
 import org.eclipse.m2m.atl.emftvm.LocalVariable;
 import org.eclipse.m2m.atl.emftvm.Metamodel;
 import org.eclipse.m2m.atl.emftvm.Model;
 import org.eclipse.m2m.atl.emftvm.Operation;
 import org.eclipse.m2m.atl.emftvm.Parameter;
-import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
 import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
-import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
 import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 
@@ -546,39 +545,57 @@ public final class EMFTVMUtil {
 	 * @param value
 	 *            the value to set
 	 */
-	public static void set(final ExecEnv env, final EObject eo, final EStructuralFeature sf, final Object value) {
+	public static void set(final ExecEnv env, final EObject eo,
+			final EStructuralFeature sf, final Object value) {
 		if (!sf.isChangeable()) {
-			throw new IllegalArgumentException(String.format("Field %s::%s is not changeable",
-					toPrettyString(sf.getEContainingClass(), env), sf.getName()));
+			throw new IllegalArgumentException(
+					String.format("Field %s::%s is not changeable",
+							toPrettyString(sf.getEContainingClass(), env),
+							sf.getName()));
 		}
 		if (env.getInputModelOf(eo) != null) {
-			throw new IllegalArgumentException(String.format("Cannot set properties of %s, as it is contained in an input model",
-					toPrettyString(eo, env)));
+			throw new IllegalArgumentException(
+					String.format(
+							"Cannot set properties of %s, as it is contained in an input model",
+							toPrettyString(eo, env)));
 		}
-		// adding the values to the tracedProperties List.
-		//@debut CB1
-		TraceLink currentTrace = env.getCurrentMatch();
-		TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
-		tProp.setPropertyName(sf.getName());
-		tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
-		tProp.setAppliedAt(currentTrace);
-		tProp.setResolved(true);
-		//@end CB1
-		
 		try {
-		if (sf.isMany()) {
-			if (!(value instanceof Collection<?>)) {
-				throw new IllegalArgumentException(String.format("Cannot assign %s to multi-valued field %s::%s", value, sf
-						.getEContainingClass().getName(), sf.getName()));
-			}
-			setMany(env, eo, sf, (Collection<?>) value);
-		} else {
-			setSingle(env, eo, sf, value, -1);
-		}
+				
+					if (sf.isMany()) {
+						
+						if (!(value instanceof Collection<?>)) {
+							throw new IllegalArgumentException(
+									String.format(
+											"Cannot assign %s to multi-valued field %s::%s",
+											value, sf.getEContainingClass()
+													.getName(), sf.getName()));
+						}
+						setMany(env, eo, sf, (Collection<?>) value);
+	
+					} else {
+						if (env.getExecutionMode() == ExecMode.MR &&
+								env.getExecutionPhase() == ExecPhase. POST) {
+							Object pivotValue = ((List<?>) value).get(0);
+							setSingle(env, eo, sf, pivotValue, -1);
+						} else {
+							setSingle(env, eo, sf, value, -1);
+						}
+						
+					}
+
 		} catch (UnresolvedElementException e) {
-			tProp.setResolved(false);
-			tProp.getResolvings().addAll(prettyCollection(value));
-		}
+			if (env.getExecutionMode() == ExecMode.MR &&
+					env.getExecutionPhase() == ExecPhase.PRE) {
+					// create a binding in case this addition did not work
+					TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
+					tProp.getResolvings().addAll(prettyCollection(value));
+					TraceLink currentTrace = env.getCurrentMatch();
+					tProp.setPropertyName(sf.getName());
+					tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
+					tProp.setAppliedAt(currentTrace);
+					tProp.getResolvings().addAll(prettyCollection(value));
+				}
+			}		
 		assert eo.eResource() != null;
 	}
 
@@ -858,11 +875,10 @@ public final class EMFTVMUtil {
 				values.addAll(value);
 			}
 		 } 
-		}catch (UnresolvedElementException e) {
+		} catch (UnresolvedElementException e) {
 			values.clear();
 			throw e;
-			
-		}
+		} 
 	}
 
 	/**

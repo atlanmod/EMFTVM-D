@@ -47,6 +47,7 @@ import org.eclipse.m2m.atl.emftvm.util.VMMonitor;
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#isJitDisabled <em>Jit Disabled</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getCurrentPhase <em>Current Phase</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionMode <em>Execution Mode</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionPhase <em>Execution Phase</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,6 +56,8 @@ import org.eclipse.m2m.atl.emftvm.util.VMMonitor;
  * @generated
  */
 public interface ExecEnv extends EObject {
+
+	String TRACES_NSURI = "traces";
 
 	/**
 	 * Returns the value of the '<em><b>Modules</b></em>' attribute.
@@ -188,6 +191,35 @@ public interface ExecEnv extends EObject {
 	 * @generated
 	 */
 	void setExecutionMode(ExecMode value);
+
+	/**
+	 * Returns the value of the '<em><b>Execution Phase</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.m2m.atl.emftvm.ExecPhase}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Execution Phase</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Execution Phase</em>' attribute.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecPhase
+	 * @see #setExecutionPhase(ExecPhase)
+	 * @see org.eclipse.m2m.atl.emftvm.EmftvmPackage#getExecEnv_ExecutionPhase()
+	 * @model
+	 * @generated
+	 */
+	ExecPhase getExecutionPhase();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.m2m.atl.emftvm.ExecEnv#getExecutionPhase <em>Execution Phase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Execution Phase</em>' attribute.
+	 * @see org.eclipse.m2m.atl.emftvm.ExecPhase
+	 * @see #getExecutionPhase()
+	 * @generated
+	 */
+	void setExecutionPhase(ExecPhase value);
 
 	/**
 	 * <!-- begin-user-doc -->
