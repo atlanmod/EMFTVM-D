@@ -39,6 +39,11 @@ import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
  */
 public abstract class TraceElementImpl extends EObjectImpl implements TraceElement {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4994196572005012568L;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

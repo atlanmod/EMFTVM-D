@@ -24,6 +24,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -35,6 +36,7 @@ import java.util.StringTokenizer;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
@@ -60,7 +62,12 @@ import org.eclipse.m2m.atl.emftvm.Metamodel;
 import org.eclipse.m2m.atl.emftvm.Model;
 import org.eclipse.m2m.atl.emftvm.Operation;
 import org.eclipse.m2m.atl.emftvm.Parameter;
+import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
+import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
+import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
+import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 
 /**
  * EMFTVM static utility methods.
@@ -548,6 +555,17 @@ public final class EMFTVMUtil {
 			throw new IllegalArgumentException(String.format("Cannot set properties of %s, as it is contained in an input model",
 					toPrettyString(eo, env)));
 		}
+		// adding the values to the tracedProperties List.
+		//@debut CB1
+		TraceLink currentTrace = env.getCurrentMatch();
+		TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
+		tProp.setPropertyName(sf.getName());
+		tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
+		tProp.setAppliedAt(currentTrace);
+		tProp.setResolved(true);
+		//@end CB1
+		
+		try {
 		if (sf.isMany()) {
 			if (!(value instanceof Collection<?>)) {
 				throw new IllegalArgumentException(String.format("Cannot assign %s to multi-valued field %s::%s", value, sf
@@ -557,7 +575,53 @@ public final class EMFTVMUtil {
 		} else {
 			setSingle(env, eo, sf, value, -1);
 		}
+		} catch (UnresolvedElementException e) {
+			tProp.setResolved(false);
+			tProp.getResolvings().addAll(prettyCollection(value));
+		}
 		assert eo.eResource() != null;
+	}
+
+	/**
+	 * Sets the <code>value</code> of <code>eo.sf</code>.
+	 * 
+	 * @param env
+	 *            the current {@link ExecEnv}
+	 * @param eo
+	 *            the model element to set the value for
+	 * @param sf
+	 *            the structural feature to set the value for
+	 * @param value
+	 *            the value to set
+	 */
+	public static void postSet(final ExecEnv env, final EObject eo, final EStructuralFeature sf, final Object value) {
+		if (!sf.isChangeable()) {
+			throw new IllegalArgumentException(String.format("Field %s::%s is not changeable",
+					toPrettyString(sf.getEContainingClass(), env), sf.getName()));
+		}
+		if (env.getInputModelOf(eo) != null) {
+			throw new IllegalArgumentException(String.format("Cannot set properties of %s, as it is contained in an input model",
+					toPrettyString(eo, env)));
+		}
+
+		if (sf.isMany()) {
+			if (!(value instanceof Collection<?>)) {
+				throw new IllegalArgumentException(String.format("Cannot assign %s to multi-valued field %s::%s", value, sf
+						.getEContainingClass().getName(), sf.getName()));
+			}
+			setMany(env, eo, sf, (Collection<?>) value);
+		} else {
+			setSingle(env, eo, sf, ((List<?>)value).get(0), -1);
+		}
+		assert eo.eResource() != null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static Collection<EObject> prettyCollection(Object value) {
+		if (value instanceof Collection<?>) {
+			return (Collection<EObject>)value;
+		}
+		return Collections.singletonList((EObject)value);
 	}
 
 	/**
@@ -650,6 +714,7 @@ public final class EMFTVMUtil {
 		if (index > 0) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
 		}
+		
 		if (sf instanceof EReference) {
 			final EReference ref = (EReference) sf;
 			if (checkValue(env, eo, ref, value, isAllowInterModelReferences(env, eo))) {
@@ -657,6 +722,9 @@ public final class EMFTVMUtil {
 				assert eo.eResource() != null;
 				assert value == null || ((EObject) value).eResource() != null;
 				assert oldValue == null || oldValue.eResource() != null;
+				if (!((EObject)value).eClass().equals(sf.getEType())) {
+					throw new UnresolvedElementException();
+				}
 				eo.eSet(sf, value);
 				if (value != null) {
 					updateResource(eo, (EObject) value);
@@ -667,7 +735,7 @@ public final class EMFTVMUtil {
 				assert eo.eResource() != null;
 				assert value == null || ((EObject) value).eResource() != null;
 				assert oldValue == null || oldValue.eResource() != null;
-			}
+			} 
 		} else {
 			final EClassifier sfType = sf.getEType();
 			if (sfType instanceof EEnum) {
@@ -679,7 +747,7 @@ public final class EMFTVMUtil {
 				}
 			} else {
 				eo.eSet(sf, value);
-			}
+			}			
 		}
 	}
 
@@ -695,6 +763,7 @@ public final class EMFTVMUtil {
 	private static void setMany(final ExecEnv env, final EObject eo, final EStructuralFeature sf, final Collection<?> value) {
 		assert sf.isMany();
 		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
+		try {
 		if (!values.isEmpty()) {
 			if (sf instanceof EReference) {
 				final List<Object> vCopy = new ArrayList<Object>(values);
@@ -706,6 +775,9 @@ public final class EMFTVMUtil {
 			}
 		}
 		addMany(env, eo, sf, value, -1);
+		} catch (UnresolvedElementException e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -751,6 +823,7 @@ public final class EMFTVMUtil {
 	private static void addMany(final ExecEnv env, final EObject eo, final EStructuralFeature sf, final Collection<?> value, final int index) {
 		assert sf.isMany();
 		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
+		try {
 		if (sf instanceof EReference) {
 			final EReference ref = (EReference) sf;
 			final boolean allowInterModelReferences = isAllowInterModelReferences(env, eo);
@@ -784,6 +857,11 @@ public final class EMFTVMUtil {
 			} else {
 				values.addAll(value);
 			}
+		 } 
+		}catch (UnresolvedElementException e) {
+			values.clear();
+			throw e;
+			
 		}
 	}
 
@@ -909,10 +987,14 @@ public final class EMFTVMUtil {
 				values.add(v);
 			}
 			updateResource(eo, v);
+		} else {
+			throw new UnresolvedElementException();
 		}
 		assert eo.eResource() != null;
 		assert v.eResource() != null;
 	}
+
+	
 
 	/**
 	 * Removes <code>v</code> from <code>values</code>. Performs constraint checking on <code>v</code>.

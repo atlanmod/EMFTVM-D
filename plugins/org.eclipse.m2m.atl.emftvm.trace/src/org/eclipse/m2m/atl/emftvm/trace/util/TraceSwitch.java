@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.m2m.atl.emftvm.trace.*;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElementList;
 import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
@@ -144,6 +145,12 @@ public class TraceSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TracePackage.TRACE_PROPERTY: {
+				TraceProperty traceProperty = (TraceProperty)theEObject;
+				T result = caseTraceProperty(traceProperty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -250,6 +257,21 @@ public class TraceSwitch<T> {
 	 * @generated
 	 */
 	public T caseSourceElementList(SourceElementList object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceProperty(TraceProperty object) {
 		return null;
 	}
 

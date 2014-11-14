@@ -450,6 +450,7 @@ public class TraceLinkSetImpl extends EObjectImpl implements TraceLinkSet {
 	 */
 	private void defaultSourceElementAdded(final SourceElement se) {
 		final EObject object = se.getObject();
+//		System.out.println(object);
 		if (defaultSourceObjects.containsKey(object)) {
 			final SourceElement eSe = defaultSourceObjects.get(object);
 			throw new IllegalArgumentException(String.format(

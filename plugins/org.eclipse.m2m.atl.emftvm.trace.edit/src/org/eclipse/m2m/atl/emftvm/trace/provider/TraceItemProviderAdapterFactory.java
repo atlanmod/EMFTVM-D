@@ -209,6 +209,29 @@ public class TraceItemProviderAdapterFactory extends TraceAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TracePropertyItemProvider tracePropertyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTracePropertyAdapter() {
+		if (tracePropertyItemProvider == null) {
+			tracePropertyItemProvider = new TracePropertyItemProvider(this);
+		}
+
+		return tracePropertyItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -313,6 +336,7 @@ public class TraceItemProviderAdapterFactory extends TraceAdapterFactory impleme
 		if (sourceElementItemProvider != null) sourceElementItemProvider.dispose();
 		if (targetElementItemProvider != null) targetElementItemProvider.dispose();
 		if (sourceElementListItemProvider != null) sourceElementListItemProvider.dispose();
+		if (tracePropertyItemProvider != null) tracePropertyItemProvider.dispose();
 	}
 
 }

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -30,6 +31,7 @@ import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
 import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
 
 
@@ -45,12 +47,18 @@ import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
  *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.impl.TraceLinkImpl#getTargetElements <em>Target Elements</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.impl.TraceLinkImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.impl.TraceLinkImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.impl.TraceLinkImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class TraceLinkImpl extends EObjectImpl implements TraceLink {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The cached value of the '{@link #getSourceElements() <em>Source Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -89,6 +97,16 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TraceProperty> properties;
 
 	/**
 	 * Lookup table of {@link SourceElement}s by name.
@@ -184,6 +202,18 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TraceProperty> getProperties() {
+		if (properties == null) {
+			properties = new EObjectContainmentWithInverseEList<TraceProperty>(TraceProperty.class, this, TracePackage.TRACE_LINK__PROPERTIES, TracePackage.TRACE_PROPERTY__APPLIED_AT);
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public SourceElement getSourceElement(String name, boolean create) {
@@ -248,6 +278,8 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetRule((TracedRule)otherEnd, msgs);
+			case TracePackage.TRACE_LINK__PROPERTIES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProperties()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -266,6 +298,8 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 				return ((InternalEList<?>)getTargetElements()).basicRemove(otherEnd, msgs);
 			case TracePackage.TRACE_LINK__RULE:
 				return basicSetRule(null, msgs);
+			case TracePackage.TRACE_LINK__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -300,6 +334,8 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 				return getRule();
 			case TracePackage.TRACE_LINK__OVERRIDDEN:
 				return isOverridden();
+			case TracePackage.TRACE_LINK__PROPERTIES:
+				return getProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,6 +363,10 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 			case TracePackage.TRACE_LINK__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
 				return;
+			case TracePackage.TRACE_LINK__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends TraceProperty>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -351,6 +391,9 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 			case TracePackage.TRACE_LINK__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case TracePackage.TRACE_LINK__PROPERTIES:
+				getProperties().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -371,6 +414,8 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 				return getRule() != null;
 			case TracePackage.TRACE_LINK__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case TracePackage.TRACE_LINK__PROPERTIES:
+				return properties != null && !properties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -491,6 +536,16 @@ public class TraceLinkImpl extends EObjectImpl implements TraceLink {
 
 	private void targetElementRemoved(final TargetElement te) {
 		targetElementsByName.remove(te.getName());
+	}
+
+	public TargetElement findTargetForObject(EObject eo) {
+		assert eo != null;
+		for (TargetElement te : getTargetElements()) {
+			if (te.getObject().equals(eo)) {
+				return te;
+			}
+		}
+		return null;
 	}
 
 } //TraceLinkImpl

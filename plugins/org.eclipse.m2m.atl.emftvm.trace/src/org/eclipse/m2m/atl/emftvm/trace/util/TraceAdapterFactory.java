@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.m2m.atl.emftvm.trace.*;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElementList;
 import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
@@ -109,6 +110,10 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSourceElementList(SourceElementList object) {
 				return createSourceElementListAdapter();
+			}
+			@Override
+			public Adapter caseTraceProperty(TraceProperty object) {
+				return createTracePropertyAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -225,6 +230,20 @@ public class TraceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSourceElementListAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty
+	 * @generated
+	 */
+	public Adapter createTracePropertyAdapter() {
 		return null;
 	}
 

@@ -26,13 +26,7 @@ import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
  * @generated
  */
 public class TargetElementItemProvider
-	extends TraceElementItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends TraceElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2m.atl.emftvm.jit.CodeBlockJIT;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
@@ -799,7 +800,7 @@ public interface ExecEnv extends EObject {
 	
 	/**
 	 * Gets the Current Match 
-	 * @return
+	 * @return {@link TraceLink}
 	 */
 	public TraceLink getCurrentMatch();
 	
@@ -808,8 +809,26 @@ public interface ExecEnv extends EObject {
 	 * @return returns the {@link Map<String, Rule>} of rules 
 	 */
 	public Map<String, Rule> getRulesMap();
-
-	void applyAll(); 
+	
+	/**
+	 * Executes an apply for all the {@link TraceLinkSet}
+	 * 
+	 */
+	void applyAll();
+	
+	/**
+	 * Matches and partially resolves a {@link TraceLink}
+	 * @param eObject
+	 * @return boolean
+	 */
+	boolean preApplySingleObject(EObject eObject, String className);
+	
+	/**
+	 * Resolves the rest of unresolved bindings,
+	 * the resourceSet is used to resolve proxies
+	 * @param rs 
+	 */
+	void postApplyAll(ResourceSet rs); 
 	
 	//public Set<Rule> getMatchedRules();
 	

@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.atl.emftvm.trace;
 
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -35,7 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TraceLinkSet extends EObject {
+public interface TraceLinkSet extends EObject{
 	/**
 	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.m2m.atl.emftvm.trace.TracedRule}.

@@ -774,7 +774,9 @@ public class CodeBlockImpl extends EObjectImpl implements CodeBlock {
 					break;
 				case SET:
 					frame.setPc(pc);
-					set(stack.pop(), stack.pop(), ((Set) instr).getFieldname(), frame);
+					Object one = stack.pop();
+					Object two = stack.pop();
+					set(one, two, ((Set) instr).getFieldname(), frame);
 					break;
 				case GET:
 					frame.setPc(pc);
@@ -851,7 +853,8 @@ public class CodeBlockImpl extends EObjectImpl implements CodeBlock {
 					break;
 				case INVOKE:
 					frame.setPc(pc);
-					stack.push(invoke((Invoke) instr, frame, stack));
+					Object obj = invoke((Invoke) instr, frame, stack);
+					stack.push(obj);
 					break;
 				case INVOKE_STATIC:
 					frame.setPc(pc);
@@ -2302,7 +2305,8 @@ public class CodeBlockImpl extends EObjectImpl implements CodeBlock {
 			}
 			if (op != null) {
 				final CodeBlock body = op.getBody();
-				return body.execute(frame.getSubFrame(body, o));
+				Object result = body.execute(frame.getSubFrame(body, o));
+				return result; 
 			}
 			throw new UnsupportedOperationException(String.format("%s::%s()", 
 					EMFTVMUtil.getTypeName(frame.getEnv(), EMFTVMUtil.getArgumentType(o)), 

@@ -222,13 +222,22 @@ public interface TracePackage extends EPackage {
 	int TRACE_LINK__OVERRIDDEN = 3;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_LINK__PROPERTIES = 4;
+
+	/**
 	 * The number of structural features of the '<em>Link</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE_LINK_FEATURE_COUNT = 4;
+	int TRACE_LINK_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.trace.impl.TraceElementImpl <em>Element</em>}' class.
@@ -480,6 +489,70 @@ public interface TracePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.trace.impl.TracePropertyImpl <em>Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.m2m.atl.emftvm.trace.impl.TracePropertyImpl
+	 * @see org.eclipse.m2m.atl.emftvm.trace.impl.TracePackageImpl#getTraceProperty()
+	 * @generated
+	 */
+	int TRACE_PROPERTY = 7;
+
+	/**
+	 * The feature id for the '<em><b>Property Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_PROPERTY__PROPERTY_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Resolved For</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_PROPERTY__RESOLVED_FOR = 1;
+
+	/**
+	 * The feature id for the '<em><b>Resolvings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_PROPERTY__RESOLVINGS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_PROPERTY__RESOLVED = 3;
+
+	/**
+	 * The feature id for the '<em><b>Applied At</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_PROPERTY__APPLIED_AT = 4;
+
+	/**
+	 * The number of structural features of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_PROPERTY_FEATURE_COUNT = 5;
+
+	/**
 	 * The meta object id for the '<em>Java List</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -487,7 +560,7 @@ public interface TracePackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.trace.impl.TracePackageImpl#getJavaList()
 	 * @generated
 	 */
-	int JAVA_LIST = 7;
+	int JAVA_LIST = 8;
 
 
 	/**
@@ -629,6 +702,17 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTraceLink_Overridden();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.m2m.atl.emftvm.trace.TraceLink#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Properties</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceLink#getProperties()
+	 * @see #getTraceLink()
+	 * @generated
+	 */
+	EReference getTraceLink_Properties();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.m2m.atl.emftvm.trace.TraceLink#getSourceElements <em>Source Elements</em>}'.
@@ -836,6 +920,71 @@ public interface TracePackage extends EPackage {
 	EReference getSourceElementList_UniqueFor();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty
+	 * @generated
+	 */
+	EClass getTraceProperty();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getPropertyName <em>Property Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Property Name</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getPropertyName()
+	 * @see #getTraceProperty()
+	 * @generated
+	 */
+	EAttribute getTraceProperty_PropertyName();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getResolvedFor <em>Resolved For</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Resolved For</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getResolvedFor()
+	 * @see #getTraceProperty()
+	 * @generated
+	 */
+	EReference getTraceProperty_ResolvedFor();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getResolvings <em>Resolvings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Resolvings</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getResolvings()
+	 * @see #getTraceProperty()
+	 * @generated
+	 */
+	EReference getTraceProperty_Resolvings();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty#isResolved <em>Resolved</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resolved</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty#isResolved()
+	 * @see #getTraceProperty()
+	 * @generated
+	 */
+	EAttribute getTraceProperty_Resolved();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getAppliedAt <em>Applied At</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Applied At</em>'.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getAppliedAt()
+	 * @see #getTraceProperty()
+	 * @generated
+	 */
+	EReference getTraceProperty_AppliedAt();
+
+	/**
 	 * Returns the meta object for data type '{@link java.util.List <em>Java List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -977,6 +1126,14 @@ public interface TracePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRACE_LINK__OVERRIDDEN = eINSTANCE.getTraceLink_Overridden();
+
+		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_LINK__PROPERTIES = eINSTANCE.getTraceLink_Properties();
 
 		/**
 		 * The meta object literal for the '<em><b>Source Elements</b></em>' containment reference list feature.
@@ -1137,6 +1294,56 @@ public interface TracePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SOURCE_ELEMENT_LIST__UNIQUE_FOR = eINSTANCE.getSourceElementList_UniqueFor();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.m2m.atl.emftvm.trace.impl.TracePropertyImpl <em>Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.m2m.atl.emftvm.trace.impl.TracePropertyImpl
+		 * @see org.eclipse.m2m.atl.emftvm.trace.impl.TracePackageImpl#getTraceProperty()
+		 * @generated
+		 */
+		EClass TRACE_PROPERTY = eINSTANCE.getTraceProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRACE_PROPERTY__PROPERTY_NAME = eINSTANCE.getTraceProperty_PropertyName();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved For</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_PROPERTY__RESOLVED_FOR = eINSTANCE.getTraceProperty_ResolvedFor();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolvings</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_PROPERTY__RESOLVINGS = eINSTANCE.getTraceProperty_Resolvings();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRACE_PROPERTY__RESOLVED = eINSTANCE.getTraceProperty_Resolved();
+
+		/**
+		 * The meta object literal for the '<em><b>Applied At</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_PROPERTY__APPLIED_AT = eINSTANCE.getTraceProperty_AppliedAt();
 
 		/**
 		 * The meta object literal for the '<em>Java List</em>' data type.

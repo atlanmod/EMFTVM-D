@@ -50,6 +50,8 @@ import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
  */
 public class SourceElementImpl extends TraceElementImpl implements SourceElement {
 	
+
+
 	/**
 	 * The cached value of the '{@link #getMapsTo() <em>Maps To</em>}' reference list.
 	 * <!-- begin-user-doc -->

@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SourceElementList extends EObject {
+public interface SourceElementList extends EObject{
 	/**
 	 * Returns the value of the '<em><b>Source Elements</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.m2m.atl.emftvm.trace.SourceElement}.

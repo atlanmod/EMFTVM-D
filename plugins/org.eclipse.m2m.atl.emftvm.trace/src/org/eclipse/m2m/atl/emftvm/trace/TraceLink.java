@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.m2m.atl.emftvm.trace;
 
+
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -27,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.TraceLink#getTargetElements <em>Target Elements</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.TraceLink#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.TraceLink#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.trace.TraceLink#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,7 +37,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TraceLink extends EObject {
+public interface TraceLink extends EObject{
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.m2m.atl.emftvm.trace.TracedRule#getLinks <em>Links</em>}'.
@@ -91,6 +94,24 @@ public interface TraceLink extends EObject {
 	void setOverridden(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getAppliedAt <em>Applied At</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Properties</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Properties</em>' containment reference list.
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TracePackage#getTraceLink_Properties()
+	 * @see org.eclipse.m2m.atl.emftvm.trace.TraceProperty#getAppliedAt
+	 * @model opposite="appliedAt" containment="true"
+	 * @generated
+	 */
+	EList<TraceProperty> getProperties();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
@@ -141,5 +162,11 @@ public interface TraceLink extends EObject {
 	 * @generated
 	 */
 	EList<TargetElement> getTargetElements();
+	/**
+	 * Returns the Source element with object matching <code>eo</code>
+	 * @param eo
+	 * @return {@link TargetElement}
+	 */
+	TargetElement findTargetForObject(EObject eo);
 
 } // TraceLink

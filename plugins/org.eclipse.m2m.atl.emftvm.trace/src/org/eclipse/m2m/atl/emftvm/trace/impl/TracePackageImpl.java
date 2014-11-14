@@ -29,6 +29,7 @@ import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
 
 /**
@@ -87,6 +88,13 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * @generated
 	 */
 	private EClass sourceElementListEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tracePropertyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,6 +286,15 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTraceLink_Properties() {
+		return (EReference)traceLinkEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getTraceLink_SourceElements() {
 		return (EReference)traceLinkEClass.getEStructuralFeatures().get(0);
 	}
@@ -449,6 +466,60 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTraceProperty() {
+		return tracePropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceProperty_PropertyName() {
+		return (EAttribute)tracePropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceProperty_ResolvedFor() {
+		return (EReference)tracePropertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceProperty_Resolvings() {
+		return (EReference)tracePropertyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceProperty_Resolved() {
+		return (EAttribute)tracePropertyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceProperty_AppliedAt() {
+		return (EReference)tracePropertyEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getJavaList() {
 		return javaListEDataType;
 	}
@@ -498,6 +569,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 		createEReference(traceLinkEClass, TRACE_LINK__TARGET_ELEMENTS);
 		createEReference(traceLinkEClass, TRACE_LINK__RULE);
 		createEAttribute(traceLinkEClass, TRACE_LINK__OVERRIDDEN);
+		createEReference(traceLinkEClass, TRACE_LINK__PROPERTIES);
 
 		traceElementEClass = createEClass(TRACE_ELEMENT);
 		createEAttribute(traceElementEClass, TRACE_ELEMENT__NAME);
@@ -519,6 +591,13 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 		createEReference(sourceElementListEClass, SOURCE_ELEMENT_LIST__SOURCE_ELEMENTS);
 		createEReference(sourceElementListEClass, SOURCE_ELEMENT_LIST__DEFAULT_FOR);
 		createEReference(sourceElementListEClass, SOURCE_ELEMENT_LIST__UNIQUE_FOR);
+
+		tracePropertyEClass = createEClass(TRACE_PROPERTY);
+		createEAttribute(tracePropertyEClass, TRACE_PROPERTY__PROPERTY_NAME);
+		createEReference(tracePropertyEClass, TRACE_PROPERTY__RESOLVED_FOR);
+		createEReference(tracePropertyEClass, TRACE_PROPERTY__RESOLVINGS);
+		createEAttribute(tracePropertyEClass, TRACE_PROPERTY__RESOLVED);
+		createEReference(tracePropertyEClass, TRACE_PROPERTY__APPLIED_AT);
 
 		// Create data types
 		javaListEDataType = createEDataType(JAVA_LIST);
@@ -598,6 +677,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 		initEReference(getTraceLink_TargetElements(), this.getTargetElement(), this.getTargetElement_TargetOf(), "targetElements", null, 0, -1, TraceLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTraceLink_Rule(), this.getTracedRule(), this.getTracedRule_Links(), "rule", null, 0, 1, TraceLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTraceLink_Overridden(), ecorePackage.getEBoolean(), "overridden", "false", 0, 1, TraceLink.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceLink_Properties(), this.getTraceProperty(), this.getTraceProperty_AppliedAt(), "properties", null, 0, -1, TraceLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(traceLinkEClass, this.getSourceElement(), "getSourceElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -629,11 +709,44 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 
 		addEOperation(sourceElementListEClass, ecorePackage.getEJavaObject(), "getSourceObjects", 2, -1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(tracePropertyEClass, TraceProperty.class, "TraceProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTraceProperty_PropertyName(), ecorePackage.getEString(), "propertyName", null, 0, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceProperty_ResolvedFor(), this.getTargetElement(), null, "resolvedFor", null, 1, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceProperty_Resolvings(), ecorePackage.getEObject(), null, "resolvings", null, 0, -1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceProperty_Resolved(), ecorePackage.getEBoolean(), "resolved", null, 0, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceProperty_AppliedAt(), this.getTraceLink(), this.getTraceLink_Properties(), "appliedAt", null, 0, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(tracePropertyEClass, null, "resolveBinding", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getTraceLinkSet(), "traces", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getJavaList());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		// Initialize data types
 		initEDataType(javaListEDataType, List.class, "JavaList", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// null
+		createNullAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>null</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createNullAnnotations() {
+		String source = null;	
+		addAnnotation
+		  (javaListEDataType, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //TracePackageImpl

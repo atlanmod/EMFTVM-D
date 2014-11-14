@@ -953,8 +953,17 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		 * @param frame the stack frame in which to execute the post-applier
 		 */
 		public abstract void postApply(StackFrame frame);
-
+		/**
+		 * creates current trace for the 
+		 * @param frame
+		 */
 		public abstract void createSingleTrace(StackFrame frame);
+		/**
+		 * Executes applier for current trace 
+		 * @param rootFrame
+		 * @param currentMatch
+		 */
+		public abstract void applySingleTrace(StackFrame rootFrame,TraceLink currentMatch);
 	}
 
 	/**
@@ -992,7 +1001,16 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 
 		@Override
 		public void createSingleTrace(StackFrame frame) {
-			assert isAbstract();			
+			assert isAbstract();		
+			//do nothing
+		}
+
+		@Override
+		public void applySingleTrace(StackFrame rootFrame,
+				TraceLink currentMatch) {
+			assert isAbstract();
+			//do nothing
+			
 		}
 	}
 
@@ -1047,7 +1065,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			if (!currentMatch.isOverridden()) {
 				createAllUniqueMappings(currentMatch);
 			}
-			boolean defaultMappingSet = completeTraceWithNoTarget(frame, currentMatch);
+			//boolean defaultMappingSet = completeTraceWithNoTarget(frame, currentMatch);
+			boolean defaultMappingSet = completeTraceFor(frame, currentMatch);
 			// Mark default/unique source elements if applicable
 			if (!defaultMappingSet) {
 				EList<SourceElement> ses = currentMatch.getSourceElements();
@@ -1093,6 +1112,17 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				}
 				applierCbState.postApplyFor(frame, trace);
 			}
+		}
+
+		@Override
+		public void applySingleTrace(StackFrame rootFrame,
+				TraceLink currentMatch) {
+			assert !isAbstract();
+			assert !currentMatch.isOverridden();
+			
+			// TODO add support for apply super rules 			
+			applierCbState.applyFor(rootFrame, currentMatch);
+			
 		}
 	}
 
@@ -2257,6 +2287,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 * @param currentMatch
 	 * @return true if the traceLink has been created successfully
 	 */
+	@SuppressWarnings("unused")
 	private boolean completeTraceWithNoTarget(StackFrame frame,
 			TraceLink trace) {
 		//TraceLink [[s:Member -> []] -> []]
@@ -2357,6 +2388,12 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 */
 	public void apply(final StackFrame frame) {
 		abstractState.apply(frame);
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public void applySingleTrace(StackFrame rootFrame, TraceLink currentMatch) {
+		abstractState.applySingleTrace(rootFrame, currentMatch);
 	}
 
 	/**
@@ -3686,12 +3723,15 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		}
 		uniqueState.createUniqueMapping(trace);
 	}
-
+	/**
+	 * Create a default Mapping for the trace
+	 */
 	public void createDefaultMappingForTrace(TraceLink traceLink) {
 		
 		defaultState.createDefaultMapping(traceLink.getRule().getLinkSet(), traceLink.getSourceElements());
 		
 	}
+
 
 
 

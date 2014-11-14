@@ -740,4 +740,6 @@ public interface Rule extends NamedElement {
 	 */
 	void createDefaultMappingForTrace(TraceLink traceLink);
 
+	void applySingleTrace(StackFrame rootFrame, TraceLink currentMatch);
+
 } // Rule

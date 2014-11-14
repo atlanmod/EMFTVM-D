@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.m2m.atl.common.ATLLogger;
@@ -69,6 +70,7 @@ import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 import org.eclipse.m2m.atl.emftvm.trace.TracedRule;
 import org.eclipse.m2m.atl.emftvm.util.DuplicateEntryException;
 import org.eclipse.m2m.atl.emftvm.util.EMFTVMUtil;
@@ -2189,12 +2191,42 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 //	public Set<Rule> getMatchedRules() {
 //		return matchedRules;
 //	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public boolean preApplySingleObject(EObject eObject, String className) {
+		StackFrame rootFrame = new StackFrame(this, mainChain.get(
+				mainChain.size() - 1).getBody());
+		
+		if (!matchSingleObject(eObject, className, rootFrame)) {
+			return false;
+		}
+		
+		preApplySingleTrace(rootFrame);
+		return true;
+		
+		
+	}
+
+	private void preApplySingleTrace(StackFrame rootFrame) {
+		Rule currentRule = rules.get(currentMatch.getRule().getRule());
+		currentRule.applyFor(rootFrame, currentMatch);
+		// TODO remove applySingle trace of ApllyFor is working well
+		
+	}
+
 	public boolean matchSingleObject(EObject object, String className) {
 
 		StackFrame rootFrame = new StackFrame(this, mainChain.get(
 				mainChain.size() - 1).getBody());
+		return matchSingleObject(object, className, rootFrame);
 		
-		Iterator<Rule> rules = resolveAppliedRules(object, className);
+	}
+
+	private boolean matchSingleObject(EObject eObject, String className,
+			StackFrame rootFrame) {
+		
+		Iterator<Rule> rules = resolveAppliedRules(eObject, className);
 		if (rules == null) {
 			return false ; // no rule matches this object;
 		}
@@ -2204,13 +2236,15 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		
 		while (rules.hasNext() && !isApplied) {
 			nextRule = rules.next();
-			isApplied = nextRule.matchSingleObject(rootFrame, object);
+			isApplied = nextRule.matchSingleObject(rootFrame, eObject);
 			//matchedRules.add(nextRule);
 		}
+		// TODO add support for match super rules here 
 		nextRule.createSingleTrace(rootFrame);
 		return true;
 	}
-
+	
+	
 	private Iterator<Rule> resolveAppliedRules(EObject object, String className) {
 		
 		if (! rulesPerType.containsKey(className)) {
@@ -2437,7 +2471,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	}
 
 	/**
-	 * 
+	 * {@inheritDoc}
 	 */
 	public void applyAll() {
 		Set<Rule> matchedRules = resolveMatchedRules();
@@ -2835,13 +2869,42 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	protected void setRuleStateCompiled(boolean ruleStateCompiled) {
 		this.ruleStateCompiled = ruleStateCompiled;
 	}
-
+	
+	/**
+	 * gets the last {@link TraceLink} processed by the preApply
+	 */
 	public TraceLink getCurrentMatch() {
 		return currentMatch;
 	}
-
+	
+	/**
+	 * Sets the curernt {@link TraceLink}
+	 * @param TraceLink
+	 */
 	public void setCurrentMatch(TraceLink match) {
 		this.currentMatch = match;	
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public void postApplyAll(ResourceSet rs) {
+		assert traces != null;
+		for (TracedRule rule : traces.getRules()) {
+			assert rule != null;
+			for (TraceLink link : rule.getLinks()) {
+				assert link != null;
+				for (TraceProperty prop: link.getProperties()) {
+					if (!prop.isResolved()) {
+						EObject to = prop.getResolvedFor().getObject();
+						EClass type = to.eClass();
+						EStructuralFeature sf = type.getEStructuralFeature(prop.getPropertyName());						
+						EMFTVMUtil.postSet(this, to, sf, prop.resolveBinding(traces, rs));				
+					}
+				}
+			}
+		}
+	}
+	
+	
 
 } // ExecEnvImpl

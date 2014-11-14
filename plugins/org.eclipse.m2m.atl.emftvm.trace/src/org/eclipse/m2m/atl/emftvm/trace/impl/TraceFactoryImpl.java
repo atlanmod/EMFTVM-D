@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.m2m.atl.emftvm.trace.*;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElementList;
 import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
@@ -80,6 +81,7 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 			case TracePackage.SOURCE_ELEMENT: return createSourceElement();
 			case TracePackage.TARGET_ELEMENT: return createTargetElement();
 			case TracePackage.SOURCE_ELEMENT_LIST: return createSourceElementList();
+			case TracePackage.TRACE_PROPERTY: return createTraceProperty();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -173,6 +175,16 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	public SourceElementList createSourceElementList() {
 		SourceElementListImpl sourceElementList = new SourceElementListImpl();
 		return sourceElementList;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceProperty createTraceProperty() {
+		TracePropertyImpl traceProperty = new TracePropertyImpl();
+		return traceProperty;
 	}
 
 	/**

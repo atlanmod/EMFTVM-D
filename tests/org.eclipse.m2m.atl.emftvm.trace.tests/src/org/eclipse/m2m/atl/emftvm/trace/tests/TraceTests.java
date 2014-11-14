@@ -44,6 +44,7 @@ public class TraceTests extends TestSuite {
 		suite.addTestSuite(TracedRuleTest.class);
 		suite.addTestSuite(TraceLinkTest.class);
 		suite.addTestSuite(SourceElementListTest.class);
+		suite.addTestSuite(TracePropertyTest.class);
 		return suite;
 	}
 
