@@ -843,6 +843,11 @@ public final class EMFTVMUtil {
 		try {
 		if (sf instanceof EReference) {
 			final EReference ref = (EReference) sf;
+			if (env.getExecutionMode() == ExecMode.MR && env.getExecutionPhase() == ExecPhase.PRE ) {
+				if (ref.isContainer() || ref.isContainment()) {
+					throw new UnresolvedElementException();
+				}
+			}
 			final boolean allowInterModelReferences = isAllowInterModelReferences(env, eo);
 			final Collection<?> srcValues = ref.isContainment() ? new ArrayList<Object>(value) : value;
 			if (index > -1) {

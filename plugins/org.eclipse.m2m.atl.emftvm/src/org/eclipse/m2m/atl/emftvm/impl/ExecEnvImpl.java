@@ -3015,7 +3015,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 						EClass type = to.eClass();
 						EStructuralFeature sf = type.getEStructuralFeature(prop.getPropertyName());	
 						List<?> value = prop.resolveBinding(traces, rs);
-						EMFTVMUtil.set(this, to, sf, value);				
+						EMFTVMUtil.set(this, to, sf, value);
+						prop.setResolved(true);
 					}
 				}
 			}
