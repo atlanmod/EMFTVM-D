@@ -560,7 +560,18 @@ public final class EMFTVMUtil {
 							toPrettyString(eo, env)));
 		}
 		try {
+			if (sf instanceof EReference &&
+					env.getExecutionMode() == ExecMode.MR &&
+						env.getExecutionPhase() == ExecPhase.PRE) {
+				TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
+				tProp.getResolvings().addAll(prettyCollection(value));
+				TraceLink currentTrace = env.getCurrentMatch();
+				tProp.setPropertyName(sf.getName());
+				tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
+				tProp.setAppliedAt(currentTrace);
+				tProp.getResolvings().addAll(prettyCollection(value));
 				
+			} else {
 					if (sf.isMany()) {
 						
 						if (!(value instanceof Collection<?>)) {
@@ -582,19 +593,19 @@ public final class EMFTVMUtil {
 						}
 						
 					}
-
+			}
 		} catch (UnresolvedElementException e) {
-			if (env.getExecutionMode() == ExecMode.MR &&
-					env.getExecutionPhase() == ExecPhase.PRE) {
+//			if (env.getExecutionMode() == ExecMode.MR &&
+//					env.getExecutionPhase() == ExecPhase.PRE) {
 					// create a binding in case this addition did not work
-					TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
-					tProp.getResolvings().addAll(prettyCollection(value));
-					TraceLink currentTrace = env.getCurrentMatch();
-					tProp.setPropertyName(sf.getName());
-					tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
-					tProp.setAppliedAt(currentTrace);
-					tProp.getResolvings().addAll(prettyCollection(value));
-				}
+//					TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
+//					tProp.getResolvings().addAll(prettyCollection(value));
+//					TraceLink currentTrace = env.getCurrentMatch();
+//					tProp.setPropertyName(sf.getName());
+//					tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
+//					tProp.setAppliedAt(currentTrace);
+//					tProp.getResolvings().addAll(prettyCollection(value));
+//				}
 			}		
 		assert eo.eResource() != null;
 	}
