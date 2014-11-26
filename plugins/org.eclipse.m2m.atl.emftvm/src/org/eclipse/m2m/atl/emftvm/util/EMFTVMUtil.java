@@ -558,11 +558,13 @@ public final class EMFTVMUtil {
 					String.format(
 							"Cannot set properties of %s, as it is contained in an input model",
 							toPrettyString(eo, env)));
-		}
+		} 
+
 		try {
 			if (sf instanceof EReference &&
 					env.getExecutionMode() == ExecMode.MR &&
 						env.getExecutionPhase() == ExecPhase.PRE) {
+				if (value == null || (sf.isMany() && prettyCollection(value).isEmpty()) ) return;
 				TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
 				tProp.getResolvings().addAll(prettyCollection(value));
 				TraceLink currentTrace = env.getCurrentMatch();
@@ -750,6 +752,7 @@ public final class EMFTVMUtil {
 				assert eo.eResource() != null;
 				assert value == null || ((EObject) value).eResource() != null;
 				assert oldValue == null || oldValue.eResource() != null;
+				if (value == null) return;
 				if (!((EObject)value).eClass().equals(sf.getEType())) {
 					throw new UnresolvedElementException();
 				}
