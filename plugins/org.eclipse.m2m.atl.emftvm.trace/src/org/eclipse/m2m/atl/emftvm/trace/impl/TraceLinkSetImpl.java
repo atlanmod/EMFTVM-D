@@ -501,21 +501,23 @@ public class TraceLinkSetImpl extends EObjectImpl implements TraceLinkSet {
 	}
 
 	public EObject recordObject(URI uri, EObject object) {
-		if (! targetElementsCache.containsKey(uri)) {
-			EObject result = EcoreUtil.copy(object);
-			targetElementsCache.put(uri, result);
-			old2newTargetElements.put(object, result);
-			return result;
+		EObject eObject = targetElementsCache.get(uri);
+		if (eObject == null) {
+			eObject = EcoreUtil.copy(object);
+			targetElementsCache.put(uri, eObject);
+			old2newTargetElements.put(object, eObject);
 		}		
-		return targetElementsCache.get(uri);
+		return eObject;
 	}
 
 	public EObject resolveObject(URI uri, EObject object) {
-		return targetElementsCache.containsKey(uri) ? targetElementsCache.get(uri) : object;
+		EObject eObject = targetElementsCache.get(uri);
+		return eObject != null ? eObject : object;
 	}
 
 	public EObject resolveObject(EObject object) {
-		return old2newTargetElements.containsKey(object) ? old2newTargetElements.get(object) : object;
+		EObject eObject = old2newTargetElements.get(object);
+		return eObject != null ? eObject : object;
 	}
 
 } //TraceLinkSetImpl
