@@ -560,7 +560,7 @@ public final class EMFTVMUtil {
 							toPrettyString(eo, env)));
 		} 
 
-		try {
+//		try {
 			if (sf instanceof EReference &&
 					env.getExecutionMode() == ExecMode.MR &&
 						env.getExecutionPhase() == ExecPhase.PRE) {
@@ -596,7 +596,8 @@ public final class EMFTVMUtil {
 						
 					}
 			}
-		} catch (UnresolvedElementException e) {
+//		} 
+//		catch (UnresolvedElementException e) {
 //			if (env.getExecutionMode() == ExecMode.MR &&
 //					env.getExecutionPhase() == ExecPhase.PRE) {
 					// create a binding in case this addition did not work
@@ -608,7 +609,7 @@ public final class EMFTVMUtil {
 //					tProp.setAppliedAt(currentTrace);
 //					tProp.getResolvings().addAll(prettyCollection(value));
 //				}
-			}		
+//			}		
 		assert eo.eResource() != null;
 	}
 
@@ -743,8 +744,7 @@ public final class EMFTVMUtil {
 		assert !sf.isMany();
 		if (index > 0) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
-		}
-		
+		}		
 		if (sf instanceof EReference) {
 			final EReference ref = (EReference) sf;
 			if (checkValue(env, eo, ref, value, isAllowInterModelReferences(env, eo))) {
@@ -753,9 +753,9 @@ public final class EMFTVMUtil {
 				assert value == null || ((EObject) value).eResource() != null;
 				assert oldValue == null || oldValue.eResource() != null;
 				if (value == null) return;
-				if (!((EObject)value).eClass().equals(sf.getEType())) {
-					throw new UnresolvedElementException();
-				}
+//				if (!((EObject)value).eClass().equals(sf.getEType())) {
+//					throw new UnresolvedElementException();
+//				}
 				eo.eSet(sf, value);
 				if (value != null) {
 					updateResource(eo, (EObject) value);
@@ -794,7 +794,7 @@ public final class EMFTVMUtil {
 	private static void setMany(final ExecEnv env, final EObject eo, final EStructuralFeature sf, final Collection<?> value) {
 		assert sf.isMany();
 		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
-		try {
+//		try {
 		if (!values.isEmpty()) {
 			if (sf instanceof EReference) {
 				final List<Object> vCopy = new ArrayList<Object>(values);
@@ -806,9 +806,9 @@ public final class EMFTVMUtil {
 			}
 		}
 		addMany(env, eo, sf, value, -1);
-		} catch (UnresolvedElementException e) {
-			throw e;
-		}
+//		} catch (UnresolvedElementException e) {
+//			throw e;
+//		}
 	}
 
 	/**
@@ -854,14 +854,14 @@ public final class EMFTVMUtil {
 	private static void addMany(final ExecEnv env, final EObject eo, final EStructuralFeature sf, final Collection<?> value, final int index) {
 		assert sf.isMany();
 		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
-		try {
+	//	try {
 		if (sf instanceof EReference) {
 			final EReference ref = (EReference) sf;
-			if (env.getExecutionMode() == ExecMode.MR && env.getExecutionPhase() == ExecPhase.PRE ) {
-				if (ref.isContainer() || ref.isContainment()) {
-					throw new UnresolvedElementException();
-				}
-			}
+//			if (env.getExecutionMode() == ExecMode.MR && env.getExecutionPhase() == ExecPhase.PRE ) {
+//				if (ref.isContainer() || ref.isContainment()) {
+//					throw new UnresolvedElementException();
+//				}
+//			}
 			final boolean allowInterModelReferences = isAllowInterModelReferences(env, eo);
 			final Collection<?> srcValues = ref.isContainment() ? new ArrayList<Object>(value) : value;
 			if (index > -1) {
@@ -894,10 +894,10 @@ public final class EMFTVMUtil {
 				values.addAll(value);
 			}
 		 } 
-		} catch (UnresolvedElementException e) {
-			values.clear();
-			throw e;
-		} 
+//		} catch (UnresolvedElementException e) {
+//			values.clear();
+//			throw e;
+//		} 
 	}
 
 	/**
@@ -1022,14 +1022,13 @@ public final class EMFTVMUtil {
 				values.add(v);
 			}
 			updateResource(eo, v);
-		} else {
-			throw new UnresolvedElementException();
-		}
+		} 
+//		else {
+//			throw new UnresolvedElementException();
+//		}
 		assert eo.eResource() != null;
 		assert v.eResource() != null;
 	}
-
-	
 
 	/**
 	 * Removes <code>v</code> from <code>values</code>. Performs constraint checking on <code>v</code>.
