@@ -1,6 +1,7 @@
 #EMFTVM+
 
-A fork of the official alt repository with an extension of the EMFTVM to support model transformation on the Cloud.
+**EMFTVM+** is a fork of the official alt repository with an extension of the EMFTVM to support model transformation on the Cloud.
+**EMFTVM+** has been successfully used in a prototype [tool](https://github.com/atlanmod/ATL_MR) for running ATL transformations on MapReduce.
 
 ## Extensions
 
