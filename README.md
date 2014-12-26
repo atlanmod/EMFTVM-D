@@ -11,3 +11,8 @@ In particular **EMFTVM+**  factorizes and exposes methods for launching independ
 For instance the distributed VM exposes methods to perform the transformation of single model elements. 
 
 ATL's tracing mechanism has also been extended with an additional data structure *TraceProperty*. It allows a fine-grained communication of transformation data between different cluster nodes.
+
+These extensions had concerned mainly the following plugins: 
+
+- **org.eclipse.m2m.atl.emftvm**
+- **org.eclipse.m2m.atl.trace**
