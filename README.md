@@ -15,4 +15,4 @@ ATL's tracing mechanism has also been extended with an additional data structure
 These extensions had concerned mainly the following plugins: 
 
 - **org.eclipse.m2m.atl.emftvm**
-- **org.eclipse.m2m.atl.trace**
+- **org.eclipse.m2m.atl.emftvm.trace**
