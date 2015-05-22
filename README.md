@@ -3,7 +3,7 @@
 **EMFTVM+** is a fork of the official [ATL](http://git.eclipse.org/c/mmt/org.eclipse.atl.git/) repository with an extension of the EMFTVM to support model transformation on the Cloud.
 
 **EMFTVM+** has been successfully used in a prototype [tool](https://github.com/atlanmod/ATL_MR) for running ATL transformations on MapReduce.
-
+N.B: This branch implements lazy loading of input models.
 ## Extensions
 
 We extended the ATL VM with a minimal set of functions, yet allowing the VM to run either in standalone or distributed mode.
