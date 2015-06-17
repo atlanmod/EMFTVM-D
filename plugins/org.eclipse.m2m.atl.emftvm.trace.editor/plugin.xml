@@ -33,4 +33,31 @@
       </editor>
    </extension>
 
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated FTrace -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.eclipse.m2m.atl.emftvm.ftrace.presentation.FTraceModelWizardID"
+            name="%_UI_FTraceModelWizard_label"
+            class="org.eclipse.m2m.atl.emftvm.ftrace.presentation.FTraceModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/FTraceModelFile.gif">
+         <description>%_UI_FTraceModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated FTrace -->
+      <editor
+            id="org.eclipse.m2m.atl.emftvm.ftrace.presentation.FTraceEditorID"
+            name="%_UI_FTraceEditor_label"
+            icon="icons/full/obj16/FTraceModelFile.gif"
+            extensions="ftrace"
+            class="org.eclipse.m2m.atl.emftvm.ftrace.presentation.FTraceEditor"
+            contributorClass="org.eclipse.m2m.atl.emftvm.ftrace.presentation.FTraceActionBarContributor">
+      </editor>
+   </extension>
 </plugin>
