@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftrace" nsURI="http://www.eclipse.org/m2m/atl/emftvm/ftrace"
+    nsPrefix="ftrace">
+  <eAnnotations source="Descrition" references="#/">
+    <details key="description" value="This is a flat/compact representation of the trace metamodel &#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FLink">
+    <eAnnotations source="Descrition" references="#/">
+      <details key="ruleName" value="this attribute contains the name of the matched rule"/>
+      <details key="sourceElements" value="A string representation of the list of source elements. &#xA;Each item  represents a source pattern element along with the associated eObject as follows &quot;pattern_element : eObjectURI&quot;.&#xA; "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ruleName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceElements" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetElements" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
