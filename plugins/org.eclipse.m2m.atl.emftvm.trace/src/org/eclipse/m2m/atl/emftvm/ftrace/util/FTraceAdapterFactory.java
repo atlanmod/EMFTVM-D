@@ -84,8 +84,8 @@ public class FTraceAdapterFactory extends AdapterFactoryImpl {
 				return createFSourceElementAdapter();
 			}
 			@Override
-			public Adapter caseTraceProperty(TraceProperty object) {
-				return createTracePropertyAdapter();
+			public Adapter caseFTraceProperty(FTraceProperty object) {
+				return createFTracePropertyAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -164,16 +164,16 @@ public class FTraceAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty <em>Trace Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty
 	 * @generated
 	 */
-	public Adapter createTracePropertyAdapter() {
+	public Adapter createFTracePropertyAdapter() {
 		return null;
 	}
 

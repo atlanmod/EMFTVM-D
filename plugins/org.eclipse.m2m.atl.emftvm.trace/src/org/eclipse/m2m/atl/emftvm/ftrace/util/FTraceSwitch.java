@@ -92,9 +92,9 @@ public class FTraceSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FTracePackage.TRACE_PROPERTY: {
-				TraceProperty traceProperty = (TraceProperty)theEObject;
-				T result = caseTraceProperty(traceProperty);
+			case FTracePackage.FTRACE_PROPERTY: {
+				FTraceProperty fTraceProperty = (FTraceProperty)theEObject;
+				T result = caseFTraceProperty(fTraceProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -163,17 +163,17 @@ public class FTraceSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Trace Property</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Trace Property</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTraceProperty(TraceProperty object) {
+	public T caseFTraceProperty(FTraceProperty object) {
 		return null;
 	}
 

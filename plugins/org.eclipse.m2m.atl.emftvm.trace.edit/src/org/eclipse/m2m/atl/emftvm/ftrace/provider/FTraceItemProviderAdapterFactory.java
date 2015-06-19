@@ -141,26 +141,26 @@ public class FTraceItemProviderAdapterFactory extends FTraceAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TracePropertyItemProvider tracePropertyItemProvider;
+	protected FTracePropertyItemProvider fTracePropertyItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty}.
+	 * This creates an adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createTracePropertyAdapter() {
-		if (tracePropertyItemProvider == null) {
-			tracePropertyItemProvider = new TracePropertyItemProvider(this);
+	public Adapter createFTracePropertyAdapter() {
+		if (fTracePropertyItemProvider == null) {
+			fTracePropertyItemProvider = new FTracePropertyItemProvider(this);
 		}
 
-		return tracePropertyItemProvider;
+		return fTracePropertyItemProvider;
 	}
 
 	/**
@@ -265,7 +265,7 @@ public class FTraceItemProviderAdapterFactory extends FTraceAdapterFactory imple
 		if (fLinkItemProvider != null) fLinkItemProvider.dispose();
 		if (fTargetElementItemProvider != null) fTargetElementItemProvider.dispose();
 		if (fSourceElementItemProvider != null) fSourceElementItemProvider.dispose();
-		if (tracePropertyItemProvider != null) tracePropertyItemProvider.dispose();
+		if (fTracePropertyItemProvider != null) fTracePropertyItemProvider.dispose();
 	}
 
 }

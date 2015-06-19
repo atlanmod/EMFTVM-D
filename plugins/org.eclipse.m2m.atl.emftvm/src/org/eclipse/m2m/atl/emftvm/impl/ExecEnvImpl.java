@@ -68,6 +68,8 @@ import org.eclipse.m2m.atl.emftvm.RuleMode;
 import org.eclipse.m2m.atl.emftvm.constraints.StackUnderflowValidator;
 import org.eclipse.m2m.atl.emftvm.constraints.ValidCodeBlockStackLevelValidator;
 import org.eclipse.m2m.atl.emftvm.constraints.Validator;
+import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.jit.CodeBlockJIT;
 import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
@@ -633,9 +635,30 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 */
 	protected final Validator<Instruction> instrStackValidator = new StackUnderflowValidator();
 
+	/**
+	 * 
+	 */
 	private CodeBlockJIT cbJit;
+	
+	/**
+	 * 
+	 */
 	private boolean ruleStateCompiled;
 
+	/**
+	 * The list of serializable links stored in NeoEMF
+	 * 
+	 */
+	private EList<FLink> serializableLinks;
+	
+	/**
+	 * returns the list of serializable links
+	 * @return {@link EList}<{@link FLink}>
+	 */
+	public EList<FLink> getSerializableLinks () {
+		return serializableLinks;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * Creates a new {@link ExecEnvImpl}.
@@ -2290,6 +2313,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		}
 		
 		preApplySingleTrace(rootFrame);
+		rootFrame.getEnv().flattenLink();
 		return true;
 		
 		
@@ -3106,6 +3130,28 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	    }
 	    
 		return result;
+	}
+
+	/**
+	 * stores one link
+	 */
+	public void storeLink() {
+		assert getCurrentMatch() != null;
+		FLink link = FTraceFactory.eINSTANCE.createFLink();
+		link.flatten(getCurrentMatch());
+		getSerializableLinks().add(link);
+	}
+
+	/**
+	 * flattens and stores a link 
+	 * @see org.eclipse.m2m.atl.emftvm.ExecEnv#flattenLink()
+	 */
+	public void flattenLink() {
+		
+		FLink flink = FTraceFactory.eINSTANCE.createFLink();
+		flink.flatten(getCurrentMatch());
+		getSerializableLinks().add(flink);
+		
 	}
 	
 	

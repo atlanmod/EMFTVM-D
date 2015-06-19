@@ -10,9 +10,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.m2m.atl.emftvm.ftrace,
  org.eclipse.m2m.atl.emftvm.ftrace.impl,
  org.eclipse.m2m.atl.emftvm.ftrace.util,
- trace,
- trace.impl,
- trace.util,
  org.eclipse.m2m.atl.emftvm.trace,
  org.eclipse.m2m.atl.emftvm.trace.impl,
  org.eclipse.m2m.atl.emftvm.trace.util

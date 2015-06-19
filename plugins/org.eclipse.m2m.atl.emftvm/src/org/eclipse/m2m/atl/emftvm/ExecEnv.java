@@ -14,10 +14,12 @@ package org.eclipse.m2m.atl.emftvm;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
 import org.eclipse.m2m.atl.emftvm.jit.CodeBlockJIT;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLinkSet;
@@ -890,8 +892,16 @@ public interface ExecEnv extends EObject {
 	 * the resourceSet is used to resolve proxies
 	 * @param rs 
 	 */
-	void postApplyAll(ResourceSet rs); 
+	void postApplyAll(ResourceSet rs);
+
+	/**
+	 * Stores the serializable link
+	 */
+	void storeLink();
+
+	void flattenLink(); 
 	
+	public EList<FLink> getSerializableLinks ();
 	//public Set<Rule> getMatchedRules();
 	
 } // ExecEnv

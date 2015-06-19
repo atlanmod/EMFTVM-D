@@ -46,6 +46,9 @@ import org.eclipse.m2m.atl.emftvm.OutputRuleElement;
 import org.eclipse.m2m.atl.emftvm.Rule;
 import org.eclipse.m2m.atl.emftvm.RuleElement;
 import org.eclipse.m2m.atl.emftvm.RuleMode;
+import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
+import org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElementList;
 import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
@@ -2332,6 +2335,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	
 	public boolean completeTraceFor(final StackFrame frame, final TraceLink trace) {
 		//TraceLink [[s:Member -> []] -> []]
 		boolean defaultMappingSet = false;

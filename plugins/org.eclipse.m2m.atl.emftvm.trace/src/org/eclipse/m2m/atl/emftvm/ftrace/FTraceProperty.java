@@ -1,13 +1,9 @@
 /**
  */
-package trace;
+package org.eclipse.m2m.atl.emftvm.ftrace;
 
 import fr.inria.atlanmod.kyanos.core.KyanosEObject;
-
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,19 +15,19 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link trace.TraceProperty#getPropertyName <em>Property Name</em>}</li>
- *   <li>{@link trace.TraceProperty#getResolvedFor <em>Resolved For</em>}</li>
- *   <li>{@link trace.TraceProperty#getResolvings <em>Resolvings</em>}</li>
- *   <li>{@link trace.TraceProperty#isResolved <em>Resolved</em>}</li>
- *   <li>{@link trace.TraceProperty#getAppliedAt <em>Applied At</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getPropertyName <em>Property Name</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvedFor <em>Resolved For</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvings <em>Resolvings</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#isResolved <em>Resolved</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getAppliedAt <em>Applied At</em>}</li>
  * </ul>
  *
- * @see trace.TracePackage#getTraceProperty()
+ * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFTraceProperty()
  * @model
  * @extends KyanosEObject
  * @generated
  */
-public interface TraceProperty extends KyanosEObject {
+public interface FTraceProperty extends KyanosEObject {
 	/**
 	 * Returns the value of the '<em><b>Property Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -42,14 +38,14 @@ public interface TraceProperty extends KyanosEObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property Name</em>' attribute.
 	 * @see #setPropertyName(String)
-	 * @see trace.TracePackage#getTraceProperty_PropertyName()
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFTraceProperty_PropertyName()
 	 * @model
 	 * @generated
 	 */
 	String getPropertyName();
 
 	/**
-	 * Sets the value of the '{@link trace.TraceProperty#getPropertyName <em>Property Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getPropertyName <em>Property Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Property Name</em>' attribute.
@@ -67,22 +63,22 @@ public interface TraceProperty extends KyanosEObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Resolved For</em>' reference.
-	 * @see #setResolvedFor(TargetElement)
-	 * @see trace.TracePackage#getTraceProperty_ResolvedFor()
+	 * @see #setResolvedFor(FTargetElement)
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFTraceProperty_ResolvedFor()
 	 * @model required="true"
 	 * @generated
 	 */
-	TargetElement getResolvedFor();
+	FTargetElement getResolvedFor();
 
 	/**
-	 * Sets the value of the '{@link trace.TraceProperty#getResolvedFor <em>Resolved For</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvedFor <em>Resolved For</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Resolved For</em>' reference.
 	 * @see #getResolvedFor()
 	 * @generated
 	 */
-	void setResolvedFor(TargetElement value);
+	void setResolvedFor(FTargetElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Resolvings</b></em>' reference list.
@@ -94,7 +90,7 @@ public interface TraceProperty extends KyanosEObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Resolvings</em>' reference list.
-	 * @see trace.TracePackage#getTraceProperty_Resolvings()
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFTraceProperty_Resolvings()
 	 * @model
 	 * @generated
 	 */
@@ -110,14 +106,14 @@ public interface TraceProperty extends KyanosEObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Resolved</em>' attribute.
 	 * @see #setResolved(boolean)
-	 * @see trace.TracePackage#getTraceProperty_Resolved()
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFTraceProperty_Resolved()
 	 * @model
 	 * @generated
 	 */
 	boolean isResolved();
 
 	/**
-	 * Sets the value of the '{@link trace.TraceProperty#isResolved <em>Resolved</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#isResolved <em>Resolved</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Resolved</em>' attribute.
@@ -128,7 +124,7 @@ public interface TraceProperty extends KyanosEObject {
 
 	/**
 	 * Returns the value of the '<em><b>Applied At</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link trace.TraceLink#getProperties <em>Properties</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getProperties <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Applied At</em>' container reference isn't clear,
@@ -136,30 +132,22 @@ public interface TraceProperty extends KyanosEObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Applied At</em>' container reference.
-	 * @see #setAppliedAt(TraceLink)
-	 * @see trace.TracePackage#getTraceProperty_AppliedAt()
-	 * @see trace.TraceLink#getProperties
+	 * @see #setAppliedAt(FLink)
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFTraceProperty_AppliedAt()
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FLink#getProperties
 	 * @model opposite="properties" transient="false"
 	 * @generated
 	 */
-	TraceLink getAppliedAt();
+	FLink getAppliedAt();
 
 	/**
-	 * Sets the value of the '{@link trace.TraceProperty#getAppliedAt <em>Applied At</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getAppliedAt <em>Applied At</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Applied At</em>' container reference.
 	 * @see #getAppliedAt()
 	 * @generated
 	 */
-	void setAppliedAt(TraceLink value);
+	void setAppliedAt(FLink value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="trace.JavaList<?>" many="false"
-	 * @generated
-	 */
-	List<?> resolveBinding(TraceLinkSet traces);
-
-} // TraceProperty
+} // FTraceProperty

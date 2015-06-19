@@ -103,6 +103,7 @@ public class FLinkItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(FTracePackage.Literals.FLINK__SOURCES);
 			childrenFeatures.add(FTracePackage.Literals.FLINK__TARGETS);
+			childrenFeatures.add(FTracePackage.Literals.FLINK__PROPERTIES);
 		}
 		return childrenFeatures;
 	}
@@ -163,6 +164,7 @@ public class FLinkItemProvider
 				return;
 			case FTracePackage.FLINK__SOURCES:
 			case FTracePackage.FLINK__TARGETS:
+			case FTracePackage.FLINK__PROPERTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -189,6 +191,11 @@ public class FLinkItemProvider
 			(createChildParameter
 				(FTracePackage.Literals.FLINK__TARGETS,
 				 FTraceFactory.eINSTANCE.createFTargetElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FTracePackage.Literals.FLINK__PROPERTIES,
+				 FTraceFactory.eINSTANCE.createFTraceProperty()));
 	}
 
 	/**

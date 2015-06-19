@@ -23,15 +23,15 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
-import org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty} object.
+ * This is the item provider adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TracePropertyItemProvider 
+public class FTracePropertyItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -45,7 +45,7 @@ public class TracePropertyItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TracePropertyItemProvider(AdapterFactory adapterFactory) {
+	public FTracePropertyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,7 +64,6 @@ public class TracePropertyItemProvider
 			addResolvedForPropertyDescriptor(object);
 			addResolvingsPropertyDescriptor(object);
 			addResolvedPropertyDescriptor(object);
-			addAppliedAtPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -80,9 +79,9 @@ public class TracePropertyItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TraceProperty_propertyName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TraceProperty_propertyName_feature", "_UI_TraceProperty_type"),
-				 FTracePackage.Literals.TRACE_PROPERTY__PROPERTY_NAME,
+				 getString("_UI_FTraceProperty_propertyName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FTraceProperty_propertyName_feature", "_UI_FTraceProperty_type"),
+				 FTracePackage.Literals.FTRACE_PROPERTY__PROPERTY_NAME,
 				 true,
 				 false,
 				 false,
@@ -102,9 +101,9 @@ public class TracePropertyItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TraceProperty_resolvedFor_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TraceProperty_resolvedFor_feature", "_UI_TraceProperty_type"),
-				 FTracePackage.Literals.TRACE_PROPERTY__RESOLVED_FOR,
+				 getString("_UI_FTraceProperty_resolvedFor_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FTraceProperty_resolvedFor_feature", "_UI_FTraceProperty_type"),
+				 FTracePackage.Literals.FTRACE_PROPERTY__RESOLVED_FOR,
 				 true,
 				 false,
 				 true,
@@ -124,9 +123,9 @@ public class TracePropertyItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TraceProperty_resolvings_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TraceProperty_resolvings_feature", "_UI_TraceProperty_type"),
-				 FTracePackage.Literals.TRACE_PROPERTY__RESOLVINGS,
+				 getString("_UI_FTraceProperty_resolvings_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FTraceProperty_resolvings_feature", "_UI_FTraceProperty_type"),
+				 FTracePackage.Literals.FTRACE_PROPERTY__RESOLVINGS,
 				 true,
 				 false,
 				 true,
@@ -146,9 +145,9 @@ public class TracePropertyItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TraceProperty_resolved_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TraceProperty_resolved_feature", "_UI_TraceProperty_type"),
-				 FTracePackage.Literals.TRACE_PROPERTY__RESOLVED,
+				 getString("_UI_FTraceProperty_resolved_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FTraceProperty_resolved_feature", "_UI_FTraceProperty_type"),
+				 FTracePackage.Literals.FTRACE_PROPERTY__RESOLVED,
 				 true,
 				 false,
 				 false,
@@ -158,36 +157,14 @@ public class TracePropertyItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Applied At feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAppliedAtPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TraceProperty_appliedAt_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TraceProperty_appliedAt_feature", "_UI_TraceProperty_type"),
-				 FTracePackage.Literals.TRACE_PROPERTY__APPLIED_AT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns TraceProperty.gif.
+	 * This returns FTraceProperty.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TraceProperty"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FTraceProperty"));
 	}
 
 	/**
@@ -198,10 +175,10 @@ public class TracePropertyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TraceProperty)object).getPropertyName();
+		String label = ((FTraceProperty)object).getPropertyName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_TraceProperty_type") :
-			getString("_UI_TraceProperty_type") + " " + label;
+			getString("_UI_FTraceProperty_type") :
+			getString("_UI_FTraceProperty_type") + " " + label;
 	}
 	
 
@@ -216,9 +193,9 @@ public class TracePropertyItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TraceProperty.class)) {
-			case FTracePackage.TRACE_PROPERTY__PROPERTY_NAME:
-			case FTracePackage.TRACE_PROPERTY__RESOLVED:
+		switch (notification.getFeatureID(FTraceProperty.class)) {
+			case FTracePackage.FTRACE_PROPERTY__PROPERTY_NAME:
+			case FTracePackage.FTRACE_PROPERTY__RESOLVED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -9,10 +9,30 @@
   <modelPluginVariables>KYANOS=fr.inria.atlanmod.kyanos</modelPluginVariables>
   <genPackages prefix="FTrace" basePackage="org.eclipse.m2m.atl.emftvm" disposableProviderFactory="true"
       ecorePackage="FTrace.ecore#/">
+    <genDataTypes ecoreDataType="FTrace.ecore#//JavaList">
+      <genTypeParameters ecoreTypeParameter="FTrace.ecore#//JavaList/E"/>
+    </genDataTypes>
     <genClasses ecoreClass="FTrace.ecore#//FLink">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FLink/ruleName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FLink/sourceElements"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FLink/targetElements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FTrace.ecore#//FLink/sources"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FTrace.ecore#//FLink/targets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FTrace.ecore#//FLink/properties"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="FTrace.ecore#//FTraceElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FTraceElement/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FTrace.ecore#//FTraceElement/object"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FTraceElement/runtimeObject"/>
+    </genClasses>
+    <genClasses ecoreClass="FTrace.ecore#//FTargetElement"/>
+    <genClasses ecoreClass="FTrace.ecore#//FSourceElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FSourceElement/mapsToSelf"/>
+    </genClasses>
+    <genClasses ecoreClass="FTrace.ecore#//FTraceProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FTraceProperty/propertyName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FTrace.ecore#//FTraceProperty/resolvedFor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FTrace.ecore#//FTraceProperty/resolvings"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FTrace.ecore#//FTraceProperty/resolved"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FTrace.ecore#//FTraceProperty/appliedAt"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

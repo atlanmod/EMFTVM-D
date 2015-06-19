@@ -2,7 +2,9 @@
  */
 package org.eclipse.m2m.atl.emftvm.ftrace.impl;
 
+import java.nio.channels.SeekableByteChannel;
 import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -10,8 +12,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.m2m.atl.emftvm.ftrace.*;
+import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
+import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
 import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,7 +65,7 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 			case FTracePackage.FLINK: return (EObject)createFLink();
 			case FTracePackage.FTARGET_ELEMENT: return (EObject)createFTargetElement();
 			case FTracePackage.FSOURCE_ELEMENT: return (EObject)createFSourceElement();
-			case FTracePackage.TRACE_PROPERTY: return (EObject)createTraceProperty();
+			case FTracePackage.FTRACE_PROPERTY: return (EObject)createFTraceProperty();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -131,9 +136,9 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TraceProperty createTraceProperty() {
-		TracePropertyImpl traceProperty = new TracePropertyImpl();
-		return traceProperty;
+	public FTraceProperty createFTraceProperty() {
+		FTracePropertyImpl fTraceProperty = new FTracePropertyImpl();
+		return fTraceProperty;
 	}
 
 	/**
@@ -173,7 +178,9 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	public static FTracePackage getPackage() {
 		return FTracePackage.eINSTANCE;
 	}
-
+	/**
+	 * Inherited
+	 */
 	public FTraceElement flatten(TraceElement element) {
 		switch (element.eClass().getClassifierID()) {
 		case TracePackage.SOURCE_ELEMENT:
@@ -192,12 +199,21 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 		clone.setObject(element.getObject());
 		return clone;
 	}
-
+	
 	private FTraceElement clone(SourceElement element) {
 		FSourceElement clone = FTraceFactory.eINSTANCE.createFSourceElement();
 		clone.setName(element.getName());
 		clone.setObject(element.getObject());
 		//clone.setMapsToSelf(element.);
+		return clone;
+	}
+
+	public FTraceProperty flatten(TraceProperty property) {
+		FTraceProperty clone = eINSTANCE.createFTraceProperty();
+		clone.setPropertyName(property.getPropertyName());
+		for (EObject eObject : property.getResolvings()) {
+			clone.getResolvings().add(eObject);
+		}
 		return clone;
 	}
 
