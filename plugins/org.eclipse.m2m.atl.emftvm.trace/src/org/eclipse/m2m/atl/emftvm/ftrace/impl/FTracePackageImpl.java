@@ -2,17 +2,25 @@
  */
 package org.eclipse.m2m.atl.emftvm.ftrace.impl;
 
+import java.util.List;
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
+import org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
+import org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty;
+import trace.TracePackage;
+import trace.impl.TracePackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +35,41 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 	 * @generated
 	 */
 	private EClass fLinkEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fTraceElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fTargetElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fSourceElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tracePropertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType javaListEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -74,11 +117,16 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		TracePackageImpl theTracePackage = (TracePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TracePackage.eNS_URI) instanceof TracePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TracePackage.eNS_URI) : TracePackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theFTracePackage.createPackageContents();
+		theTracePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theFTracePackage.initializePackageContents();
+		theTracePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theFTracePackage.freeze();
@@ -112,8 +160,8 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFLink_SourceElements() {
-		return (EAttribute)fLinkEClass.getEStructuralFeatures().get(1);
+	public EReference getFLink_Sources() {
+		return (EReference)fLinkEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -121,8 +169,143 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFLink_TargetElements() {
-		return (EAttribute)fLinkEClass.getEStructuralFeatures().get(2);
+	public EReference getFLink_Targets() {
+		return (EReference)fLinkEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFTraceElement() {
+		return fTraceElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFTraceElement_Name() {
+		return (EAttribute)fTraceElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFTraceElement_Object() {
+		return (EReference)fTraceElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFTraceElement_RuntimeObject() {
+		return (EAttribute)fTraceElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFTargetElement() {
+		return fTargetElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFSourceElement() {
+		return fSourceElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFSourceElement_MapsToSelf() {
+		return (EAttribute)fSourceElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceProperty() {
+		return tracePropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceProperty_PropertyName() {
+		return (EAttribute)tracePropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceProperty_ResolvedFor() {
+		return (EReference)tracePropertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceProperty_Resolvings() {
+		return (EReference)tracePropertyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceProperty_Resolved() {
+		return (EAttribute)tracePropertyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceProperty_AppliedAt() {
+		return (EReference)tracePropertyEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getTraceProperty__ResolveBinding__List() {
+		return tracePropertyEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getJavaList() {
+		return javaListEDataType;
 	}
 
 	/**
@@ -155,8 +338,29 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		// Create classes and their features
 		fLinkEClass = createEClass(FLINK);
 		createEAttribute(fLinkEClass, FLINK__RULE_NAME);
-		createEAttribute(fLinkEClass, FLINK__SOURCE_ELEMENTS);
-		createEAttribute(fLinkEClass, FLINK__TARGET_ELEMENTS);
+		createEReference(fLinkEClass, FLINK__SOURCES);
+		createEReference(fLinkEClass, FLINK__TARGETS);
+
+		fTraceElementEClass = createEClass(FTRACE_ELEMENT);
+		createEAttribute(fTraceElementEClass, FTRACE_ELEMENT__NAME);
+		createEReference(fTraceElementEClass, FTRACE_ELEMENT__OBJECT);
+		createEAttribute(fTraceElementEClass, FTRACE_ELEMENT__RUNTIME_OBJECT);
+
+		fTargetElementEClass = createEClass(FTARGET_ELEMENT);
+
+		fSourceElementEClass = createEClass(FSOURCE_ELEMENT);
+		createEAttribute(fSourceElementEClass, FSOURCE_ELEMENT__MAPS_TO_SELF);
+
+		tracePropertyEClass = createEClass(TRACE_PROPERTY);
+		createEAttribute(tracePropertyEClass, TRACE_PROPERTY__PROPERTY_NAME);
+		createEReference(tracePropertyEClass, TRACE_PROPERTY__RESOLVED_FOR);
+		createEReference(tracePropertyEClass, TRACE_PROPERTY__RESOLVINGS);
+		createEAttribute(tracePropertyEClass, TRACE_PROPERTY__RESOLVED);
+		createEReference(tracePropertyEClass, TRACE_PROPERTY__APPLIED_AT);
+		createEOperation(tracePropertyEClass, TRACE_PROPERTY___RESOLVE_BINDING__LIST);
+
+		// Create data types
+		javaListEDataType = createEDataType(JAVA_LIST);
 	}
 
 	/**
@@ -182,17 +386,53 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		TracePackage theTracePackage = (TracePackage)EPackage.Registry.INSTANCE.getEPackage(TracePackage.eNS_URI);
+
 		// Create type parameters
+		addETypeParameter(javaListEDataType, "E");
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		fTargetElementEClass.getESuperTypes().add(this.getFTraceElement());
+		fSourceElementEClass.getESuperTypes().add(this.getFTraceElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(fLinkEClass, FLink.class, "FLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFLink_RuleName(), ecorePackage.getEString(), "ruleName", null, 1, 1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFLink_SourceElements(), ecorePackage.getEString(), "sourceElements", "", 0, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFLink_TargetElements(), ecorePackage.getEString(), "targetElements", null, 1, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFLink_Sources(), this.getFSourceElement(), null, "sources", null, 0, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFLink_Targets(), this.getFTargetElement(), null, "targets", null, 1, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fTraceElementEClass, FTraceElement.class, "FTraceElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFTraceElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, FTraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFTraceElement_Object(), ecorePackage.getEObject(), null, "object", null, 0, 1, FTraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFTraceElement_RuntimeObject(), ecorePackage.getEJavaObject(), "runtimeObject", null, 0, 1, FTraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fTargetElementEClass, FTargetElement.class, "FTargetElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(fSourceElementEClass, FSourceElement.class, "FSourceElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFSourceElement_MapsToSelf(), ecorePackage.getEBoolean(), "mapsToSelf", null, 0, 1, FSourceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tracePropertyEClass, TraceProperty.class, "TraceProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTraceProperty_PropertyName(), ecorePackage.getEString(), "propertyName", null, 0, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceProperty_ResolvedFor(), this.getFTargetElement(), null, "resolvedFor", null, 1, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceProperty_Resolvings(), ecorePackage.getEObject(), null, "resolvings", null, 0, -1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceProperty_Resolved(), ecorePackage.getEBoolean(), "resolved", null, 0, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceProperty_AppliedAt(), this.getFLink(), null, "appliedAt", null, 0, 1, TraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = initEOperation(getTraceProperty__ResolveBinding__List(), null, "resolveBinding", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(theTracePackage.getJavaList());
+		EGenericType g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "traces", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theTracePackage.getJavaList());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		// Initialize data types
+		initEDataType(javaListEDataType, List.class, "JavaList", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -200,6 +440,8 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		// Create annotations
 		// Descrition
 		createDescritionAnnotations();
+		// null
+		createNullAnnotations();
 	}
 
 	/**
@@ -223,11 +465,25 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		  (fLinkEClass, 
 		   source, 
 		   new String[] {
-			 "ruleName", "this attribute contains the name of the matched rule",
-			 "sourceElements", "A string representation of the list of source elements. \nEach item  represents a source pattern element along with the associated eObject as follows \"pattern_element : eObjectURI\".\n "
+			 "ruleName", "this attribute contains the name of the matched rule"
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("/")
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>null</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createNullAnnotations() {
+		String source = null;	
+		addAnnotation
+		  (javaListEDataType, 
+		   source, 
+		   new String[] {
 		   });
 	}
 

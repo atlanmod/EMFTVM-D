@@ -11,7 +11,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,17 +22,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
-import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.FLink} object.
+ * This is the item provider adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class FLinkItemProvider 
+public class FTraceElementItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -47,7 +45,7 @@ public class FLinkItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FLinkItemProvider(AdapterFactory adapterFactory) {
+	public FTraceElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,25 +60,27 @@ public class FLinkItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRuleNamePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addObjectPropertyDescriptor(object);
+			addRuntimeObjectPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Rule Name feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRuleNamePropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FLink_ruleName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FLink_ruleName_feature", "_UI_FLink_type"),
-				 FTracePackage.Literals.FLINK__RULE_NAME,
+				 getString("_UI_FTraceElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FTraceElement_name_feature", "_UI_FTraceElement_type"),
+				 FTracePackage.Literals.FTRACE_ELEMENT__NAME,
 				 true,
 				 false,
 				 false,
@@ -90,45 +90,47 @@ public class FLinkItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Object feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(FTracePackage.Literals.FLINK__SOURCES);
-			childrenFeatures.add(FTracePackage.Literals.FLINK__TARGETS);
-		}
-		return childrenFeatures;
+	protected void addObjectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FTraceElement_object_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FTraceElement_object_feature", "_UI_FTraceElement_type"),
+				 FTracePackage.Literals.FTRACE_ELEMENT__OBJECT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
+	 * This adds a property descriptor for the Runtime Object feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns FLink.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FLink"));
+	protected void addRuntimeObjectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FTraceElement_runtimeObject_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FTraceElement_runtimeObject_feature", "_UI_FTraceElement_type"),
+				 FTracePackage.Literals.FTRACE_ELEMENT__RUNTIME_OBJECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -139,10 +141,10 @@ public class FLinkItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FLink)object).getRuleName();
+		String label = ((FTraceElement)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_FLink_type") :
-			getString("_UI_FLink_type") + " " + label;
+			getString("_UI_FTraceElement_type") :
+			getString("_UI_FTraceElement_type") + " " + label;
 	}
 	
 
@@ -157,13 +159,10 @@ public class FLinkItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(FLink.class)) {
-			case FTracePackage.FLINK__RULE_NAME:
+		switch (notification.getFeatureID(FTraceElement.class)) {
+			case FTracePackage.FTRACE_ELEMENT__NAME:
+			case FTracePackage.FTRACE_ELEMENT__RUNTIME_OBJECT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case FTracePackage.FLINK__SOURCES:
-			case FTracePackage.FLINK__TARGETS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -179,16 +178,6 @@ public class FLinkItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(FTracePackage.Literals.FLINK__SOURCES,
-				 FTraceFactory.eINSTANCE.createFSourceElement()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(FTracePackage.Literals.FLINK__TARGETS,
-				 FTraceFactory.eINSTANCE.createFTargetElement()));
 	}
 
 	/**

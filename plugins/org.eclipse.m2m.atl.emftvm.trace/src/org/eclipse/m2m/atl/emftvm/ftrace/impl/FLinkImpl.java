@@ -3,13 +3,15 @@
 package org.eclipse.m2m.atl.emftvm.ftrace.impl;
 
 import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
+import org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
+import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
+import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,8 +22,8 @@ import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FLinkImpl#getRuleName <em>Rule Name</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FLinkImpl#getSourceElements <em>Source Elements</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FLinkImpl#getTargetElements <em>Target Elements</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FLinkImpl#getSources <em>Sources</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FLinkImpl#getTargets <em>Targets</em>}</li>
  * </ul>
  *
  * @generated
@@ -80,18 +82,36 @@ public class FLinkImpl extends KyanosEObjectImpl implements FLink {
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EList<String> getSourceElements() {
-		return (EList<String>)eGet(FTracePackage.Literals.FLINK__SOURCE_ELEMENTS, true);
+	public EList<FSourceElement> getSources() {
+		return (EList<FSourceElement>)eGet(FTracePackage.Literals.FLINK__SOURCES, true);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EList<String> getTargetElements() {
-		return (EList<String>)eGet(FTracePackage.Literals.FLINK__TARGET_ELEMENTS, true);
+	public EList<FTargetElement> getTargets() {
+		return (EList<FTargetElement>)eGet(FTracePackage.Literals.FLINK__TARGETS, true);
 	}
+
+	/**
+	 * Flattens a {@link TraceLink}
+	 */
+	public void flatten(TraceLink currentMatch) {
+		
+		// initialize the name 
+		this.setRuleName(currentMatch.getRule().getRule());
+		
+		//iterate and copy the the source and target elements
+		for (TraceElement element : currentMatch.getSourceElements()) {
+			this.getSources().add((FSourceElement)FTraceFactory.eINSTANCE.flatten(element)); 
+		}
+		
+		for (TraceElement element : currentMatch.getTargetElements()) {
+			this.getTargets().add((FTargetElement)FTraceFactory.eINSTANCE.flatten(element)); 
+		}
+	}
+
 
 } //FLinkImpl

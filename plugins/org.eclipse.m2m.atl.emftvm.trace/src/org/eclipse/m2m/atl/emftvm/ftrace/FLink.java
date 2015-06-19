@@ -5,6 +5,7 @@ package org.eclipse.m2m.atl.emftvm.ftrace;
 import fr.inria.atlanmod.kyanos.core.KyanosEObject;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,12 +17,12 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getRuleName <em>Rule Name</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getSourceElements <em>Source Elements</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getTargetElements <em>Target Elements</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getSources <em>Sources</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getTargets <em>Targets</em>}</li>
  * </ul>
  *
  * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFLink()
- * @model annotation="Descrition ruleName='this attribute contains the name of the matched rule' sourceElements='A string representation of the list of source elements. \nEach item  represents a source pattern element along with the associated eObject as follows \"pattern_element : eObjectURI\".\n '"
+ * @model annotation="Descrition ruleName='this attribute contains the name of the matched rule'"
  * @extends KyanosEObject
  * @generated
  */
@@ -53,35 +54,38 @@ public interface FLink extends KyanosEObject {
 	void setRuleName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Source Elements</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Returns the value of the '<em><b>Sources</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source Elements</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Sources</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Elements</em>' attribute list.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFLink_SourceElements()
-	 * @model default=""
+	 * @return the value of the '<em>Sources</em>' containment reference list.
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFLink_Sources()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<String> getSourceElements();
+	EList<FSourceElement> getSources();
 
 	/**
-	 * Returns the value of the '<em><b>Target Elements</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Returns the value of the '<em><b>Targets</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Target Elements</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Targets</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Elements</em>' attribute list.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFLink_TargetElements()
-	 * @model required="true"
+	 * @return the value of the '<em>Targets</em>' containment reference list.
+	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFLink_Targets()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<String> getTargetElements();
+	EList<FTargetElement> getTargets();
+
+	void flatten(TraceLink currentMatch);
+
 
 } // FLink

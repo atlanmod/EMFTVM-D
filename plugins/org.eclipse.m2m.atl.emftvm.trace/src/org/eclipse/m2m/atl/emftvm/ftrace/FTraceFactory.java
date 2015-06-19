@@ -3,6 +3,7 @@
 package org.eclipse.m2m.atl.emftvm.ftrace;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +32,33 @@ public interface FTraceFactory extends EFactory {
 	FLink createFLink();
 
 	/**
+	 * Returns a new object of class '<em>FTarget Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>FTarget Element</em>'.
+	 * @generated
+	 */
+	FTargetElement createFTargetElement();
+
+	/**
+	 * Returns a new object of class '<em>FSource Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>FSource Element</em>'.
+	 * @generated
+	 */
+	FSourceElement createFSourceElement();
+
+	/**
+	 * Returns a new object of class '<em>Trace Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Property</em>'.
+	 * @generated
+	 */
+	TraceProperty createTraceProperty();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,5 +66,7 @@ public interface FTraceFactory extends EFactory {
 	 * @generated
 	 */
 	FTracePackage getFTracePackage();
+
+	FTraceElement flatten(TraceElement element);
 
 } //FTraceFactory

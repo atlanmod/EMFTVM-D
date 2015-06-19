@@ -1,17 +1,19 @@
 /**
  */
-package org.eclipse.m2m.atl.emftvm.ftrace.impl;
+package trace.impl;
 
 import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.m2m.atl.emftvm.ftrace.*;
-import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
-import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+
+import trace.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,24 +21,24 @@ import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
+public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static FTraceFactory init() {
+	public static TraceFactory init() {
 		try {
-			FTraceFactory theFTraceFactory = (FTraceFactory)EPackage.Registry.INSTANCE.getEFactory(FTracePackage.eNS_URI);
-			if (theFTraceFactory != null) {
-				return theFTraceFactory;
+			TraceFactory theTraceFactory = (TraceFactory)EPackage.Registry.INSTANCE.getEFactory(TracePackage.eNS_URI);
+			if (theTraceFactory != null) {
+				return theTraceFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new FTraceFactoryImpl();
+		return new TraceFactoryImpl();
 	}
 
 	/**
@@ -45,7 +47,7 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FTraceFactoryImpl() {
+	public TraceFactoryImpl() {
 		super();
 	}
 
@@ -57,10 +59,13 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case FTracePackage.FLINK: return (EObject)createFLink();
-			case FTracePackage.FTARGET_ELEMENT: return (EObject)createFTargetElement();
-			case FTracePackage.FSOURCE_ELEMENT: return (EObject)createFSourceElement();
-			case FTracePackage.TRACE_PROPERTY: return (EObject)createTraceProperty();
+			case TracePackage.TRACE_LINK_SET: return (EObject)createTraceLinkSet();
+			case TracePackage.TRACED_RULE: return (EObject)createTracedRule();
+			case TracePackage.TRACE_LINK: return (EObject)createTraceLink();
+			case TracePackage.SOURCE_ELEMENT: return (EObject)createSourceElement();
+			case TracePackage.TARGET_ELEMENT: return (EObject)createTargetElement();
+			case TracePackage.SOURCE_ELEMENT_LIST: return (EObject)createSourceElementList();
+			case TracePackage.TRACE_PROPERTY: return (EObject)createTraceProperty();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -74,7 +79,7 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case FTracePackage.JAVA_LIST:
+			case TracePackage.JAVA_LIST:
 				return createJavaListFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -89,7 +94,7 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case FTracePackage.JAVA_LIST:
+			case TracePackage.JAVA_LIST:
 				return convertJavaListToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -101,9 +106,9 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FLink createFLink() {
-		FLinkImpl fLink = new FLinkImpl();
-		return fLink;
+	public TraceLinkSet createTraceLinkSet() {
+		TraceLinkSetImpl traceLinkSet = new TraceLinkSetImpl();
+		return traceLinkSet;
 	}
 
 	/**
@@ -111,9 +116,9 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FTargetElement createFTargetElement() {
-		FTargetElementImpl fTargetElement = new FTargetElementImpl();
-		return fTargetElement;
+	public TracedRule createTracedRule() {
+		TracedRuleImpl tracedRule = new TracedRuleImpl();
+		return tracedRule;
 	}
 
 	/**
@@ -121,9 +126,39 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FSourceElement createFSourceElement() {
-		FSourceElementImpl fSourceElement = new FSourceElementImpl();
-		return fSourceElement;
+	public TraceLink createTraceLink() {
+		TraceLinkImpl traceLink = new TraceLinkImpl();
+		return traceLink;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SourceElement createSourceElement() {
+		SourceElementImpl sourceElement = new SourceElementImpl();
+		return sourceElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TargetElement createTargetElement() {
+		TargetElementImpl targetElement = new TargetElementImpl();
+		return targetElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SourceElementList createSourceElementList() {
+		SourceElementListImpl sourceElementList = new SourceElementListImpl();
+		return sourceElementList;
 	}
 
 	/**
@@ -159,8 +194,8 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FTracePackage getFTracePackage() {
-		return (FTracePackage)getEPackage();
+	public TracePackage getTracePackage() {
+		return (TracePackage)getEPackage();
 	}
 
 	/**
@@ -170,35 +205,8 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static FTracePackage getPackage() {
-		return FTracePackage.eINSTANCE;
+	public static TracePackage getPackage() {
+		return TracePackage.eINSTANCE;
 	}
 
-	public FTraceElement flatten(TraceElement element) {
-		switch (element.eClass().getClassifierID()) {
-		case TracePackage.SOURCE_ELEMENT:
-			return clone ((SourceElement)element);
-		case TracePackage.TARGET_ELEMENT:
-			return clone ((TargetElement)element);	
-		default:
-			
-		}
-		return null;
-	}
-
-	private FTraceElement clone(TargetElement element) {
-		FTargetElement clone = FTraceFactory.eINSTANCE.createFTargetElement();
-		clone.setName(element.getName());
-		clone.setObject(element.getObject());
-		return clone;
-	}
-
-	private FTraceElement clone(SourceElement element) {
-		FSourceElement clone = FTraceFactory.eINSTANCE.createFSourceElement();
-		clone.setName(element.getName());
-		clone.setObject(element.getObject());
-		//clone.setMapsToSelf(element.);
-		return clone;
-	}
-
-} //FTraceFactoryImpl
+} //TraceFactoryImpl

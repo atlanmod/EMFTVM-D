@@ -95,6 +95,75 @@ public class FTraceItemProviderAdapterFactory extends FTraceAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FTargetElementItemProvider fTargetElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFTargetElementAdapter() {
+		if (fTargetElementItemProvider == null) {
+			fTargetElementItemProvider = new FTargetElementItemProvider(this);
+		}
+
+		return fTargetElementItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FSourceElementItemProvider fSourceElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFSourceElementAdapter() {
+		if (fSourceElementItemProvider == null) {
+			fSourceElementItemProvider = new FSourceElementItemProvider(this);
+		}
+
+		return fSourceElementItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TracePropertyItemProvider tracePropertyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.m2m.atl.emftvm.ftrace.TraceProperty}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTracePropertyAdapter() {
+		if (tracePropertyItemProvider == null) {
+			tracePropertyItemProvider = new TracePropertyItemProvider(this);
+		}
+
+		return tracePropertyItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -194,6 +263,9 @@ public class FTraceItemProviderAdapterFactory extends FTraceAdapterFactory imple
 	 */
 	public void dispose() {
 		if (fLinkItemProvider != null) fLinkItemProvider.dispose();
+		if (fTargetElementItemProvider != null) fTargetElementItemProvider.dispose();
+		if (fSourceElementItemProvider != null) fSourceElementItemProvider.dispose();
+		if (tracePropertyItemProvider != null) tracePropertyItemProvider.dispose();
 	}
 
 }

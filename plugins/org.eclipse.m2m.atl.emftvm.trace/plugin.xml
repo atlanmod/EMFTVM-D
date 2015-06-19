@@ -24,4 +24,12 @@
             genModel="model/FTrace.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated FTrace -->
+      <package
+            uri="http://www.eclipse.org/m2m/atl/emftvm/2011/Trace"
+            class="trace.TracePackage"
+            genModel="model/FTrace.genmodel"/>
+   </extension>
+
 </plugin>

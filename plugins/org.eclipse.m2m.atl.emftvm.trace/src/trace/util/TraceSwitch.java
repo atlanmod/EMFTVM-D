@@ -1,13 +1,13 @@
 /**
  */
-package org.eclipse.m2m.atl.emftvm.ftrace.util;
+package trace.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.eclipse.m2m.atl.emftvm.ftrace.*;
+import trace.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,17 +19,17 @@ import org.eclipse.m2m.atl.emftvm.ftrace.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage
+ * @see trace.TracePackage
  * @generated
  */
-public class FTraceSwitch<T> extends Switch<T> {
+public class TraceSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static FTracePackage modelPackage;
+	protected static TracePackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -37,9 +37,9 @@ public class FTraceSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FTraceSwitch() {
+	public TraceSwitch() {
 		if (modelPackage == null) {
-			modelPackage = FTracePackage.eINSTANCE;
+			modelPackage = TracePackage.eINSTANCE;
 		}
 	}
 
@@ -66,33 +66,51 @@ public class FTraceSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case FTracePackage.FLINK: {
-				FLink fLink = (FLink)theEObject;
-				T result = caseFLink(fLink);
+			case TracePackage.TRACE_LINK_SET: {
+				TraceLinkSet traceLinkSet = (TraceLinkSet)theEObject;
+				T result = caseTraceLinkSet(traceLinkSet);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FTracePackage.FTRACE_ELEMENT: {
-				FTraceElement fTraceElement = (FTraceElement)theEObject;
-				T result = caseFTraceElement(fTraceElement);
+			case TracePackage.TRACED_RULE: {
+				TracedRule tracedRule = (TracedRule)theEObject;
+				T result = caseTracedRule(tracedRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FTracePackage.FTARGET_ELEMENT: {
-				FTargetElement fTargetElement = (FTargetElement)theEObject;
-				T result = caseFTargetElement(fTargetElement);
-				if (result == null) result = caseFTraceElement(fTargetElement);
+			case TracePackage.TRACE_LINK: {
+				TraceLink traceLink = (TraceLink)theEObject;
+				T result = caseTraceLink(traceLink);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FTracePackage.FSOURCE_ELEMENT: {
-				FSourceElement fSourceElement = (FSourceElement)theEObject;
-				T result = caseFSourceElement(fSourceElement);
-				if (result == null) result = caseFTraceElement(fSourceElement);
+			case TracePackage.TRACE_ELEMENT: {
+				TraceElement traceElement = (TraceElement)theEObject;
+				T result = caseTraceElement(traceElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FTracePackage.TRACE_PROPERTY: {
+			case TracePackage.SOURCE_ELEMENT: {
+				SourceElement sourceElement = (SourceElement)theEObject;
+				T result = caseSourceElement(sourceElement);
+				if (result == null) result = caseTraceElement(sourceElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TracePackage.TARGET_ELEMENT: {
+				TargetElement targetElement = (TargetElement)theEObject;
+				T result = caseTargetElement(targetElement);
+				if (result == null) result = caseTraceElement(targetElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TracePackage.SOURCE_ELEMENT_LIST: {
+				SourceElementList sourceElementList = (SourceElementList)theEObject;
+				T result = caseSourceElementList(sourceElementList);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TracePackage.TRACE_PROPERTY: {
 				TraceProperty traceProperty = (TraceProperty)theEObject;
 				T result = caseTraceProperty(traceProperty);
 				if (result == null) result = defaultCase(theEObject);
@@ -103,17 +121,47 @@ public class FTraceSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FLink</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Link Set</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FLink</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Link Set</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFLink(FLink object) {
+	public T caseTraceLinkSet(TraceLinkSet object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Traced Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Traced Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTracedRule(TracedRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Link</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Link</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceLink(TraceLink object) {
 		return null;
 	}
 
@@ -128,48 +176,63 @@ public class FTraceSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFTraceElement(FTraceElement object) {
+	public T caseTraceElement(TraceElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FTarget Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Source Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FTarget Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Source Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFTargetElement(FTargetElement object) {
+	public T caseSourceElement(SourceElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FSource Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Target Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FSource Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Target Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFSourceElement(FSourceElement object) {
+	public T caseTargetElement(TargetElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Trace Property</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Source Element List</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Trace Property</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Source Element List</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSourceElementList(SourceElementList object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -193,4 +256,4 @@ public class FTraceSwitch<T> extends Switch<T> {
 		return null;
 	}
 
-} //FTraceSwitch
+} //TraceSwitch
