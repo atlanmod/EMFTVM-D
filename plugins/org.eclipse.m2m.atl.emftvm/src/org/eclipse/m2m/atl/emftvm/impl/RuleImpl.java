@@ -46,9 +46,6 @@ import org.eclipse.m2m.atl.emftvm.OutputRuleElement;
 import org.eclipse.m2m.atl.emftvm.Rule;
 import org.eclipse.m2m.atl.emftvm.RuleElement;
 import org.eclipse.m2m.atl.emftvm.RuleMode;
-import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
-import org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement;
-import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElement;
 import org.eclipse.m2m.atl.emftvm.trace.SourceElementList;
 import org.eclipse.m2m.atl.emftvm.trace.TargetElement;
@@ -601,7 +598,8 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 				String name = re.getName();
 				if (!superRuleElementNames.contains(name) && re.getBinding() == null) {
 					// Skip bound elements until all non-bound values have been set
-					iterables.put(name, re.createIterable(env));
+					// this compiles the allInstances of list
+					//iterables.put(name, re.createIterable(env));
 				}
 			}
 			iterableMap = iterables;
@@ -2511,7 +2509,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 	 * @generated NOT
 	 */
 	public void compileIterables(ExecEnv env) {
-		superRulesState.compileIterables(env);
+		//superRulesState.compileIterables(env);
 	}
 
 	/**
