@@ -7,38 +7,17 @@
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="FLink">
     <eAnnotations source="Descrition" references="#/">
-      <details key="ruleName" value="this attribute contains the name of the matched rule"/>
+      <details key="ruleName" value="this attribute contains the name of the matched rule and a list of unresolved bindings stored per binding name&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ruleName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
-        eType="#//FSourceElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
-        upperBound="-1" eType="#//FTargetElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//FTraceProperty" containment="true" eOpposite="#//FTraceProperty/appliedAt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FTraceElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FTargetElement" eSuperTypes="#//FTraceElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FSourceElement" eSuperTypes="#//FTraceElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mapsToSelf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        eType="#//FTraceProperty" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FTraceProperty">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedFor" lowerBound="1"
-        eType="#//FTargetElement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvings" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolved" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="appliedAt" eType="#//FLink"
-        eOpposite="#//FLink/properties"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="JavaList" instanceClassName="java.util.List">
-    <eAnnotations/>
-    <eTypeParameters name="E"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolvings" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolvedFor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

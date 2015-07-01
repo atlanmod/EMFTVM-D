@@ -5,9 +5,6 @@ package org.eclipse.m2m.atl.emftvm.ftrace.impl;
 import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
-import org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
 
@@ -20,10 +17,8 @@ import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl#getPropertyName <em>Property Name</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl#getResolvedFor <em>Resolved For</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl#getResolvings <em>Resolvings</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl#isResolved <em>Resolved</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl#getAppliedAt <em>Applied At</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl#getResolvedFor <em>Resolved For</em>}</li>
  * </ul>
  *
  * @generated
@@ -81,8 +76,8 @@ public class FTracePropertyImpl extends KyanosEObjectImpl implements FTracePrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FTargetElement getResolvedFor() {
-		return (FTargetElement)eGet(FTracePackage.Literals.FTRACE_PROPERTY__RESOLVED_FOR, true);
+	public String getResolvedFor() {
+		return (String)eGet(FTracePackage.Literals.FTRACE_PROPERTY__RESOLVED_FOR, true);
 	}
 
 	/**
@@ -90,7 +85,7 @@ public class FTracePropertyImpl extends KyanosEObjectImpl implements FTracePrope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setResolvedFor(FTargetElement newResolvedFor) {
+	public void setResolvedFor(String newResolvedFor) {
 		eSet(FTracePackage.Literals.FTRACE_PROPERTY__RESOLVED_FOR, newResolvedFor);
 	}
 
@@ -100,44 +95,8 @@ public class FTracePropertyImpl extends KyanosEObjectImpl implements FTracePrope
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EList<EObject> getResolvings() {
-		return (EList<EObject>)eGet(FTracePackage.Literals.FTRACE_PROPERTY__RESOLVINGS, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isResolved() {
-		return (Boolean)eGet(FTracePackage.Literals.FTRACE_PROPERTY__RESOLVED, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setResolved(boolean newResolved) {
-		eSet(FTracePackage.Literals.FTRACE_PROPERTY__RESOLVED, newResolved);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FLink getAppliedAt() {
-		return (FLink)eGet(FTracePackage.Literals.FTRACE_PROPERTY__APPLIED_AT, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAppliedAt(FLink newAppliedAt) {
-		eSet(FTracePackage.Literals.FTRACE_PROPERTY__APPLIED_AT, newAppliedAt);
+	public EList<String> getResolvings() {
+		return (EList<String>)eGet(FTracePackage.Literals.FTRACE_PROPERTY__RESOLVINGS, true);
 	}
 
 } //FTracePropertyImpl

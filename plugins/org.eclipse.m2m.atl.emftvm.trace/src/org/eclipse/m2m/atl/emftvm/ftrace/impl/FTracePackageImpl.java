@@ -2,18 +2,13 @@
  */
 package org.eclipse.m2m.atl.emftvm.ftrace.impl;
 
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
-import org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement;
-import org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement;
-import org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
@@ -38,37 +33,7 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fTraceElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 *///		for (TraceProperty property : currentMatch.getProperties()) {
-//	
-//}
-	private EClass fTargetElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass fSourceElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass fTracePropertyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType javaListEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -154,89 +119,8 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFLink_Sources() {
-		return (EReference)fLinkEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFLink_Targets() {
-		return (EReference)fLinkEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getFLink_Properties() {
-		return (EReference)fLinkEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFTraceElement() {
-		return fTraceElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFTraceElement_Name() {
-		return (EAttribute)fTraceElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFTraceElement_Object() {
-		return (EReference)fTraceElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFTraceElement_RuntimeObject() {
-		return (EAttribute)fTraceElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFTargetElement() {
-		return fTargetElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFSourceElement() {
-		return fSourceElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFSourceElement_MapsToSelf() {
-		return (EAttribute)fSourceElementEClass.getEStructuralFeatures().get(0);
+		return (EReference)fLinkEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -262,8 +146,8 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFTraceProperty_ResolvedFor() {
-		return (EReference)fTracePropertyEClass.getEStructuralFeatures().get(1);
+	public EAttribute getFTraceProperty_ResolvedFor() {
+		return (EAttribute)fTracePropertyEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -271,35 +155,8 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFTraceProperty_Resolvings() {
-		return (EReference)fTracePropertyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFTraceProperty_Resolved() {
-		return (EAttribute)fTracePropertyEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFTraceProperty_AppliedAt() {
-		return (EReference)fTracePropertyEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EDataType getJavaList() {
-		return javaListEDataType;
+	public EAttribute getFTraceProperty_Resolvings() {
+		return (EAttribute)fTracePropertyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -332,29 +189,12 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		// Create classes and their features
 		fLinkEClass = createEClass(FLINK);
 		createEAttribute(fLinkEClass, FLINK__RULE_NAME);
-		createEReference(fLinkEClass, FLINK__SOURCES);
-		createEReference(fLinkEClass, FLINK__TARGETS);
 		createEReference(fLinkEClass, FLINK__PROPERTIES);
-
-		fTraceElementEClass = createEClass(FTRACE_ELEMENT);
-		createEAttribute(fTraceElementEClass, FTRACE_ELEMENT__NAME);
-		createEReference(fTraceElementEClass, FTRACE_ELEMENT__OBJECT);
-		createEAttribute(fTraceElementEClass, FTRACE_ELEMENT__RUNTIME_OBJECT);
-
-		fTargetElementEClass = createEClass(FTARGET_ELEMENT);
-
-		fSourceElementEClass = createEClass(FSOURCE_ELEMENT);
-		createEAttribute(fSourceElementEClass, FSOURCE_ELEMENT__MAPS_TO_SELF);
 
 		fTracePropertyEClass = createEClass(FTRACE_PROPERTY);
 		createEAttribute(fTracePropertyEClass, FTRACE_PROPERTY__PROPERTY_NAME);
-		createEReference(fTracePropertyEClass, FTRACE_PROPERTY__RESOLVED_FOR);
-		createEReference(fTracePropertyEClass, FTRACE_PROPERTY__RESOLVINGS);
-		createEAttribute(fTracePropertyEClass, FTRACE_PROPERTY__RESOLVED);
-		createEReference(fTracePropertyEClass, FTRACE_PROPERTY__APPLIED_AT);
-
-		// Create data types
-		javaListEDataType = createEDataType(JAVA_LIST);
+		createEAttribute(fTracePropertyEClass, FTRACE_PROPERTY__RESOLVINGS);
+		createEAttribute(fTracePropertyEClass, FTRACE_PROPERTY__RESOLVED_FOR);
 	}
 
 	/**
@@ -381,40 +221,20 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		setNsURI(eNS_URI);
 
 		// Create type parameters
-		addETypeParameter(javaListEDataType, "E");
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		fTargetElementEClass.getESuperTypes().add(this.getFTraceElement());
-		fSourceElementEClass.getESuperTypes().add(this.getFTraceElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(fLinkEClass, FLink.class, "FLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFLink_RuleName(), ecorePackage.getEString(), "ruleName", null, 1, 1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFLink_Sources(), this.getFSourceElement(), null, "sources", null, 0, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFLink_Targets(), this.getFTargetElement(), null, "targets", null, 1, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFLink_Properties(), this.getFTraceProperty(), this.getFTraceProperty_AppliedAt(), "properties", null, 0, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(fTraceElementEClass, FTraceElement.class, "FTraceElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFTraceElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, FTraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFTraceElement_Object(), ecorePackage.getEObject(), null, "object", null, 0, 1, FTraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFTraceElement_RuntimeObject(), ecorePackage.getEJavaObject(), "runtimeObject", null, 0, 1, FTraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(fTargetElementEClass, FTargetElement.class, "FTargetElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(fSourceElementEClass, FSourceElement.class, "FSourceElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFSourceElement_MapsToSelf(), ecorePackage.getEBoolean(), "mapsToSelf", null, 0, 1, FSourceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFLink_Properties(), this.getFTraceProperty(), null, "properties", null, 0, -1, FLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fTracePropertyEClass, FTraceProperty.class, "FTraceProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFTraceProperty_PropertyName(), ecorePackage.getEString(), "propertyName", null, 0, 1, FTraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFTraceProperty_ResolvedFor(), this.getFTargetElement(), null, "resolvedFor", null, 1, 1, FTraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFTraceProperty_Resolvings(), ecorePackage.getEObject(), null, "resolvings", null, 0, -1, FTraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFTraceProperty_Resolved(), ecorePackage.getEBoolean(), "resolved", null, 0, 1, FTraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFTraceProperty_AppliedAt(), this.getFLink(), this.getFLink_Properties(), "appliedAt", null, 0, 1, FTraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Initialize data types
-		initEDataType(javaListEDataType, List.class, "JavaList", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFTraceProperty_Resolvings(), ecorePackage.getEString(), "resolvings", null, 0, -1, FTraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFTraceProperty_ResolvedFor(), ecorePackage.getEString(), "resolvedFor", null, 0, 1, FTraceProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -422,8 +242,6 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		// Create annotations
 		// Descrition
 		createDescritionAnnotations();
-		// null
-		createNullAnnotations();
 	}
 
 	/**
@@ -447,25 +265,10 @@ public class FTracePackageImpl extends EPackageImpl implements FTracePackage {
 		  (fLinkEClass, 
 		   source, 
 		   new String[] {
-			 "ruleName", "this attribute contains the name of the matched rule"
+			 "ruleName", "this attribute contains the name of the matched rule and a list of unresolved bindings stored per binding name\n"
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("/")
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>null</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createNullAnnotations() {
-		String source = null;	
-		addAnnotation
-		  (javaListEDataType, 
-		   source, 
-		   new String[] {
 		   });
 	}
 

@@ -3,7 +3,6 @@
 package org.eclipse.m2m.atl.emftvm.ftrace;
 
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.m2m.atl.emftvm.trace.TraceElement;
 import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 
 /**
@@ -33,24 +32,6 @@ public interface FTraceFactory extends EFactory {
 	FLink createFLink();
 
 	/**
-	 * Returns a new object of class '<em>FTarget Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>FTarget Element</em>'.
-	 * @generated
-	 */
-	FTargetElement createFTargetElement();
-
-	/**
-	 * Returns a new object of class '<em>FSource Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>FSource Element</em>'.
-	 * @generated
-	 */
-	FSourceElement createFSourceElement();
-
-	/**
 	 * Returns a new object of class '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,13 +54,14 @@ public interface FTraceFactory extends EFactory {
 	 * @param element
 	 * @return {@link FTraceElement}
 	 */
-	FTraceElement flatten(TraceElement element);
+//	FTraceElement flatten(TraceElement element);
 
 	/**
 	 * Flattens the trace properties
 	 * @param property
 	 * @return {@link FTraceProperty}
+	 * @throws Exception 
 	 */
-	FTraceProperty flatten(TraceProperty property);
+	FTraceProperty flatten(TraceProperty property) throws ClassCastException;
 
 } //FTraceFactory

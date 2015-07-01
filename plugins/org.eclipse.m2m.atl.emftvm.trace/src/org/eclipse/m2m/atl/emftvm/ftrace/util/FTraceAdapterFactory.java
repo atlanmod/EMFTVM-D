@@ -72,18 +72,6 @@ public class FTraceAdapterFactory extends AdapterFactoryImpl {
 				return createFLinkAdapter();
 			}
 			@Override
-			public Adapter caseFTraceElement(FTraceElement object) {
-				return createFTraceElementAdapter();
-			}
-			@Override
-			public Adapter caseFTargetElement(FTargetElement object) {
-				return createFTargetElementAdapter();
-			}
-			@Override
-			public Adapter caseFSourceElement(FSourceElement object) {
-				return createFSourceElementAdapter();
-			}
-			@Override
 			public Adapter caseFTraceProperty(FTraceProperty object) {
 				return createFTracePropertyAdapter();
 			}
@@ -118,48 +106,6 @@ public class FTraceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFLinkAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement <em>Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement
-	 * @generated
-	 */
-	public Adapter createFTraceElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement <em>FTarget Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement
-	 * @generated
-	 */
-	public Adapter createFTargetElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement <em>FSource Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement
-	 * @generated
-	 */
-	public Adapter createFSourceElementAdapter() {
 		return null;
 	}
 

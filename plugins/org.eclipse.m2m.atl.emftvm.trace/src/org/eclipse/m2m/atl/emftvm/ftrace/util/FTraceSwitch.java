@@ -72,26 +72,6 @@ public class FTraceSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FTracePackage.FTRACE_ELEMENT: {
-				FTraceElement fTraceElement = (FTraceElement)theEObject;
-				T result = caseFTraceElement(fTraceElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case FTracePackage.FTARGET_ELEMENT: {
-				FTargetElement fTargetElement = (FTargetElement)theEObject;
-				T result = caseFTargetElement(fTargetElement);
-				if (result == null) result = caseFTraceElement(fTargetElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case FTracePackage.FSOURCE_ELEMENT: {
-				FSourceElement fSourceElement = (FSourceElement)theEObject;
-				T result = caseFSourceElement(fSourceElement);
-				if (result == null) result = caseFTraceElement(fSourceElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case FTracePackage.FTRACE_PROPERTY: {
 				FTraceProperty fTraceProperty = (FTraceProperty)theEObject;
 				T result = caseFTraceProperty(fTraceProperty);
@@ -114,51 +94,6 @@ public class FTraceSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFLink(FLink object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFTraceElement(FTraceElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FTarget Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FTarget Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFTargetElement(FTargetElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FSource Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FSource Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFSourceElement(FSourceElement object) {
 		return null;
 	}
 

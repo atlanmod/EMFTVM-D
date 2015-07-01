@@ -4,7 +4,6 @@ package org.eclipse.m2m.atl.emftvm.ftrace;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -29,7 +28,7 @@ public interface FTracePackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->https://docs.google.com/presentation/d/1RfryJJHs2BdZ420G3w_cL9Hao1aGwfQWnkyU6nxzv5M/edit#slide=id.gb51ffff8c_0_0
 	 * @generated
 	 */
 	String eNAME = "ftrace";
@@ -78,31 +77,13 @@ public interface FTracePackage extends EPackage {
 	int FLINK__RULE_NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Sources</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLINK__SOURCES = 1;
-
-	/**
-	 * The feature id for the '<em><b>Targets</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLINK__TARGETS = 2;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLINK__PROPERTIES = 3;
+	int FLINK__PROPERTIES = 1;
 
 	/**
 	 * The number of structural features of the '<em>FLink</em>' class.
@@ -111,7 +92,7 @@ public interface FTracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLINK_FEATURE_COUNT = 4;
+	int FLINK_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>FLink</em>' class.
@@ -124,180 +105,6 @@ public interface FTracePackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTraceElementImpl <em>Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTraceElementImpl
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getFTraceElement()
-	 * @generated
-	 */
-	int FTRACE_ELEMENT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTRACE_ELEMENT__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Object</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTRACE_ELEMENT__OBJECT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Runtime Object</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTRACE_ELEMENT__RUNTIME_OBJECT = 2;
-
-	/**
-	 * The number of structural features of the '<em>Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTRACE_ELEMENT_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTRACE_ELEMENT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTargetElementImpl <em>FTarget Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTargetElementImpl
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getFTargetElement()
-	 * @generated
-	 */
-	int FTARGET_ELEMENT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTARGET_ELEMENT__NAME = FTRACE_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Object</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTARGET_ELEMENT__OBJECT = FTRACE_ELEMENT__OBJECT;
-
-	/**
-	 * The feature id for the '<em><b>Runtime Object</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTARGET_ELEMENT__RUNTIME_OBJECT = FTRACE_ELEMENT__RUNTIME_OBJECT;
-
-	/**
-	 * The number of structural features of the '<em>FTarget Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTARGET_ELEMENT_FEATURE_COUNT = FTRACE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>FTarget Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTARGET_ELEMENT_OPERATION_COUNT = FTRACE_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FSourceElementImpl <em>FSource Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FSourceElementImpl
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getFSourceElement()
-	 * @generated
-	 */
-	int FSOURCE_ELEMENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FSOURCE_ELEMENT__NAME = FTRACE_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Object</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FSOURCE_ELEMENT__OBJECT = FTRACE_ELEMENT__OBJECT;
-
-	/**
-	 * The feature id for the '<em><b>Runtime Object</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FSOURCE_ELEMENT__RUNTIME_OBJECT = FTRACE_ELEMENT__RUNTIME_OBJECT;
-
-	/**
-	 * The feature id for the '<em><b>Maps To Self</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FSOURCE_ELEMENT__MAPS_TO_SELF = FTRACE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>FSource Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FSOURCE_ELEMENT_FEATURE_COUNT = FTRACE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>FSource Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FSOURCE_ELEMENT_OPERATION_COUNT = FTRACE_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl <em>Property</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -305,7 +112,7 @@ public interface FTracePackage extends EPackage {
 	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getFTraceProperty()
 	 * @generated
 	 */
-	int FTRACE_PROPERTY = 4;
+	int FTRACE_PROPERTY = 1;
 
 	/**
 	 * The feature id for the '<em><b>Property Name</b></em>' attribute.
@@ -317,40 +124,22 @@ public interface FTracePackage extends EPackage {
 	int FTRACE_PROPERTY__PROPERTY_NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Resolved For</b></em>' reference.
+	 * The feature id for the '<em><b>Resolvings</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FTRACE_PROPERTY__RESOLVED_FOR = 1;
+	int FTRACE_PROPERTY__RESOLVINGS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Resolvings</b></em>' reference list.
+	 * The feature id for the '<em><b>Resolved For</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FTRACE_PROPERTY__RESOLVINGS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Resolved</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTRACE_PROPERTY__RESOLVED = 3;
-
-	/**
-	 * The feature id for the '<em><b>Applied At</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FTRACE_PROPERTY__APPLIED_AT = 4;
+	int FTRACE_PROPERTY__RESOLVED_FOR = 2;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -359,7 +148,7 @@ public interface FTracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FTRACE_PROPERTY_FEATURE_COUNT = 5;
+	int FTRACE_PROPERTY_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Property</em>' class.
@@ -369,16 +158,6 @@ public interface FTracePackage extends EPackage {
 	 * @ordered
 	 */
 	int FTRACE_PROPERTY_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '<em>Java List</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.List
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getJavaList()
-	 * @generated
-	 */
-	int JAVA_LIST = 5;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink <em>FLink</em>}'.
@@ -402,28 +181,6 @@ public interface FTracePackage extends EPackage {
 	EAttribute getFLink_RuleName();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sources</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FLink#getSources()
-	 * @see #getFLink()
-	 * @generated
-	 */
-	EReference getFLink_Sources();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getTargets <em>Targets</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Targets</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FLink#getTargets()
-	 * @see #getFLink()
-	 * @generated
-	 */
-	EReference getFLink_Targets();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.m2m.atl.emftvm.ftrace.FLink#getProperties <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -433,80 +190,6 @@ public interface FTracePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFLink_Properties();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement <em>Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Element</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement
-	 * @generated
-	 */
-	EClass getFTraceElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement#getName()
-	 * @see #getFTraceElement()
-	 * @generated
-	 */
-	EAttribute getFTraceElement_Name();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement#getObject <em>Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Object</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement#getObject()
-	 * @see #getFTraceElement()
-	 * @generated
-	 */
-	EReference getFTraceElement_Object();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement#getRuntimeObject <em>Runtime Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Runtime Object</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceElement#getRuntimeObject()
-	 * @see #getFTraceElement()
-	 * @generated
-	 */
-	EAttribute getFTraceElement_RuntimeObject();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement <em>FTarget Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FTarget Element</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTargetElement
-	 * @generated
-	 */
-	EClass getFTargetElement();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement <em>FSource Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FSource Element</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement
-	 * @generated
-	 */
-	EClass getFSourceElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement#isMapsToSelf <em>Maps To Self</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Maps To Self</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FSourceElement#isMapsToSelf()
-	 * @see #getFSourceElement()
-	 * @generated
-	 */
-	EAttribute getFSourceElement_MapsToSelf();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty <em>Property</em>}'.
@@ -530,59 +213,26 @@ public interface FTracePackage extends EPackage {
 	EAttribute getFTraceProperty_PropertyName();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvedFor <em>Resolved For</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvedFor <em>Resolved For</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Resolved For</em>'.
+	 * @return the meta object for the attribute '<em>Resolved For</em>'.
 	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvedFor()
 	 * @see #getFTraceProperty()
 	 * @generated
 	 */
-	EReference getFTraceProperty_ResolvedFor();
+	EAttribute getFTraceProperty_ResolvedFor();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvings <em>Resolvings</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvings <em>Resolvings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Resolvings</em>'.
+	 * @return the meta object for the attribute list '<em>Resolvings</em>'.
 	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getResolvings()
 	 * @see #getFTraceProperty()
 	 * @generated
 	 */
-	EReference getFTraceProperty_Resolvings();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#isResolved <em>Resolved</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resolved</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#isResolved()
-	 * @see #getFTraceProperty()
-	 * @generated
-	 */
-	EAttribute getFTraceProperty_Resolved();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getAppliedAt <em>Applied At</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Applied At</em>'.
-	 * @see org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty#getAppliedAt()
-	 * @see #getFTraceProperty()
-	 * @generated
-	 */
-	EReference getFTraceProperty_AppliedAt();
-
-	/**
-	 * Returns the meta object for data type '{@link java.util.List <em>Java List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Java List</em>'.
-	 * @see java.util.List
-	 * @model instanceClass="java.util.List" typeParameters="E"
-	 * @generated
-	 */
-	EDataType getJavaList();
+	EAttribute getFTraceProperty_Resolvings();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -626,90 +276,12 @@ public interface FTracePackage extends EPackage {
 		EAttribute FLINK__RULE_NAME = eINSTANCE.getFLink_RuleName();
 
 		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FLINK__SOURCES = eINSTANCE.getFLink_Sources();
-
-		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FLINK__TARGETS = eINSTANCE.getFLink_Targets();
-
-		/**
 		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference FLINK__PROPERTIES = eINSTANCE.getFLink_Properties();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTraceElementImpl <em>Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTraceElementImpl
-		 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getFTraceElement()
-		 * @generated
-		 */
-		EClass FTRACE_ELEMENT = eINSTANCE.getFTraceElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FTRACE_ELEMENT__NAME = eINSTANCE.getFTraceElement_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Object</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FTRACE_ELEMENT__OBJECT = eINSTANCE.getFTraceElement_Object();
-
-		/**
-		 * The meta object literal for the '<em><b>Runtime Object</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FTRACE_ELEMENT__RUNTIME_OBJECT = eINSTANCE.getFTraceElement_RuntimeObject();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTargetElementImpl <em>FTarget Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTargetElementImpl
-		 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getFTargetElement()
-		 * @generated
-		 */
-		EClass FTARGET_ELEMENT = eINSTANCE.getFTargetElement();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FSourceElementImpl <em>FSource Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FSourceElementImpl
-		 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getFSourceElement()
-		 * @generated
-		 */
-		EClass FSOURCE_ELEMENT = eINSTANCE.getFSourceElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Maps To Self</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FSOURCE_ELEMENT__MAPS_TO_SELF = eINSTANCE.getFSourceElement_MapsToSelf();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePropertyImpl <em>Property</em>}' class.
@@ -730,46 +302,20 @@ public interface FTracePackage extends EPackage {
 		EAttribute FTRACE_PROPERTY__PROPERTY_NAME = eINSTANCE.getFTraceProperty_PropertyName();
 
 		/**
-		 * The meta object literal for the '<em><b>Resolved For</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Resolved For</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FTRACE_PROPERTY__RESOLVED_FOR = eINSTANCE.getFTraceProperty_ResolvedFor();
+		EAttribute FTRACE_PROPERTY__RESOLVED_FOR = eINSTANCE.getFTraceProperty_ResolvedFor();
 
 		/**
-		 * The meta object literal for the '<em><b>Resolvings</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Resolvings</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FTRACE_PROPERTY__RESOLVINGS = eINSTANCE.getFTraceProperty_Resolvings();
-
-		/**
-		 * The meta object literal for the '<em><b>Resolved</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FTRACE_PROPERTY__RESOLVED = eINSTANCE.getFTraceProperty_Resolved();
-
-		/**
-		 * The meta object literal for the '<em><b>Applied At</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FTRACE_PROPERTY__APPLIED_AT = eINSTANCE.getFTraceProperty_AppliedAt();
-
-		/**
-		 * The meta object literal for the '<em>Java List</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.List
-		 * @see org.eclipse.m2m.atl.emftvm.ftrace.impl.FTracePackageImpl#getJavaList()
-		 * @generated
-		 */
-		EDataType JAVA_LIST = eINSTANCE.getJavaList();
+		EAttribute FTRACE_PROPERTY__RESOLVINGS = eINSTANCE.getFTraceProperty_Resolvings();
 
 	}
 
