@@ -15,7 +15,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.m2m.atl.emftvm.*;
 import org.eclipse.m2m.atl.emftvm.Add;
 import org.eclipse.m2m.atl.emftvm.Allinst;
 import org.eclipse.m2m.atl.emftvm.AllinstIn;

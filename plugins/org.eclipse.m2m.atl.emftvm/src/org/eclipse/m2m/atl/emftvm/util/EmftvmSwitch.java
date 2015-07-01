@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.m2m.atl.emftvm.*;
 import org.eclipse.m2m.atl.emftvm.Add;
 import org.eclipse.m2m.atl.emftvm.Allinst;
 import org.eclipse.m2m.atl.emftvm.AllinstIn;

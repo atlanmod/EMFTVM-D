@@ -36,13 +36,11 @@ import java.util.StringTokenizer;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.internal.propertytester.FilePropertyTester;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -65,15 +63,10 @@ import org.eclipse.m2m.atl.emftvm.Metamodel;
 import org.eclipse.m2m.atl.emftvm.Model;
 import org.eclipse.m2m.atl.emftvm.Operation;
 import org.eclipse.m2m.atl.emftvm.Parameter;
-import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
-import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
-import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
-import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
-
 import fr.inria.atlanmod.kyanos.core.KyanosEObject;
 import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
 
