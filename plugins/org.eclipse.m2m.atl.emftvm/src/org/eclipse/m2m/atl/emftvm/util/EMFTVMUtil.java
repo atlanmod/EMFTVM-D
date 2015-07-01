@@ -36,11 +36,13 @@ import java.util.StringTokenizer;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.internal.propertytester.FilePropertyTester;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -63,10 +65,17 @@ import org.eclipse.m2m.atl.emftvm.Metamodel;
 import org.eclipse.m2m.atl.emftvm.Model;
 import org.eclipse.m2m.atl.emftvm.Operation;
 import org.eclipse.m2m.atl.emftvm.Parameter;
+import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
 import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
 import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
+
+import fr.inria.atlanmod.kyanos.core.KyanosEObject;
+import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
 
 /**
  * EMFTVM static utility methods.
@@ -171,6 +180,7 @@ public final class EMFTVMUtil {
 	private static Metamodel ecoreMetamodel;
 	private static Metamodel emfTvmMetamodel;
 	private static Metamodel traceMetamodel;
+	private static Metamodel ftraceMetamodel;
 
 	/**
 	 * Not used.
@@ -278,6 +288,20 @@ public final class EMFTVMUtil {
 		}
 		return traceMetamodel;
 	}
+	
+	/**
+	 * Returns the singleton instance of the FTrace metamodel.
+	 * 
+	 * @return the singleton instance of the FTrace metamodel
+	 */
+	public static Metamodel getFTraceMetamodel() {
+		if (ftraceMetamodel == null) {
+			ftraceMetamodel = EmftvmFactory.eINSTANCE.createMetamodel();
+			ftraceMetamodel.setResource(FTracePackage.eINSTANCE.eResource());
+		}
+		return ftraceMetamodel;
+	}
+	
 
 	/**
 	 * Finds all instances of type in the registered input/inout models.
@@ -449,7 +473,16 @@ public final class EMFTVMUtil {
 	public static Object uncheckedGet(final ExecEnv env, final EObject eo, final EStructuralFeature sf) {
 		if (sf instanceof EReference) {
 			// EReferences need only EList conversion, notably not EnumLiteral conversion
-			final Object value = eo.eGet(sf);
+			 Object value = null;
+			if (eo instanceof KyanosEObject) {
+				if (((EReference) sf).isContainer()) {
+					value = ((KyanosEObjectImpl)eo).eContainer();
+				} else { 
+				value = ((KyanosEObjectImpl)eo).dynamicGet(eo.eClass().getFeatureID(sf)); 
+				}
+			} else {
+				value = eo.eGet(sf); 
+				}
 			if (!(value instanceof Collection<?>) || (value instanceof LazyCollection<?>)) {
 				// Simple values and internal collection types don't need conversion
 				return value;
@@ -564,14 +597,24 @@ public final class EMFTVMUtil {
 			if (sf instanceof EReference &&
 					env.getExecutionMode() == ExecMode.MR &&
 						env.getExecutionPhase() == ExecPhase.PRE) {
-				if (value == null || (sf.isMany() && prettyCollection(value).isEmpty()) ) return;
-				TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
-				tProp.getResolvings().addAll(prettyCollection(value));
-				TraceLink currentTrace = env.getCurrentMatch();
-				tProp.setPropertyName(sf.getName());
-				tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
-				tProp.setAppliedAt(currentTrace);
-				tProp.getResolvings().addAll(prettyCollection(value));
+				if (value == null || (sf.isMany() && prettyCollection(value).isEmpty()) ) 
+					return;
+				
+
+//				TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
+//				tProp.getResolvings().addAll(prettyCollection(value));
+//				TraceLink currentTrace = env.getCurrentMatch();
+//				tProp.setPropertyName(sf.getName());
+//				tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
+//				tProp.setAppliedAt(currentTrace);
+//				tProp.getResolvings().addAll(prettyCollection(value));
+//				FLink flink = env.getCurrentFLink();
+				
+				if (sf.isMany()) {
+					setManyAtPre(env, eo, sf, (Collection<?>) value);
+				} else {
+					setSingleAtPre(env, eo, sf, value, -1);
+				}
 				
 			} else {
 					if (sf.isMany()) {
@@ -588,6 +631,7 @@ public final class EMFTVMUtil {
 					} else {
 						if (env.getExecutionMode() == ExecMode.MR &&
 								env.getExecutionPhase() == ExecPhase. POST) {
+							//
 							Object pivotValue = ((List<?>) value).get(0);
 							setSingle(env, eo, sf, pivotValue, -1);
 						} else {
@@ -596,22 +640,13 @@ public final class EMFTVMUtil {
 						
 					}
 			}
-//		} 
-//		catch (UnresolvedElementException e) {
-//			if (env.getExecutionMode() == ExecMode.MR &&
-//					env.getExecutionPhase() == ExecPhase.PRE) {
-					// create a binding in case this addition did not work
-//					TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
-//					tProp.getResolvings().addAll(prettyCollection(value));
-//					TraceLink currentTrace = env.getCurrentMatch();
-//					tProp.setPropertyName(sf.getName());
-//					tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
-//					tProp.setAppliedAt(currentTrace);
-//					tProp.getResolvings().addAll(prettyCollection(value));
-//				}
-//			}		
+		
 		assert eo.eResource() != null;
 	}
+
+
+
+
 
 	/**
 	 * Sets the <code>value</code> of <code>eo.sf</code>.
@@ -753,9 +788,6 @@ public final class EMFTVMUtil {
 				assert value == null || ((EObject) value).eResource() != null;
 				assert oldValue == null || oldValue.eResource() != null;
 				if (value == null) return;
-//				if (!((EObject)value).eClass().equals(sf.getEType())) {
-//					throw new UnresolvedElementException();
-//				}
 				eo.eSet(sf, value);
 				if (value != null) {
 					updateResource(eo, (EObject) value);
@@ -782,6 +814,46 @@ public final class EMFTVMUtil {
 		}
 	}
 
+	private static void setSingleAtPre(ExecEnv env, EObject eo,
+			EStructuralFeature sf, Object value, int i) {
+		
+		final EReference ref = (EReference) sf;
+		if (checkValueAtPre(env, eo, ref, value, isAllowInterModelReferences(env, eo))) {
+			final EObject oldValue = (EObject) eo.eGet(sf);
+			assert eo.eResource() != null;
+			assert value == null || ((EObject) value).eResource() != null;
+			assert oldValue == null || oldValue.eResource() != null;
+			if (value == null) return;
+			eo.eSet(sf, value);
+			if (value != null) {
+				updateResource(eo, (EObject) value);
+			}
+			if (oldValue != null) {
+				updateResource(eo, oldValue);
+			}
+			assert eo.eResource() != null;
+			assert value == null || ((EObject) value).eResource() != null;
+			assert oldValue == null || oldValue.eResource() != null;
+		} else {
+			FTraceProperty fprop = FTraceFactory.eINSTANCE.createFTraceProperty();
+			fprop.setPropertyName(sf.getName());
+			fprop.setResolvedFor(((KyanosEObject)eo).kyanosId());
+			fprop.getResolvings().add(((KyanosEObject)value).kyanosId());
+			env.getCurrentFLink().getProperties().add(fprop);
+		}
+		
+	}
+	private static boolean checkValueAtPre(final ExecEnv env, final EObject eo, final EReference ref, final Object value,
+			final boolean allowInterModelReferences) {
+		if (value instanceof EObject) {
+			assert eo.eResource() != null;
+			final EObject ev = (EObject) value;
+			if (eo.eResource() == ev.eResource() ) {
+				return true;
+			} 
+		}
+		return false;	
+	}
 	/**
 	 * Sets the <code>value</code> of <code>eo.sf</code>. Assumes <code>sf</code> has a multiplicity &gt; 1.
 	 * 
@@ -810,6 +882,25 @@ public final class EMFTVMUtil {
 //			throw e;
 //		}
 	}
+	@SuppressWarnings("unchecked")
+	private static void setManyAtPre(ExecEnv env, EObject eo,
+			EStructuralFeature sf, Collection<?> value) {
+		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
+
+		if (!values.isEmpty()) {
+			if (sf instanceof EReference) {
+				final List<Object> vCopy = new ArrayList<Object>(values);
+				for (EObject v : (List<? extends EObject>) vCopy) {
+					removeRefValue((EReference) sf, eo, values, v);
+				}
+			} else {
+				values.clear();
+			}
+		}
+		addManyAtPre(env, eo, sf, value, -1);
+		
+	}
+
 
 	/**
 	 * Adds <code>value</code> to <code>eo.sf</code>. Assumes <code>sf</code> has a multiplicity &gt; 1.
@@ -899,6 +990,60 @@ public final class EMFTVMUtil {
 //			throw e;
 //		} 
 	}
+	@SuppressWarnings("unchecked")
+	private static void addManyAtPre(ExecEnv env, EObject eo,
+			EStructuralFeature sf, Collection<?> value, int index) {
+		
+		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
+		
+		if (sf instanceof EReference) {
+			FTraceProperty prop = FTraceFactory.eINSTANCE.createFTraceProperty();
+			final EReference ref = (EReference) sf;
+//			if (env.getExecutionMode() == ExecMode.MR && env.getExecutionPhase() == ExecPhase.PRE ) {
+//				if (ref.isContainer() || ref.isContainment()) {
+//					throw new UnresolvedElementException();
+//				}
+//			}
+			final boolean allowInterModelReferences = isAllowInterModelReferences(env, eo);
+			final Collection<?> srcValues = ref.isContainment() ? new ArrayList<Object>(value) : value;
+			if (index > -1) {
+				int currentIndex = index;
+				for (Object v : srcValues) {
+					addRefValueAtPre(env, ref, eo, values, (EObject) v, currentIndex++, allowInterModelReferences,prop);
+				}
+			} else {
+				for (Object v : srcValues) {
+					addRefValueAtPre(env, ref, eo, values, (EObject) v, -1, allowInterModelReferences,  prop);
+				}
+			}
+			if ( prop.getResolvings().get(0) != null) {
+				prop.setPropertyName(sf.getName());
+				prop.setResolvedFor(((KyanosEObject)eo).kyanosId());
+				env.getCurrentFLink().getProperties().add(prop);
+			}
+		} else {
+			final EClassifier sfType = sf.getEType();
+			if (sfType instanceof EEnum) {
+				final EEnum eEnum = (EEnum) sfType;
+				if (index > -1) {
+					int currentIndex = index;
+					for (Object v : value) {
+						addEnumValue(eEnum, values, v, currentIndex++);
+					}
+				} else {
+					for (Object v : value) {
+						addEnumValue(eEnum, values, v, -1);
+					}
+				}
+			} else if (index > -1) {
+				((List<Object>) values).addAll(index, value);
+			} else {
+				values.addAll(value);
+			}
+		 } 
+		
+	}
+
 
 	/**
 	 * Removes the <code>value</code> from <code>eo.sf</code>. Assumes <code>sf</code> has a multiplicity &gt; 1.
@@ -1030,6 +1175,27 @@ public final class EMFTVMUtil {
 		assert v.eResource() != null;
 	}
 
+	private static void addRefValueAtPre(ExecEnv env, EReference ref,
+			EObject eo, Collection<Object> values, EObject v, int index,
+			boolean allowInterModelReferences, FTraceProperty prop) {
+		assert eo.eResource() != null;
+		assert v.eResource() != null;
+		if (checkValueAtPre(env, eo, ref, v, allowInterModelReferences)) {
+			if (index > -1) {
+				((List<Object>) values).add(index, v);
+			} else {
+				values.add(v);
+			}
+			updateResource(eo, v);
+		} 
+		else {
+			prop.getResolvings().add(((KyanosEObject)v).kyanosId());
+		}
+		assert eo.eResource() != null;
+		assert v.eResource() != null;
+		
+	}
+	
 	/**
 	 * Removes <code>v</code> from <code>values</code>. Performs constraint checking on <code>v</code>.
 	 * 
@@ -1085,6 +1251,21 @@ public final class EMFTVMUtil {
 	 */
 	private static boolean isAllowInterModelReferences(final ExecEnv env, final EObject eo) {
 		final Model eoModel = env.getModelOf(eo);
+		if (eoModel != null) {
+			return eoModel.isAllowInterModelReferences();
+		} else {
+			return true;
+		}
+	}
+	/**
+	 * checks whether the first output model allows intermodel references 
+	 * @param env
+	 * @param eoModel
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private static boolean isAllowInterModelReferences(final ExecEnv env, Model eoModel) {
+		//final Model eoModel = env.getOutputModels().;
 		if (eoModel != null) {
 			return eoModel.isAllowInterModelReferences();
 		} else {

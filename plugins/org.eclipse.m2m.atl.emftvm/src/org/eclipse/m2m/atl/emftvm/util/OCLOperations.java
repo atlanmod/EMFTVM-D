@@ -110,7 +110,7 @@ public final class OCLOperations {
 		public ResolveList(final Collection<Object> dataSource,
 				final StackFrame frame) {
 			super(dataSource);
-			this.tls = frame.getEnv().getTraces();
+			this.tls = frame.getEnv().getMatches();
 		}
 
 		/**
