@@ -837,6 +837,7 @@ public interface ExecEnv extends EObject {
 	 * Returns the JIT compiler instance for this execution environment.
 	 * @return the JIT compiler instance
 	 */
+	
 	CodeBlockJIT getJITCompiler();
 	
 	
@@ -886,7 +887,12 @@ public interface ExecEnv extends EObject {
 	 * @return boolean
 	 */
 	boolean preApplySingleObject(EObject eObject, String className);
-	
+	/**
+	 * partially resolves bindings 
+	 * @param match
+	 * @return
+	 */
+	public boolean preApplySingleTrace(TraceLink match) ;
 	/**
 	 * Resolves the rest of unresolved bindings,
 	 * the resourceSet is used to resolve proxies
@@ -899,9 +905,13 @@ public interface ExecEnv extends EObject {
 	 */
 	void storeLink();
 
-	void flattenLink(); 
+	FLink flattenLink(); 
 	
 	public EList<FLink> getSerializableLinks ();
 	//public Set<Rule> getMatchedRules();
+
+	public FLink getCurrentFLink();
+	
+	public void setCurrentFLink(FLink flink);
 	
 } // ExecEnv

@@ -70,6 +70,7 @@ import org.eclipse.m2m.atl.emftvm.constraints.ValidCodeBlockStackLevelValidator;
 import org.eclipse.m2m.atl.emftvm.constraints.Validator;
 import org.eclipse.m2m.atl.emftvm.ftrace.FLink;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
+import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
 import org.eclipse.m2m.atl.emftvm.jit.CodeBlockJIT;
 import org.eclipse.m2m.atl.emftvm.trace.TraceFactory;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
@@ -107,7 +108,7 @@ import org.eclipse.m2m.atl.emftvm.util.VMMonitor;
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getInputModels <em>Input Models</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getInoutModels <em>Inout Models</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getOutputModels <em>Output Models</em>}</li>
- *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getModules <em>Modules</em>}</li>
+ *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExneecEnvImpl#getModules <em>Modules</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getMatches <em>Matches</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getTraces <em>Traces</em>}</li>
  *   <li>{@link org.eclipse.m2m.atl.emftvm.impl.ExecEnvImpl#getUniqueResults <em>Unique Results</em>}</li>
@@ -669,6 +670,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		registerMetaModel(EcorePackage.eNAME.toUpperCase(), EMFTVMUtil.getEcoreMetamodel());
 		registerMetaModel(EmftvmPackage.eNAME.toUpperCase(), EMFTVMUtil.getEmfTvmMetamodel());
 		registerMetaModel(TracePackage.eNAME.toUpperCase(), EMFTVMUtil.getTraceMetamodel());
+		registerMetaModel(FTracePackage.eNAME.toUpperCase(), EMFTVMUtil.getFTraceMetamodel());
 		createField("matches", true, Types.EXEC_ENV_TYPE, Types.TRACE_LINK_SET_TYPE, new NativeCodeBlock() {
 			@Override
 			public Object execute(final StackFrame frame) {
@@ -1379,6 +1381,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 			}
 			setRuleStateCompiled(false);
 			loadedModules.add(name);
+			serializableLinks = new BasicEList<FLink>();
 			return module;
 		} catch (Exception e) {
 			throw new VMException(null, String.format(
@@ -1722,6 +1725,12 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	private Map<String, List<Rule>> rulesPerType;
 
 	private TraceLink currentMatch;
+
+	private FLink currentFlink;
+
+	private StackFrame rootFrame;
+	
+	
 	/**
 	 * creates a map<String, LazyList<Rule>> of rules per type
 	 */
@@ -2305,35 +2314,43 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * {@inheritDoc}
 	 */
 	public boolean preApplySingleObject(EObject eObject, String className) {
-		StackFrame rootFrame = new StackFrame(this, mainChain.get(
-				mainChain.size() - 1).getBody());
+		 
 		
 		if (!matchSingleObject(eObject, className, rootFrame)) {
 			return false;
 		}
 		
 		preApplySingleTrace(rootFrame);
-		rootFrame.getEnv().flattenLink();
+		//rootFrame.getEnv().flattenLink();
 		return true;
 		
-		
 	}
-
+	public boolean preApplySingleTrace(TraceLink match) {
+		//setting up current traces
+		
+		setCurrentMatch(match);
+		FLink flink = FTraceFactory.eINSTANCE.createFLink();
+		flink.setRuleName(match.getRule().getRule());
+		setCurrentFLink(flink);
+		getSerializableLinks().add(flink);		
+		preApplySingleTrace(rootFrame);
+		
+		return currentFlink.getProperties().get(0) != null;
+	}
 	private void preApplySingleTrace(StackFrame rootFrame) {
 		Rule currentRule = rules.get(currentMatch.getRule().getRule());
 		currentRule.applyFor(rootFrame, currentMatch);
-		// TODO remove applySingle trace of ApllyFor is working well
+		// TODO remove applySingle trace of ApllyFor if working well
 		
 	}
 
 	public boolean matchSingleObject(EObject object, String className) {
-
-		StackFrame rootFrame = new StackFrame(this, mainChain.get(
-				mainChain.size() - 1).getBody());
+//
+//		StackFrame rootFrame = new StackFrame(this, mainChain.get(
+//				mainChain.size() - 1).getBody());
 		return matchSingleObject(object, className, rootFrame);
 		
 	}
-
 	private boolean matchSingleObject(EObject eObject, String className,
 			StackFrame rootFrame) {
 		
@@ -2389,7 +2406,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 				throw new UnsupportedOperationException(String.format(
 						"Operation %s not found", EMFTVMUtil.MAIN_OP_NAME));
 			}
-			//final StackFrame rootFrame = new StackFrame(this, mainChain.get(mainChain.size() - 1).getBody());
+			rootFrame = new StackFrame(this, mainChain.get(mainChain.size() - 1).getBody());
 
 			// run all automatic rules before main
 			currentPhase = RuleMode.AUTOMATIC_SINGLE;
@@ -3013,7 +3030,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	}
 	
 	/**
-	 * Sets the curernt {@link TraceLink}
+	 * Sets the current {@link TraceLink}
 	 * @param TraceLink
 	 */
 	public void setCurrentMatch(TraceLink match) {
@@ -3023,12 +3040,14 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * {@inheritDoc}
 	 */
 	public void postApplyAll(ResourceSet rs) {
+		
 		{// cleaning the resource and making sure that
 		 // traces are still there	
 		 //	cleanResources(rs);
 			assert traces != null; 
 			
 		}
+		
 		for (TracedRule rule : traces.getRules()) {
 			assert rule != null;
 			for (TraceLink link : rule.getLinks()) {
@@ -3046,10 +3065,12 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 			}
 		}
 	}
+	
 	/**
 	 * cleans up the resources before performing the postApply
 	 * @param rs
 	 */
+	@SuppressWarnings("unused")
 	private void cleanResources(ResourceSet rs) {
 		assert rs != null;
 		assert rs.getResources() != null; 
@@ -3146,14 +3167,22 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * flattens and stores a link 
 	 * @see org.eclipse.m2m.atl.emftvm.ExecEnv#flattenLink()
 	 */
-	public void flattenLink() {
+	public FLink flattenLink() {
 		
 		FLink flink = FTraceFactory.eINSTANCE.createFLink();
 		flink.flatten(getCurrentMatch());
-		getSerializableLinks().add(flink);
+		//getSerializableLinks().add(flink);
+		return flink;
 		
 	}
-	
-	
 
+	public FLink getCurrentFLink() {
+		// TODO Auto-generated method stub
+		return currentFlink;
+	}
+	
+	public void setCurrentFLink(FLink flink) {
+		currentFlink = flink;
+	}
+	
 } // ExecEnvImpl

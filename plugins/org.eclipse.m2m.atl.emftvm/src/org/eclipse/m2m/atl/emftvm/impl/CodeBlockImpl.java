@@ -257,7 +257,7 @@ public class CodeBlockImpl extends EObjectImpl implements CodeBlock {
 		super();
 	}
 
-	/**
+	/**towards possible bringing between
 	 * <!-- begin-user-doc -->
 	 * Returns the {@link EClass} that correspond to this metaclass.
 	 * @return the {@link EClass} that correspond to this metaclass.
@@ -741,7 +741,10 @@ public class CodeBlockImpl extends EObjectImpl implements CodeBlock {
 		if (monitor != null) {
 			monitor.enter(frame);
 		}
-
+//		if (this.toString().contains("MultiValuedClassAttribute2Column@applier")) {
+//			System.out.println("");
+//		}
+			
 		try {
 			LOOP: while (pc < codeSize) {
 				Instruction instr = code.get(pc++);
@@ -779,6 +782,9 @@ public class CodeBlockImpl extends EObjectImpl implements CodeBlock {
 					set(one, two, ((Set) instr).getFieldname(), frame);
 					break;
 				case GET:
+//					if (instr.toString().contains("fieldname: owner")) {
+//						System.out.println("");
+//					}
 					frame.setPc(pc);
 					stack.push(get(((Get) instr).getFieldname(), frame, stack.pop()));
 					break;
