@@ -2317,7 +2317,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		 
 		
 		if (!matchSingleObject(eObject, className, rootFrame)) {
-			return false;
+			return false; // // no rule type matches this object;
 		}
 		
 		preApplySingleTrace(rootFrame);
@@ -2337,6 +2337,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		
 		return currentFlink.getProperties().get(0) != null;
 	}
+	
 	private void preApplySingleTrace(StackFrame rootFrame) {
 		Rule currentRule = rules.get(currentMatch.getRule().getRule());
 		currentRule.applyFor(rootFrame, currentMatch);
@@ -2367,7 +2368,11 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 			isApplied = nextRule.matchSingleObject(rootFrame, eObject);
 			//matchedRules.add(nextRule);
 		}
+		
+		
 		// TODO add support for match super rules here 
+		if (!isApplied) return false; 
+
 		nextRule.createSingleTrace(rootFrame);
 		return true;
 	}
