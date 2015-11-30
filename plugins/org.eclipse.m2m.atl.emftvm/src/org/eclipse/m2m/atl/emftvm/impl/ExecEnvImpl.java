@@ -2315,7 +2315,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		
 		Iterator<Rule> rules = resolveAppliedRules(eObject, className);
 		if (rules == null) {
-			return false ; // no rule matches this object;
+			return false ; // no rule type matches this object;
 		}
 			
 		boolean isApplied = false;
@@ -2327,6 +2327,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 			//matchedRules.add(nextRule);
 		}
 		// TODO add support for match super rules here 
+		if (!isApplied) return false; 
+		
 		nextRule.createSingleTrace(rootFrame);
 		return true;
 	}

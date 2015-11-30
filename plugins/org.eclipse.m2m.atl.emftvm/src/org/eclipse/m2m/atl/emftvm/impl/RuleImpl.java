@@ -492,6 +492,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 		@Override
 		public boolean matchSingleObject(StackFrame frame, EObject object) {
 			assert getESuperRules().isEmpty();	
+			// computes a match if exist and sets up the current Match [TraceLink]
 			return matchFor(frame, Collections.singletonList(object).toArray(), 0);
 		}
 		/**
