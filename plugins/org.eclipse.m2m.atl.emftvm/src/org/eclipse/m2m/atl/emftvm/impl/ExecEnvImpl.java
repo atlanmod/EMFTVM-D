@@ -2325,20 +2325,25 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		return true;
 		
 	}
+	
+	/**
+	 * returns Boolean.<code>true</code> if the flatLink does not have properties to be resolved
+	 */
 	public boolean preApplySingleTrace(TraceLink match) {
 		//setting up current traces
-		
+		//TODO optimize this 
+		//TODO setup current rule everytime needed
 		setCurrentMatch(match);
 		FLink flink = FTraceFactory.eINSTANCE.createFLink();
 		flink.setRuleName(match.getRule().getRule());
 		setCurrentFLink(flink);
 		getSerializableLinks().add(flink);		
 		preApplySingleTrace(rootFrame);
-		
 		return currentFlink.getProperties().get(0) != null;
 	}
 	
 	private void preApplySingleTrace(StackFrame rootFrame) {
+		//TODO setup current rule everytime needed in the TableATLMapper code
 		Rule currentRule = rules.get(currentMatch.getRule().getRule());
 		currentRule.applyFor(rootFrame, currentMatch);
 		// TODO remove applySingle trace of ApllyFor if working well
@@ -2346,9 +2351,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	}
 
 	public boolean matchSingleObject(EObject object, String className) {
-//
-//		StackFrame rootFrame = new StackFrame(this, mainChain.get(
-//				mainChain.size() - 1).getBody());
+		
 		return matchSingleObject(object, className, rootFrame);
 		
 	}
@@ -3176,13 +3179,11 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		
 		FLink flink = FTraceFactory.eINSTANCE.createFLink();
 		flink.flatten(getCurrentMatch());
-		//getSerializableLinks().add(flink);
 		return flink;
 		
 	}
 
 	public FLink getCurrentFLink() {
-		// TODO Auto-generated method stub
 		return currentFlink;
 	}
 	

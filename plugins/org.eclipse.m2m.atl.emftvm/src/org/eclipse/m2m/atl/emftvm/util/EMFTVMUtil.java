@@ -67,7 +67,9 @@ import org.eclipse.m2m.atl.emftvm.ftrace.FTraceFactory;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
+
 import fr.inria.atlanmod.kyanos.core.KyanosEObject;
+import fr.inria.atlanmod.kyanos.core.KyanosResource;
 import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
 
 /**
@@ -586,22 +588,12 @@ public final class EMFTVMUtil {
 							toPrettyString(eo, env)));
 		} 
 
-//		try {
 			if (sf instanceof EReference &&
 					env.getExecutionMode() == ExecMode.MR &&
 						env.getExecutionPhase() == ExecPhase.PRE) {
 				if (value == null || (sf.isMany() && prettyCollection(value).isEmpty()) ) 
 					return;
-				
 
-//				TraceProperty tProp = TraceFactory.eINSTANCE.createTraceProperty();
-//				tProp.getResolvings().addAll(prettyCollection(value));
-//				TraceLink currentTrace = env.getCurrentMatch();
-//				tProp.setPropertyName(sf.getName());
-//				tProp.setResolvedFor(currentTrace.findTargetForObject(eo));
-//				tProp.setAppliedAt(currentTrace);
-//				tProp.getResolvings().addAll(prettyCollection(value));
-//				FLink flink = env.getCurrentFLink();
 				
 				if (sf.isMany()) {
 					setManyAtPre(env, eo, sf, (Collection<?>) value);
@@ -1218,6 +1210,9 @@ public final class EMFTVMUtil {
 	 *            the value of the {@link EReference} that has just been modified
 	 */
 	private static void updateResource(final EObject eo, final EObject v) {
+		// TODO UPDATE the roots list at the end of the machin
+		if ( eo.eResource() instanceof KyanosResource)
+			return; 
 		if (eo.eResource() == null) {
 			assert eo.eContainer() == null;
 			v.eResource().getContents().add(eo);
