@@ -2,7 +2,7 @@
  */
 package org.eclipse.m2m.atl.emftvm.ftrace;
 
-import fr.inria.atlanmod.kyanos.core.KyanosEObject;
+import fr.inria.atlanmod.neoemf.core.NeoEMFEObject;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
@@ -22,10 +22,10 @@ import org.eclipse.m2m.atl.emftvm.trace.TraceLink;
  *
  * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFLink()
  * @model annotation="Descrition ruleName='this attribute contains the name of the matched rule and a list of unresolved bindings stored per binding name\n'"
- * @extends KyanosEObject
+ * @extends NeoEMFEObject
  * @generated
  */
-public interface FLink extends KyanosEObject {
+public interface FLink extends NeoEMFEObject {
 	/**
 	 * Returns the value of the '<em><b>Rule Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

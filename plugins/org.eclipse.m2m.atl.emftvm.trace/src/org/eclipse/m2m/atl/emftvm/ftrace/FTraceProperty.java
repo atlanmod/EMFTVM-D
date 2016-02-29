@@ -2,7 +2,8 @@
  */
 package org.eclipse.m2m.atl.emftvm.ftrace;
 
-import fr.inria.atlanmod.kyanos.core.KyanosEObject;
+import fr.inria.atlanmod.neoemf.core.NeoEMFEObject;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -21,10 +22,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage#getFTraceProperty()
  * @model
- * @extends KyanosEObject
+ * @extends NeoEMFEObject
  * @generated
  */
-public interface FTraceProperty extends KyanosEObject {
+public interface FTraceProperty extends NeoEMFEObject {
 	/**
 	 * Returns the value of the '<em><b>Property Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

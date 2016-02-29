@@ -2,7 +2,7 @@
  */
 package org.eclipse.m2m.atl.emftvm.ftrace.impl;
 
-import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
+import fr.inria.atlanmod.neoemf.core.impl.NeoEMFEObjectImpl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -27,7 +27,7 @@ import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
  *
  * @generated
  */
-public class FLinkImpl extends KyanosEObjectImpl implements FLink {
+public class FLinkImpl extends NeoEMFEObjectImpl implements FLink {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

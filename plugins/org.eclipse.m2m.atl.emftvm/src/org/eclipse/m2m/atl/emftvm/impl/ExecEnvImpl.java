@@ -781,18 +781,7 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * @generated NOT
 	 */
 	public TraceLinkSet getTraces() {
-		if (traces == null) {
-			basicGetTraces();
-		}
-		if (traces != null && traces.eIsProxy()) {
-			InternalEObject oldTraces = (InternalEObject)traces;
-			traces = (TraceLinkSet)eResolveProxy(oldTraces);
-			if (traces != oldTraces) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmftvmPackage.EXEC_ENV__TRACES, oldTraces, traces));
-			}
-		}
-		return traces;
+		return getMatches();
 	}
 
 	/**
@@ -2330,16 +2319,14 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 	 * returns Boolean.<code>true</code> if the flatLink does not have properties to be resolved
 	 */
 	public boolean preApplySingleTrace(TraceLink match) {
-		//setting up current traces
-		//TODO optimize this 
-		//TODO setup current rule everytime needed
+		
+		// Flatennig and 
 		setCurrentMatch(match);
 		FLink flink = FTraceFactory.eINSTANCE.createFLink();
 		flink.setRuleName(match.getRule().getRule());
-		setCurrentFLink(flink);
-		getSerializableLinks().add(flink);		
+		setCurrentFLink(flink);	
 		preApplySingleTrace(rootFrame);
-		return currentFlink.getProperties().get(0) != null;
+		return currentFlink.getProperties().size() == 0;
 	}
 	
 	private void preApplySingleTrace(StackFrame rootFrame) {
@@ -2374,7 +2361,8 @@ public class ExecEnvImpl extends EObjectImpl implements ExecEnv {
 		
 		
 		// TODO add support for match super rules here 
-		if (!isApplied) return false; 
+		if (!isApplied) 
+			return false; 
 
 		nextRule.createSingleTrace(rootFrame);
 		return true;

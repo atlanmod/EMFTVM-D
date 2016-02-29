@@ -2,7 +2,8 @@
  */
 package org.eclipse.m2m.atl.emftvm.ftrace.impl;
 
-import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
+import fr.inria.atlanmod.neoemf.core.impl.NeoEMFEObjectImpl;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
@@ -23,7 +24,7 @@ import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
  *
  * @generated
  */
-public class FTracePropertyImpl extends KyanosEObjectImpl implements FTraceProperty {
+public class FTracePropertyImpl extends NeoEMFEObjectImpl implements FTraceProperty {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

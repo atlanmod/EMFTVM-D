@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.m2m.atl.emftvm.ftrace.*;
 import org.eclipse.m2m.atl.emftvm.trace.TraceProperty;
 
-import fr.inria.atlanmod.kyanos.core.KyanosEObject;
+import fr.inria.atlanmod.neoemf.core.NeoEMFEObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -137,14 +137,14 @@ public class FTraceFactoryImpl extends EFactoryImpl implements FTraceFactory {
 		FTraceProperty clone = eINSTANCE.createFTraceProperty();
 		clone.setPropertyName(property.getPropertyName());
 		EObject targetObject = (EObject) property.getResolvedFor().getRuntimeObject();
-		if (targetObject instanceof KyanosEObject) {
-			clone.setResolvedFor(((KyanosEObject)targetObject).kyanosId());
+		if (targetObject instanceof NeoEMFEObject) {
+			clone.setResolvedFor(((NeoEMFEObject)targetObject).neoemfId());
 		} else {
 			throw new ClassCastException("invalid NeoEMF eObject");
 		}
 
 		for (EObject eObject : property.getResolvings()) {
-			clone.getResolvings().add(((KyanosEObject)eObject).kyanosId());
+			clone.getResolvings().add(((NeoEMFEObject)eObject).neoemfId());
 		}
 
 		return clone;
