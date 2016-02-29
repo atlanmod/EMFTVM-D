@@ -2348,6 +2348,7 @@ public class RuleImpl extends NamedElementImpl implements Rule {
 			if (trace.getTargetElement(oreName) != null) {
 				continue;
 			}
+			
 			TargetElement te = TraceFactory.eINSTANCE.createTargetElement();
 			te.setName(oreName);
 			te.setTargetOf(trace);

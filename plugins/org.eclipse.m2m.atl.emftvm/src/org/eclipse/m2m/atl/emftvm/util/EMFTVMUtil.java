@@ -68,9 +68,8 @@ import org.eclipse.m2m.atl.emftvm.ftrace.FTracePackage;
 import org.eclipse.m2m.atl.emftvm.ftrace.FTraceProperty;
 import org.eclipse.m2m.atl.emftvm.trace.TracePackage;
 
-import fr.inria.atlanmod.kyanos.core.KyanosEObject;
-import fr.inria.atlanmod.kyanos.core.KyanosResource;
-import fr.inria.atlanmod.kyanos.core.impl.KyanosEObjectImpl;
+import fr.inria.atlanmod.neoemf.core.NeoEMFEObject;
+import fr.inria.atlanmod.neoemf.core.impl.NeoEMFEObjectImpl;
 
 /**
  * EMFTVM static utility methods.
@@ -469,11 +468,11 @@ public final class EMFTVMUtil {
 		if (sf instanceof EReference) {
 			// EReferences need only EList conversion, notably not EnumLiteral conversion
 			 Object value = null;
-			if (eo instanceof KyanosEObject) {
+			if (eo instanceof NeoEMFEObject) {
 				if (((EReference) sf).isContainer()) {
-					value = ((KyanosEObjectImpl)eo).eContainer();
+					value = ((NeoEMFEObjectImpl)eo).eContainer();
 				} else { 
-				value = ((KyanosEObjectImpl)eo).dynamicGet(eo.eClass().getFeatureID(sf)); 
+				value = ((NeoEMFEObjectImpl)eo).dynamicGet(eo.eClass().getFeatureID(sf)); 
 				}
 			} else {
 				value = eo.eGet(sf); 
@@ -822,8 +821,8 @@ public final class EMFTVMUtil {
 		} else {
 			FTraceProperty fprop = FTraceFactory.eINSTANCE.createFTraceProperty();
 			fprop.setPropertyName(sf.getName());
-			fprop.setResolvedFor(((KyanosEObject)eo).kyanosId());
-			fprop.getResolvings().add(((KyanosEObject)value).kyanosId());
+			fprop.setResolvedFor(((NeoEMFEObject)eo).neoemfId());
+			fprop.getResolvings().add(((NeoEMFEObject)value).neoemfId());
 			env.getCurrentFLink().getProperties().add(fprop);
 		}
 		
@@ -873,14 +872,7 @@ public final class EMFTVMUtil {
 		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
 
 		if (!values.isEmpty()) {
-			if (sf instanceof EReference) {
-				final List<Object> vCopy = new ArrayList<Object>(values);
-				for (EObject v : (List<? extends EObject>) vCopy) {
-					removeRefValue((EReference) sf, eo, values, v);
-				}
-			} else {
-				values.clear();
-			}
+			values.clear();
 		}
 		addManyAtPre(env, eo, sf, value, -1);
 		
@@ -1001,9 +993,9 @@ public final class EMFTVMUtil {
 					addRefValueAtPre(env, ref, eo, values, (EObject) v, -1, allowInterModelReferences,  prop);
 				}
 			}
-			if ( prop.getResolvings().get(0) != null) {
+			if (prop.getResolvings().get(0) != null) {
 				prop.setPropertyName(sf.getName());
-				prop.setResolvedFor(((KyanosEObject)eo).kyanosId());
+				prop.setResolvedFor(((NeoEMFEObject)eo).neoemfId());
 				env.getCurrentFLink().getProperties().add(prop);
 			}
 		} else {
@@ -1171,10 +1163,10 @@ public final class EMFTVMUtil {
 			} else {
 				values.add(v);
 			}
-			updateResource(eo, v);
+	//		updateResource(eo, v);
 		} 
 		else {
-			prop.getResolvings().add(((KyanosEObject)v).kyanosId());
+			prop.getResolvings().add(((NeoEMFEObject)v).neoemfId());
 		}
 		assert eo.eResource() != null;
 		assert v.eResource() != null;
@@ -1210,22 +1202,23 @@ public final class EMFTVMUtil {
 	 *            the value of the {@link EReference} that has just been modified
 	 */
 	private static void updateResource(final EObject eo, final EObject v) {
-		// TODO UPDATE the roots list at the end of the machin
-		if ( eo.eResource() instanceof KyanosResource)
-			return; 
-		if (eo.eResource() == null) {
-			assert eo.eContainer() == null;
-			v.eResource().getContents().add(eo);
-		} else if (v.eResource() == null) {
-			assert v.eContainer() == null;
-			eo.eResource().getContents().add(v);
-		}
-		if (eo.eContainer() != null) {
-			eo.eResource().getContents().remove(eo);
-		}
-		if (v.eContainer() != null) {
-			v.eResource().getContents().remove(v);
-		}
+		//TODO UPDATE the roots list at the end of the machine
+//		if ( eo.eResource() instanceof NeoEMFResource)
+//			return; 
+//		if (eo.eResource() == null) {
+//			assert eo.eContainer() == null;
+//			v.eResource().getContents().add(eo);
+//		} else if (v.eResource() == null) {
+//			assert v.eContainer() == null;
+//			eo.eResource().getContents().add(v);
+//		}
+//		if (eo.eContainer() != null) {
+//			eo.eResource().getContents().remove(eo);
+//		}
+//		if (v.eContainer() != null) {
+//			v.eResource().getContents().remove(v);
+//		}
+	
 	}
 
 	/**
