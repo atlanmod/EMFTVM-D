@@ -871,9 +871,9 @@ public final class EMFTVMUtil {
 			EStructuralFeature sf, Collection<?> value) {
 		final Collection<Object> values = (Collection<Object>) eo.eGet(sf);
 
-		if (!values.isEmpty()) {
-			values.clear();
-		}
+//		if (!values.isEmpty()) {
+//			values.clear();
+//		}
 		addManyAtPre(env, eo, sf, value, -1);
 		
 	}
@@ -1424,6 +1424,7 @@ public final class EMFTVMUtil {
 		if (method != null) {
 			return invokeNative(frame, self, method, arg);
 		}
+		
 		throw new UnsupportedOperationException(String.format("%s::%s(%s)", EMFTVMUtil.getTypeName(frame.getEnv(), getArgumentType(self)),
 				opname, EMFTVMUtil.getTypeName(frame.getEnv(), getArgumentType(arg))));
 	}
